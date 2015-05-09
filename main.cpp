@@ -17,21 +17,27 @@
 
 //other includes
 #include "Core\Shader_Loader.h"
+#include "Core\GameModels.h"
 
 GLuint program;
+Models::GameModels* gameModels;
 
 void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0, 0.0, 0.0, 1.0);//rgba
 
-	//use the created program
+	glBindVertexArray(gameModels->GetModel("triangle1"));
 	glUseProgram(program);
-
-	//draw 3 vertices as triangles
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glutSwapBuffers();//swaps between back buffer and front buffer. Remember that we are using double buffering.
+}
+
+void closeCallback()
+{
+	std::cout << "GLUT:\t Finished" << std::endl;
+	glutLeaveMainLoop();
 }
 
 void printGLInfo(bool verbose = false)
@@ -54,10 +60,13 @@ void Init()
 {
 	glEnable(GL_DEPTH_TEST);
 
+	gameModels = new Models::GameModels();
+	gameModels->CreateTriangleModel("triangle1");
+
 	//load and compile shaders
 	Core::Shader_Loader shaderLoader;
 	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//GL_POINT, GL_FILL
 }
 
 int main(int argc, char **argv)
@@ -67,10 +76,11 @@ int main(int argc, char **argv)
 	//glutInitWindowPosition(100, 500);//optional
 	glutInitWindowSize(800, 600); //optional
 	glutCreateWindow("PA199 3D Breakout");
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	glewInit();
 
-	printGLInfo(true);
+	printGLInfo();
 	if (!glewIsSupported("GL_VERSION_3_0"))
 	{
 		std::cerr << "error: OpenGL 3.0 not supported!" << std::endl;
@@ -81,9 +91,13 @@ int main(int argc, char **argv)
 
 	// register callbacks
 	glutDisplayFunc(renderScene);
+	glutCloseFunc(closeCallback);
 
 	glutMainLoop();//GLUT processing loop, interupted only by callbacks
 
+	//cleanup
+	delete gameModels;
 	glDeleteProgram(program);
+
 	return 0;
 }
