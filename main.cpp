@@ -29,7 +29,7 @@ void renderScene(void)
 	glUseProgram(program);
 
 	//draw 3 vertices as triangles
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	glutSwapBuffers();//swaps between back buffer and front buffer. Remember that we are using double buffering.
 }
