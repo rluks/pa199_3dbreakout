@@ -7,13 +7,29 @@
 //Beside FreeGLUT there are other libraries that can be used with OpenGL. eg: SDL, GLFW, GLUT, GLOW, native code, etc.
 #include "..\packages\nupengl.core.0.0.0.1\build\native\include\GL\freeglut.h" 
 
-//other includes
+//includes
 #include <iostream>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
+#include <vector>
+
+//other includes
+#include "Core\Shader_Loader.h"
+
+GLuint program;
 
 void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0, 0.0, 0.0, 1.0);//rgba
+
+	//use the created program
+	glUseProgram(program);
+
+	//draw 3 vertices as triangles
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glutSwapBuffers();//swaps between back buffer and front buffer. Remember that we are using double buffering.
 }
@@ -34,6 +50,16 @@ void printGLInfo(bool verbose = false)
 	}
 }
 
+void Init()
+{
+	glEnable(GL_DEPTH_TEST);
+
+	//load and compile shaders
+	Core::Shader_Loader shaderLoader;
+	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);// initialize the GLUT library
@@ -51,12 +77,13 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	glEnable(GL_DEPTH_TEST);
+	Init();
 
 	// register callbacks
 	glutDisplayFunc(renderScene);
 
 	glutMainLoop();//GLUT processing loop, interupted only by callbacks
 
+	glDeleteProgram(program);
 	return 0;
 }
