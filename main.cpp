@@ -16,9 +16,10 @@
 #include <vector>
 
 //other includes
-#include "Core\Shader_Loader.h"
+#include "Core\Shader_Manager.h"
 #include "Core\GameModels.h"
 
+Managers::Shader_Manager* shaderManager;
 GLuint program;
 Models::GameModels* gameModels;
 
@@ -65,9 +66,12 @@ void Init()
 	gameModels = new Models::GameModels();
 	gameModels->CreateTriangleModel("triangle1");
 
-	//load and compile shaders
-	Core::Shader_Loader shaderLoader;
-	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
+	shaderManager = new Managers::Shader_Manager();
+	shaderManager->CreateProgram("colorShader",
+		"Shaders\\Vertex_Shader.glsl",
+		"Shaders\\Fragment_Shader.glsl");
+	program = Managers::Shader_Manager::GetShader("colorShader");
+
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
