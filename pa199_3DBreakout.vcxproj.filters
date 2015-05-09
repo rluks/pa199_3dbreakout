@@ -10,6 +10,7 @@
     <ClCompile Include="Core\Shader_Loader.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\GameModels.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -20,5 +21,7 @@
     <ClInclude Include="Core\Shader_Loader.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\VertexFormat.h" />
+    <ClInclude Include="Core\GameModels.h" />
   </ItemGroup>
 </Project>
