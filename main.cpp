@@ -66,7 +66,7 @@ void Init()
 	//load and compile shaders
 	Core::Shader_Loader shaderLoader;
 	program = shaderLoader.CreateProgram("Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//GL_POINT, GL_FILL
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 int main(int argc, char **argv)

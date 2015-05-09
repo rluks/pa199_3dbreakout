@@ -39,11 +39,9 @@ void GameModels::CreateTriangleModel(const std::string& gameModelName)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * 3, &vertices[0], GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);//vertex position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)(offsetof(VertexFormat, VertexFormat::position)));
 	glEnableVertexAttribArray(1);//color
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)sizeof(glm::vec3)); //skip position vector in the structure
-	//(void*)(offsetof(VertexFormat, VertexFormat::color)
-	//(void*)(offsetof(VertexFormat, VertexFormat::position) 
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)(offsetof(VertexFormat, VertexFormat::color)));
 
 	Model myModel;                            //is allocated on Stack
 	myModel.vao = vao;                        //add vao
