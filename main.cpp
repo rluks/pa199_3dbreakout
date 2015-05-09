@@ -25,7 +25,9 @@ Models::GameModels* gameModels;
 void renderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(1.0, 0.0, 0.0, 1.0);//rgba
+
+	glm::vec4 bgcolor = glm::vec4(0.7, 0.8, 0.8, 1.0);
+	glClearColor(bgcolor.r, bgcolor.g, bgcolor.b, bgcolor.a);
 
 	glBindVertexArray(gameModels->GetModel("triangle1"));
 	glUseProgram(program);
