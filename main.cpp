@@ -36,8 +36,8 @@ void printGLInfo(bool verbose = false)
 
 int main(int argc, char **argv)
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+	glutInit(&argc, argv);// initialize the GLUT library
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);//Z buffer, Double Buffering, 32-bit Framebuffer for the four 8-bit color channels: Red, Green, Blue, and Alpha
 	//glutInitWindowPosition(100, 500);//optional
 	glutInitWindowSize(800, 600); //optional
 	glutCreateWindow("PA199 3D Breakout");
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 	// register callbacks
 	glutDisplayFunc(renderScene);
 
-	glutMainLoop();
+	glutMainLoop();//GLUT processing loop, interupted only by callbacks
 
 	return 0;
 }
