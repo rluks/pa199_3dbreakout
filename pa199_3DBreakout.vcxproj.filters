@@ -23,5 +23,8 @@
     <ClInclude Include="Core\Shader_Manager.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Init\WindowInfo.h" />
+    <ClInclude Include="Core\Init\ContextInfo.h" />
+    <ClInclude Include="Core\Init\FrameBufferInfo.h" />
   </ItemGroup>
 </Project>
