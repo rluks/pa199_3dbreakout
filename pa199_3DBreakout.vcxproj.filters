@@ -11,6 +11,8 @@
     <ClCompile Include="Core\Shader_Manager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Init\Init_GLEW.cpp" />
+    <ClCompile Include="Core\Init\Init_GLUT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -26,5 +28,7 @@
     <ClInclude Include="Core\Init\WindowInfo.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
     <ClInclude Include="Core\Init\FrameBufferInfo.h" />
+    <ClInclude Include="Core\Init\Init_GLEW.h" />
+    <ClInclude Include="Core\Init\Init_GLUT.h" />
   </ItemGroup>
 </Project>

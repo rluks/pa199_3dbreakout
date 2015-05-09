@@ -1,109 +1,22 @@
+#pragma once
 
-//(GL Extension Wrangler), which adds support for the newest OpenGL versions eg. OpenGL  version 4.5. 
-//This means that we can access and play with OpenGL’s newest functions
-#include "..\packages\nupengl.core.0.0.0.1\build\native\include\GL\glew.h" 
+#include "Core\Init\Init_GLUT.h"
 
-//setting up a window, initializing OpenGL contexts and getting input from mouse/keyboard. 
-//Beside FreeGLUT there are other libraries that can be used with OpenGL. eg: SDL, GLFW, GLUT, GLOW, native code, etc.
-#include "..\packages\nupengl.core.0.0.0.1\build\native\include\GL\freeglut.h" 
-
-//includes
-#include <iostream>
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fstream>
-#include <vector>
-
-//other includes
-#include "Core\Shader_Manager.h"
-#include "Core\GameModels.h"
-
-Managers::Shader_Manager* shaderManager;
-GLuint program;
-Models::GameModels* gameModels;
-
-void renderScene(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glm::vec4 bgcolor = glm::vec4(0.7, 0.8, 0.8, 1.0);
-	glClearColor(bgcolor.r, bgcolor.g, bgcolor.b, bgcolor.a);
-
-	glBindVertexArray(gameModels->GetModel("triangle1"));
-	glUseProgram(program);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	glutSwapBuffers();//swaps between back buffer and front buffer. Remember that we are using double buffering.
-}
-
-void closeCallback()
-{
-	std::cout << "GLUT:\t Finished" << std::endl;
-	glutLeaveMainLoop();
-}
-
-void printGLInfo(bool verbose = false)
-{
-	std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-	std::cout << "GLSL version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-
-	if (verbose)
-	{
-		int n_extension_num;
-		glGetIntegerv(GL_NUM_EXTENSIONS, &n_extension_num);
-		for (int i = 0; i < n_extension_num; ++i) {
-			const char *p_s_ext_name = (const char*)glGetStringi(GL_EXTENSIONS, i);
-			std::cout << p_s_ext_name << std::endl;
-		}
-	}
-}
-
-void Init()
-{
-	glEnable(GL_DEPTH_TEST);
-
-	gameModels = new Models::GameModels();
-	gameModels->CreateTriangleModel("triangle1");
-
-	shaderManager = new Managers::Shader_Manager();
-	shaderManager->CreateProgram("colorShader",
-		"Shaders\\Vertex_Shader.glsl",
-		"Shaders\\Fragment_Shader.glsl");
-	program = Managers::Shader_Manager::GetShader("colorShader");
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-}
+using namespace Core;
+using namespace Init;
 
 int main(int argc, char **argv)
 {
-	glutInit(&argc, argv);// initialize the GLUT library
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);//Z buffer, Double Buffering, 32-bit Framebuffer for the four 8-bit color channels: Red, Green, Blue, and Alpha
-	//glutInitWindowPosition(100, 500);//optional
-	glutInitWindowSize(800, 600); //optional
-	glutCreateWindow("PA199 3D Breakout");
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+	WindowInfo window(std::string("PA199 3D Breakout"),
+		400, 200,//position
+		800, 600, //size
+		true);//reshape
 
-	glewInit();
+	ContextInfo context(3, 3, true);
+	FramebufferInfo frameBufferInfo(true, true, true, true);
+	Init_GLUT::init(window, context, frameBufferInfo);
 
-	printGLInfo();
-	if (!glewIsSupported("GL_VERSION_3_0"))
-	{
-		std::cerr << "error: OpenGL 3.0 not supported!" << std::endl;
-		return 1;
-	}
-
-	Init();
-
-	// register callbacks
-	glutDisplayFunc(renderScene);
-	glutCloseFunc(closeCallback);
-
-	glutMainLoop();//GLUT processing loop, interupted only by callbacks
-
-	//cleanup
-	delete gameModels;
-	glDeleteProgram(program);
+	Init_GLUT::run();
 
 	return 0;
 }
