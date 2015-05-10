@@ -15,6 +15,7 @@
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Rendering\Models\Models.cpp" />
     <ClCompile Include="Rendering\Models\Triangle.cpp" />
+    <ClCompile Include="Managers\Models_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -36,5 +37,6 @@
     <ClInclude Include="Rendering\IGameObject.h" />
     <ClInclude Include="Rendering\Models\Model.h" />
     <ClInclude Include="Rendering\Models\Triangle.h" />
+    <ClInclude Include="Managers\Models_Manager.h" />
   </ItemGroup>
 </Project>

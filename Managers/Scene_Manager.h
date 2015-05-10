@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Shader_Manager.h"
+#include "Models_Manager.h"
 #include "../Core/Init/IListener.h"
 
 namespace Managers
@@ -20,5 +21,6 @@ namespace Managers
 			int previous_height);
 	private:
 		Managers::Shader_Manager* shader_manager;
+		Managers::Models_Manager* models_manager;
 	};
 }
