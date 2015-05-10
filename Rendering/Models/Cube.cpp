@@ -1,4 +1,5 @@
 #include "Cube.h"
+
 using namespace Rendering;
 using namespace Models;
 
@@ -99,6 +100,14 @@ void Cube::Update()
 void Cube::Draw()
 {
 	glUseProgram(program);
+
+	GLuint camera = glGetUniformLocation(program, "camera");
+
+	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
+	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+
+	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
+
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 6 * 2 * 3);
 }
