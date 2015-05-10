@@ -3,7 +3,8 @@
 using namespace Rendering;
 using namespace Models;
 
-float fov = 1.0f;
+float fov = 50.0f;
+GLfloat gDegreesRotated = 0.0f;
 
 Cube::Cube()
 {}
@@ -96,7 +97,10 @@ void Cube::Create()
 
 void Cube::Update()
 {
-	//nothing here for the moment
+	gDegreesRotated += 1.0f;
+
+	//don't go over 360 degrees
+	while (gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
 }
 
 void Cube::Draw()
@@ -105,17 +109,22 @@ void Cube::Draw()
 
 	GLuint camera = glGetUniformLocation(program, "camera");
 	GLuint projection = glGetUniformLocation(program, "projection");
+	GLuint model = glGetUniformLocation(program, "model");
 
+	/*
 	fov++;
-	if (fov > 100.0f)
-		fov = 1.0f;
+	if (fov > 50.0f)
+		fov = 30.0f;*/
 
 	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
 	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 10.0f);
 
+	glm::mat4 modelMatrix = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0, 1, 0));
+
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 6 * 2 * 3);
