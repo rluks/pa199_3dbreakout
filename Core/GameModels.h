@@ -1,11 +1,9 @@
-#ifndef _GAME_MODELS_H_
-#define _GAME_MODELS_H_
-
 #pragma once
+
 #include "..\..\packages\nupengl.core.0.0.0.1\build\native\include\GL\glew.h" 
 #include "..\..\packages\nupengl.core.0.0.0.1\build\native\include\GL\freeglut.h" 
 
-#include "VertexFormat.h"
+#include "..\Rendering\VertexFormat.h"
 
 #include <vector>
 #include <map>
@@ -33,4 +31,3 @@ namespace Models
 		std::map<std::string, Model> GameModelList;//keep our models
 	};
 }
-#endif
