@@ -7,6 +7,7 @@
 #include "../Rendering/IGameObject.h"
 #include "../Rendering/Models/Triangle.h"
 #include "../Rendering/Models/Quad.h"
+#include "../Rendering/Models/Cube.h"
 
 using namespace Rendering;
 

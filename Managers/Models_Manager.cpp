@@ -15,6 +15,11 @@ Models_Manager::Models_Manager()
 	quad->Create();
 	gameModelList["quad"] = quad;
 
+	Models::Cube* cube = new Models::Cube();
+	cube->SetProgram(Shader_Manager::GetShader("colorShader"));
+	cube->Create();
+	gameModelList["cube"] = cube;
+
 }
 
 Models_Manager::~Models_Manager()
