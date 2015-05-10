@@ -102,11 +102,14 @@ void Cube::Draw()
 	glUseProgram(program);
 
 	GLuint camera = glGetUniformLocation(program, "camera");
+	GLuint projection = glGetUniformLocation(program, "projection");
 
 	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
 	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 projectionMatrix = glm::perspective(glm::radians(50.0f), 800.0f / 600.0f, 0.1f, 10.0f);
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
+	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 6 * 2 * 3);
