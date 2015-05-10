@@ -69,7 +69,8 @@
     <ClCompile Include="Core\GameModels.cpp" />
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
     <ClCompile Include="Core\Init\Init_GLUT.cpp" />
-    <ClCompile Include="Core\Shader_Manager.cpp" />
+    <ClCompile Include="Managers\Scene_Manager.cpp" />
+    <ClCompile Include="Managers\Shader_Manager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -81,10 +82,12 @@
     <ClInclude Include="Core\GameModels.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
     <ClInclude Include="Core\Init\FrameBufferInfo.h" />
+    <ClInclude Include="Core\Init\IListener.h" />
     <ClInclude Include="Core\Init\Init_GLUT.h" />
+    <ClInclude Include="Managers\Scene_Manager.h" />
     <ClInclude Include="Core\Init\WindowInfo.h" />
     <ClInclude Include="Core\Init\Init_GLEW.h" />
-    <ClInclude Include="Core\Shader_Manager.h" />
+    <ClInclude Include="Managers\Shader_Manager.h" />
     <ClInclude Include="Core\VertexFormat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

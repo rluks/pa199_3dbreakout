@@ -8,11 +8,12 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Core\GameModels.cpp" />
-    <ClCompile Include="Core\Shader_Manager.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
     <ClCompile Include="Core\Init\Init_GLUT.cpp" />
+    <ClCompile Include="Managers\Shader_Manager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\Scene_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -22,13 +23,15 @@
   <ItemGroup>
     <ClInclude Include="Core\VertexFormat.h" />
     <ClInclude Include="Core\GameModels.h" />
-    <ClInclude Include="Core\Shader_Manager.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Init\WindowInfo.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
     <ClInclude Include="Core\Init\FrameBufferInfo.h" />
     <ClInclude Include="Core\Init\Init_GLEW.h" />
     <ClInclude Include="Core\Init\Init_GLUT.h" />
+    <ClInclude Include="Core\Init\IListener.h" />
+    <ClInclude Include="Managers\Shader_Manager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\Scene_Manager.h" />
   </ItemGroup>
 </Project>
