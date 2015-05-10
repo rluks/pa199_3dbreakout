@@ -7,7 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Core\GameModels.cpp" />
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
     <ClCompile Include="Core\Init\Init_GLUT.cpp" />
     <ClCompile Include="Managers\Shader_Manager.cpp">
@@ -15,6 +14,7 @@
     </ClCompile>
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Rendering\Models\Models.cpp" />
+    <ClCompile Include="Rendering\Models\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -22,7 +22,6 @@
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\GameModels.h" />
     <ClInclude Include="Core\Init\WindowInfo.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
     <ClInclude Include="Core\Init\FrameBufferInfo.h" />
@@ -36,5 +35,6 @@
     <ClInclude Include="Rendering\VertexFormat.h" />
     <ClInclude Include="Rendering\IGameObject.h" />
     <ClInclude Include="Rendering\Models\Model.h" />
+    <ClInclude Include="Rendering\Models\Triangle.h" />
   </ItemGroup>
 </Project>
