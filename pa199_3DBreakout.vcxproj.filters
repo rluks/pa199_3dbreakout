@@ -14,6 +14,7 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Managers\Scene_Manager.cpp" />
+    <ClCompile Include="Rendering\Models\Models.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -21,7 +22,6 @@
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\VertexFormat.h" />
     <ClInclude Include="Core\GameModels.h" />
     <ClInclude Include="Core\Init\WindowInfo.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
@@ -33,5 +33,8 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Managers\Scene_Manager.h" />
+    <ClInclude Include="Rendering\VertexFormat.h" />
+    <ClInclude Include="Rendering\IGameObject.h" />
+    <ClInclude Include="Rendering\Models\Model.h" />
   </ItemGroup>
 </Project>

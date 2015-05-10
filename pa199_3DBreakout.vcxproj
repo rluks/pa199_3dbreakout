@@ -72,6 +72,7 @@
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Managers\Shader_Manager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rendering\Models\Models.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,7 +89,9 @@
     <ClInclude Include="Core\Init\WindowInfo.h" />
     <ClInclude Include="Core\Init\Init_GLEW.h" />
     <ClInclude Include="Managers\Shader_Manager.h" />
-    <ClInclude Include="Core\VertexFormat.h" />
+    <ClInclude Include="Rendering\IGameObject.h" />
+    <ClInclude Include="Rendering\Models\Model.h" />
+    <ClInclude Include="Rendering\VertexFormat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
