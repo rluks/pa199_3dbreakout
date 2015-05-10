@@ -5,11 +5,15 @@ using namespace Rendering;
 
 Models_Manager::Models_Manager()
 {
-	//triangle game object
 	Models::Triangle* triangle = new Models::Triangle();
 	triangle->SetProgram(Shader_Manager::GetShader("colorShader"));
 	triangle->Create();
 	gameModelList["triangle"] = triangle;
+
+	Models::Quad* quad = new Models::Quad();
+	quad->SetProgram(Shader_Manager::GetShader("colorShader"));
+	quad->Create();
+	gameModelList["quad"] = quad;
 
 }
 

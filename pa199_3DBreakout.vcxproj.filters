@@ -16,6 +16,7 @@
     <ClCompile Include="Rendering\Models\Models.cpp" />
     <ClCompile Include="Rendering\Models\Triangle.cpp" />
     <ClCompile Include="Managers\Models_Manager.cpp" />
+    <ClCompile Include="Rendering\Models\Quad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -38,5 +39,6 @@
     <ClInclude Include="Rendering\Models\Model.h" />
     <ClInclude Include="Rendering\Models\Triangle.h" />
     <ClInclude Include="Managers\Models_Manager.h" />
+    <ClInclude Include="Rendering\Models\Quad.h" />
   </ItemGroup>
 </Project>
