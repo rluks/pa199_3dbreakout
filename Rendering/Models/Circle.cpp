@@ -27,11 +27,11 @@ void Circle::Create()
 	float y = -1.0f;
 	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red));
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), nevim));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
 
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 1.0f), yellow));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), nevim));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
 
 
 	glGenBuffers(1, &vbo);
