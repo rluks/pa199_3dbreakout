@@ -3,6 +3,8 @@
 using namespace Rendering;
 using namespace Models;
 
+float dx = 0.0f;
+
 Circle::Circle()
 {}
 
@@ -13,6 +15,7 @@ void Circle::Create()
 {
 	GLuint vao;
 	GLuint vbo;
+
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
@@ -24,7 +27,23 @@ void Circle::Create()
 	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
 	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
 
+	glm::vec3 origin = glm::vec3(0, 0, 0);
+
 	float y = -1.0f;
+
+	vertices.push_back(VertexFormat(glm::vec3(0, y, -1.0f), red));
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 0), blue));
+	vertices.push_back(VertexFormat(origin, green));
+
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 0), blue));
+	vertices.push_back(VertexFormat(glm::vec3(0, y, 1), yellow));
+	vertices.push_back(VertexFormat(origin, green));
+
+	vertices.push_back(VertexFormat(glm::vec3(0, y, 1), yellow));
+	vertices.push_back(VertexFormat(glm::vec3(-1, y, 0), nevim));
+	vertices.push_back(VertexFormat(origin, green));
+
+	/*
 	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red));
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
 	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
@@ -32,11 +51,12 @@ void Circle::Create()
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 1.0f), yellow));
 	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
+	*/
 
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * 6 * 6, &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * 9, &vertices[0], GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)0);
@@ -52,6 +72,10 @@ void Circle::Create()
 
 void Circle::Update()
 {
+	dx+=0.02;
+	if (dx > 3.0f)
+		dx = 0.0f;
+
 
 }
 
@@ -64,10 +88,9 @@ void Circle::Draw()
 	GLuint model = glGetUniformLocation(program, "model");
 
 	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
-	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(2, 5, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(0, 3, -1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(35.0f), 800.0f / 600.0f, 0.1f, 10.0f);
-	//glm::mat4 projectionMatrix = glm::perspective(glm::radians(35.0f), 800.0f / 600.0f, 10.0f, 0.1f);
 
 	glm::mat4 identityMx = glm::mat4(	glm::vec4(-1, 0, 0, 0),
 										glm::vec4(0, 1, 0, 0),
@@ -79,5 +102,5 @@ void Circle::Draw()
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(identityMx));
 
 	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, 6 * 2 * 3);
+	glDrawArrays(GL_TRIANGLES, 0, 9);
 }
