@@ -8,6 +8,8 @@
 #include "../Rendering/Models/Triangle.h"
 #include "../Rendering/Models/Quad.h"
 #include "../Rendering/Models/Cube.h"
+#include "../Rendering/Models/Sphere.h"
+#include "../Rendering/Models/Circle.h"
 
 using namespace Rendering;
 

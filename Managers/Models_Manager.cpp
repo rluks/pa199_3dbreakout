@@ -10,15 +10,25 @@ Models_Manager::Models_Manager()
 	triangle->Create();
 	gameModelList["triangle"] = triangle;
 
-	Models::Quad* quad = new Models::Quad();
+	/*Models::Quad* quad = new Models::Quad();
 	quad->SetProgram(Shader_Manager::GetShader("colorShader"));
 	quad->Create();
-	gameModelList["quad"] = quad;
+	gameModelList["quad"] = quad;*/
 
-	Models::Cube* cube = new Models::Cube();
+	/*Models::Cube* cube = new Models::Cube();
 	cube->SetProgram(Shader_Manager::GetShader("colorShader"));
 	cube->Create();
-	gameModelList["cube"] = cube;
+	gameModelList["cube"] = cube;*/
+
+	/*Models::Sphere* sphere = new Models::Sphere();
+	sphere->SetProgram(Shader_Manager::GetShader("colorShader"));
+	sphere->Create();
+	gameModelList["sphere"] = sphere;*/
+
+	Models::Circle* circle = new Models::Circle();
+	circle->SetProgram(Shader_Manager::GetShader("colorShader"));
+	circle->Create();
+	gameModelList["circle"] = circle;
 
 }
 

@@ -111,11 +111,6 @@ void Cube::Draw()
 	GLuint projection = glGetUniformLocation(program, "projection");
 	GLuint model = glGetUniformLocation(program, "model");
 
-	/*
-	fov++;
-	if (fov > 50.0f)
-		fov = 30.0f;*/
-
 	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
 	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 10.0f);
