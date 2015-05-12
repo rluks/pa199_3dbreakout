@@ -46,10 +46,7 @@ void Circle::Create()
 	vertices.push_back(VertexFormat(origin, green));*/
 
 	float pi = 3.14159265358979323846f;
-
-	//float angle = 0.0f;
-	float angleDelta = pi / 2;
-
+	float angleDelta = pi / 16;
 
 	for (float angle = 0.0f; angle < 2 * pi; angle += angleDelta)
 	{
@@ -59,9 +56,9 @@ void Circle::Create()
 		float x2 = cos(angle + angleDelta);
 		float z2 = sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), red));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue));
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue));
-		vertices.push_back(VertexFormat(origin, green));
+		vertices.push_back(VertexFormat(origin, blue));
 	}
 
 	/*
