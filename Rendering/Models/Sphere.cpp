@@ -25,9 +25,9 @@ void Sphere::Create()
 	unsigned int rings = 12;
 	unsigned int sectors = 24;
 
-	float const R = 1. / (float)(rings - 1);
-	float const S = 1. / (float)(sectors - 1);
-	int r, s;
+	float const R = 1.0f / (float)(rings - 1);
+	float const S = 1.0f / (float)(sectors - 1);
+	unsigned int r, s;
 
 	float pi = 3.14159265358979323846f;
 
@@ -39,21 +39,23 @@ void Sphere::Create()
 	std::vector<GLfloat>::iterator v = vertices.begin();
 	std::vector<GLfloat>::iterator n = normals.begin();
 	std::vector<GLfloat>::iterator t = texcoords.begin();
-	for (r = 0; r < rings; r++) for (s = 0; s < sectors; s++) {
-		float const y = sin(-pi/2.0f + pi * r * R);
-		float const x = cos(2 * pi * s * S) * sin(pi * r * R);
-		float const z = sin(2 * pi * s * S) * sin(pi * r * R);
+	for (r = 0; r < rings; r++) {
+		for (s = 0; s < sectors; s++) {
+			float const y = sin(-pi / 2.0f + pi * r * R);
+			float const x = cos(2 * pi * s * S) * sin(pi * r * R);
+			float const z = sin(2 * pi * s * S) * sin(pi * r * R);
 
-		*t++ = s*S;
-		*t++ = r*R;
+			*t++ = s*S;
+			*t++ = r*R;
 
-		*v++ = x * radius;
-		*v++ = y * radius;
-		*v++ = z * radius;
+			*v++ = x * radius;
+			*v++ = y * radius;
+			*v++ = z * radius;
 
-		*n++ = x;
-		*n++ = y;
-		*n++ = z;
+			*n++ = x;
+			*n++ = y;
+			*n++ = z;
+		}
 	}
 
 	indices.resize(rings * sectors * 4);

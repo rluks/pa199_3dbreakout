@@ -20,6 +20,7 @@
     <ClCompile Include="Rendering\Models\Cube.cpp" />
     <ClCompile Include="Rendering\Models\Sphere.cpp" />
     <ClCompile Include="Rendering\Models\Circle.cpp" />
+    <ClCompile Include="Rendering\png_texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -46,5 +47,7 @@
     <ClInclude Include="Rendering\Models\Cube.h" />
     <ClInclude Include="Rendering\Models\Sphere.h" />
     <ClInclude Include="Rendering\Models\Circle.h" />
+    <ClInclude Include="OpenGLIncludes.h" />
+    <ClInclude Include="Rendering\png_texture.h" />
   </ItemGroup>
 </Project>

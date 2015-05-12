@@ -5,6 +5,7 @@ using namespace Models;
 
 float dx = 0.0f;
 unsigned int verticesSize = 0;
+GLuint hero_tex;
 
 Circle::Circle()
 {}
@@ -16,6 +17,8 @@ void Circle::Create()
 {
 	GLuint vao;
 	GLuint vbo;
+
+	//hero_tex = LoadTextureFromPNGFile("Textures/player1.png");
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -91,7 +94,7 @@ void Circle::Create()
 
 void Circle::Update()
 {
-	dx+=0.02;
+	dx += 0.02f;
 	if (dx > 3.0f)
 		dx = 0.0f;
 
