@@ -34,7 +34,7 @@ void Circle::Create()
 
 	glm::vec3 origin = glm::vec3(0, 0, 0);
 
-	float y = -1.0f;
+	float y = 0.0f;
 
 	/*
 	vertices.push_back(VertexFormat(glm::vec3(0, y, -1.0f), red));
@@ -122,10 +122,19 @@ void Circle::Draw()
 
 	GLuint texture2d = glGetUniformLocation(program, "tex");
 
-	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
-	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(0, 3, -1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::vec3 topView = glm::vec3(0, 3, -1);
+	glm::vec3 perspectiveView = glm::vec3(3, 3, -1);
+	glm::vec3 selectedView = topView;
 
-	glm::mat4 projectionMatrix = glm::perspective(glm::radians(35.0f), 800.0f / 600.0f, 0.1f, 10.0f);
+	//eye - position of the camera's viewpoint, 
+	//center - where are you looking, up = up is Y+
+	glm::mat4 cameraMatrix = glm::lookAt(selectedView,
+										glm::vec3(0, 0, 0), 
+										glm::vec3(0, 1, 0));
+
+	glm::mat4 projectionMatrix = glm::perspective(glm::radians(35.0f), 
+												800.0f / 600.0f, 
+												0.1f, 10.0f);
 
 	glm::mat4 identityMx = glm::mat4(	glm::vec4(-1, 0, 0, 0),
 										glm::vec4(0, 1, 0, 0),
