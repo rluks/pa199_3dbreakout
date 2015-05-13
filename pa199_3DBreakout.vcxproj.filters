@@ -20,7 +20,8 @@
     <ClCompile Include="Rendering\Models\Cube.cpp" />
     <ClCompile Include="Rendering\Models\Sphere.cpp" />
     <ClCompile Include="Rendering\Models\Circle.cpp" />
-    <ClCompile Include="Rendering\png_texture.cpp" />
+    <ClCompile Include="Rendering\tdogl\Bitmap.cpp" />
+    <ClCompile Include="Rendering\tdogl\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -48,6 +49,11 @@
     <ClInclude Include="Rendering\Models\Sphere.h" />
     <ClInclude Include="Rendering\Models\Circle.h" />
     <ClInclude Include="OpenGLIncludes.h" />
-    <ClInclude Include="Rendering\png_texture.h" />
+    <ClInclude Include="Rendering\tdogl\Bitmap.h" />
+    <ClInclude Include="Rendering\tdogl\Texture.h" />
+    <ClInclude Include="Rendering\tdogl\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\tileable_grass_00.png" />
   </ItemGroup>
 </Project>

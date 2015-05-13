@@ -49,8 +49,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libpng15.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Roman\Documents\Visual Studio 2013\Projects\pa199_3DBreakout\packages\libpng.1.5.10.11;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +80,8 @@
     <ClCompile Include="Rendering\Models\Quad.cpp" />
     <ClCompile Include="Rendering\Models\Sphere.cpp" />
     <ClCompile Include="Rendering\Models\Triangle.cpp" />
-    <ClCompile Include="Rendering\png_texture.cpp" />
+    <ClCompile Include="Rendering\tdogl\Bitmap.cpp" />
+    <ClCompile Include="Rendering\tdogl\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -105,8 +106,13 @@
     <ClInclude Include="Rendering\Models\Sphere.h" />
     <ClInclude Include="Rendering\Models\Triangle.h" />
     <ClInclude Include="OpenGLIncludes.h" />
-    <ClInclude Include="Rendering\png_texture.h" />
+    <ClInclude Include="Rendering\tdogl\stb_image.h" />
+    <ClInclude Include="Rendering\tdogl\Bitmap.h" />
+    <ClInclude Include="Rendering\tdogl\Texture.h" />
     <ClInclude Include="Rendering\VertexFormat.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\tileable_grass_00.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
