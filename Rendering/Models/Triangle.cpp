@@ -20,11 +20,12 @@ void Triangle::Create()
 	glBindVertexArray(vao);
 
 	glm::vec4 red = glm::vec4(1, 0, 0, 1);
+	glm::vec2 zeros = glm::vec2(0, 0);
 
 	std::vector<VertexFormat> vertices;
-	vertices.push_back(VertexFormat(glm::vec3(0.25, -0.25, 0.0), red));
-	vertices.push_back(VertexFormat(glm::vec3(-0.25, -0.25, 0.0), red));
-	vertices.push_back(VertexFormat(glm::vec3(0.25, 0.25, 0.0), glm::vec4(0, 0, 1, 1)));
+	vertices.push_back(VertexFormat(glm::vec3(0.25, -0.25, 0.0), red, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(-0.25, -0.25, 0.0), red, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(0.25, 0.25, 0.0), glm::vec4(0, 0, 1, 1), zeros));
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);

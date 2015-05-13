@@ -15,16 +15,22 @@ void Quad::Create()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
+	glm::vec2 zeros = glm::vec2(0, 0);
+
 	std::vector<VertexFormat> vertices;
 	vertices.push_back(VertexFormat(glm::vec3(-0.25, 0.5, 0.0),//pos
-		glm::vec4(1, 0, 0, 1)));   //color
+		glm::vec4(1, 0, 0, 1),
+		zeros));
 	vertices.push_back(VertexFormat(glm::vec3(-0.25, 0.75, 0.0),//pos
-		glm::vec4(0, 0, 0, 1)));   //color
+		glm::vec4(0, 0, 0, 1),
+		zeros));
 	vertices.push_back(VertexFormat(glm::vec3(0.25, 0.5, 0.0),  //pos
-		glm::vec4(0, 1, 0, 1)));   //color
+		glm::vec4(0, 1, 0, 1),
+		zeros));
 	//4th vertex
 	vertices.push_back(VertexFormat(glm::vec3(0.25, 0.75, 0.0),//pos
-		glm::vec4(0, 0, 1, 1)));   //color
+		glm::vec4(0, 0, 1, 1),
+		zeros));   //color
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);            //here we have 4

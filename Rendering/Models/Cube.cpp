@@ -25,58 +25,60 @@ void Cube::Create()
 	glm::vec4 green = glm::vec4(0, 1, 0, 1);
 	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
 
+	glm::vec2 zeros = glm::vec2(0, 0);
+
 	//vertices.push_back(VertexFormat(glm::vec3(-0.5, 0.5, 0.0), red));
 	//vertices.push_back(VertexFormat(glm::vec3(-0.5, -0.5, 0.0), green)); 
 	//vertices.push_back(VertexFormat(glm::vec3(0.5, 0.5, 0.0), blue)); 
 	//vertices.push_back(VertexFormat(glm::vec3(0.5, -0.5, 0.0), red));
 
 		// bottom
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), blue));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, -1.0f), blue, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), blue, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), green, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), blue, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), blue, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), blue, zeros));
 
 		// top
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, 1.0f), green));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, 1.0f), green, zeros));
 
 		// front
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, 1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), red));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, 1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), red, zeros));;
 
 		// back
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), red));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, -1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), blue, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), red, zeros));
 
 		// left
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), blue));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, -1.0f), blue, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, -1.0f, 1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, 1.0f), green, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(-1.0f, 1.0f, -1.0f), blue, zeros));
 
 		// right
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, 1.0f), blue));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), blue, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, -1.0f), blue, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), red, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, -1.0f, 1.0f), blue, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, -1.0f), blue, zeros));
+		vertices.push_back(VertexFormat(glm::vec3(1.0f, 1.0f, 1.0f), blue, zeros));
 
 
 	glGenBuffers(1, &vbo);
