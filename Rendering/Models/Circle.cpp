@@ -52,8 +52,6 @@ void Circle::Create()
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16;
 
-	glm::vec2 zeros = glm::vec2(0, 0);
-
 	for (float angle = 0.0f; angle < 2 * pi; angle += angleDelta)
 	{
 		float x = cos(angle);
@@ -62,9 +60,15 @@ void Circle::Create()
 		float x2 = cos(angle + angleDelta);
 		float z2 = sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, zeros));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, zeros));
-		vertices.push_back(VertexFormat(origin, blue, zeros));
+		glm::vec2 zeros = glm::vec2(0, 0);
+		glm::vec2 originTex = glm::vec2(0.5, 0.5);
+
+		glm::vec2 texCoord = glm::vec2(x/2 + 0.5, z/2 + 0.5);
+		glm::vec2 texCoord2 = glm::vec2(x2 / 2 + 0.5, z2 / 2 + 0.5);
+
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
+		vertices.push_back(VertexFormat(origin, blue, originTex));
 	}
 
 	/*

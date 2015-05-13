@@ -6,9 +6,10 @@ uniform mat4 model;
 
 layout(location = 0) in vec3 in_position;
 layout(location = 1) in vec4 in_color;
-layout(location = 2) in vec2 fragTexCoord; //this is the texture coord
+layout(location = 2) in vec2 vertTexCoord; //this is the texture coord
  
 out vec4 color;
+out vec2 fragTexCoord;
 
 void main()
 {
