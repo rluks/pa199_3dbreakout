@@ -5,7 +5,7 @@ using namespace Models;
 
 float dx = 0.0f;
 unsigned int verticesSize = 0;
-GLuint hero_tex;
+tdogl::Texture* gTexture = NULL;
 
 Circle::Circle()
 {}
@@ -18,8 +18,6 @@ void Circle::Create()
 	GLuint vao;
 	GLuint vbo;
 
-
-	tdogl::Texture* gTexture = NULL;
 	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/tileable_grass_00.png");
 	gTexture = new tdogl::Texture(bmp);
 
@@ -87,8 +85,12 @@ void Circle::Create()
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)0);
+
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)(offsetof(VertexFormat, VertexFormat::color)));
+	
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_TRUE, sizeof(VertexFormat), (void*)(offsetof(VertexFormat, VertexFormat::texture)));
 
 	glBindVertexArray(0);
 
@@ -114,6 +116,8 @@ void Circle::Draw()
 	GLuint projection = glGetUniformLocation(program, "projection");
 	GLuint model = glGetUniformLocation(program, "model");
 
+	GLuint texture2d = glGetUniformLocation(program, "tex");
+
 	//eye - position of the camera's viewpoint, center - where are you looking, up = up is Y+
 	glm::mat4 cameraMatrix = glm::lookAt(glm::vec3(0, 3, -1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
@@ -127,6 +131,10 @@ void Circle::Draw()
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(identityMx));
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gTexture->object());
+	glUniform1i(texture2d, 0);
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
