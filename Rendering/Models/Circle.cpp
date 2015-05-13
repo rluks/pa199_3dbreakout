@@ -122,9 +122,9 @@ void Circle::Draw()
 
 	GLuint texture2d = glGetUniformLocation(program, "tex");
 
-	glm::vec3 topView = glm::vec3(0, 3, 1);
-	glm::vec3 perspectiveView = glm::vec3(3, 3, -1);
-	glm::vec3 selectedView = topView;
+	glm::vec3 topView = glm::vec3(0, 4, 0.1);
+	glm::vec3 perspectiveView = glm::vec3(0, 3, 3);
+	glm::vec3 selectedView = perspectiveView;
 
 	//eye - position of the camera's viewpoint, 
 	//center - where are you looking, up = up is Y+
