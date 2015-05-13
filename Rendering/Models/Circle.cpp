@@ -18,7 +18,10 @@ void Circle::Create()
 	GLuint vao;
 	GLuint vbo;
 
-	//hero_tex = LoadTextureFromPNGFile("Textures/player1.png");
+
+	tdogl::Texture* gTexture = NULL;
+	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/tileable_grass_00.png");
+	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
