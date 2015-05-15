@@ -66,6 +66,19 @@ void Brick::Create()
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, texCoordIn2));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn));
+
+		if (angle == 0.0f)//vertical wall
+		{
+
+			vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
+			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
+			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
+			
+			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
+			vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
+			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
+
+		}
 	}
 
 	/*vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red, zeros));
@@ -135,9 +148,11 @@ void Brick::Draw()
 		glm::vec4(0, 0, 1, 0),
 		glm::vec4(0, 0, 0, 1));
 
+	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(170.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(identityMx));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(rotated));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
