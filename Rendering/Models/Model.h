@@ -8,6 +8,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../tdogl/Texture.h"
+
 namespace Rendering
 {
 	namespace Models //create another namespace
@@ -30,7 +32,9 @@ namespace Rendering
 			GLuint vao;
 			GLuint program;
 			std::vector<GLuint> vbos;
+
 			unsigned int verticesSize;
+			tdogl::Texture* gTexture;
 		};
 	}
 }

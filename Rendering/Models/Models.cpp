@@ -6,6 +6,7 @@ using namespace Models;
 Model::Model()
 {
 	verticesSize = 0;
+	gTexture = NULL;
 }
 
 Model::~Model()

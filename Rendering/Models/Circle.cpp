@@ -4,7 +4,7 @@ using namespace Rendering;
 using namespace Models;
 
 float dx = 0.0f;
-tdogl::Texture* gTexture = NULL;
+
 
 Circle::Circle()
 {}
@@ -18,6 +18,7 @@ void Circle::Create()
 	GLuint vbo;
 
 	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/tileable_grass_00.png");
+
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);
