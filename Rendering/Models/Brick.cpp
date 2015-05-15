@@ -35,7 +35,7 @@ void Brick::Create()
 	
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16;
-	float endAngle = pi/6.0f;
+	float endAngle = pi/3.0f;
 	float smallerRadius = 0.7f;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
