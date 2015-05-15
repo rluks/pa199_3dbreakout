@@ -34,11 +34,15 @@ void Brick::Create()
 	float y = 0.2f;
 	
 	float pi = 3.14159265358979323846f;
-	float angleDelta = pi / 16;
+	float angleDelta = pi / 16.0f;
 	float endAngle = pi/3.0f;
 	float smallerRadius = 0.7f;
+	int counter = 0;
+	int lastIteration = 6;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
+		counter++;
+
 		float x = cos(angle);
 		float z = sin(angle);
 
@@ -69,7 +73,6 @@ void Brick::Create()
 
 		if (angle == 0.0f)//vertical wall
 		{
-
 			vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
 			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
 			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
@@ -78,7 +81,17 @@ void Brick::Create()
 			vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
 			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
 
-		}
+		} 
+		else if (counter == lastIteration)
+		{
+			vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
+			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
+
+			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
+			vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
+			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+		}	
 	}
 
 	/*vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red, zeros));
@@ -90,8 +103,6 @@ void Brick::Create()
 	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green, zeros));*/	
 
 	verticesSize = vertices.size();
-
-	std::cout << verticesSize;
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -148,7 +159,7 @@ void Brick::Draw()
 		glm::vec4(0, 0, 1, 0),
 		glm::vec4(0, 0, 0, 1));
 
-	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(170.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
