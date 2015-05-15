@@ -35,8 +35,8 @@ void Brick::Create()
 	
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16;
-
 	float endAngle = pi/6.0f;
+	float smallerRadius = 0.7f;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		float x = cos(angle);
@@ -45,11 +45,11 @@ void Brick::Create()
 		float x2 = cos(angle + angleDelta);
 		float z2 = sin(angle + angleDelta);
 
-		float xIn = 0.3f * cos(angle);
-		float zIn = 0.3f * sin(angle);
+		float xIn = smallerRadius * cos(angle);
+		float zIn = smallerRadius * sin(angle);
 
-		float xIn2 = 0.3f * cos(angle + angleDelta);
-		float zIn2 = 0.3f * sin(angle + angleDelta);
+		float xIn2 = smallerRadius * cos(angle + angleDelta);
+		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
 		glm::vec2 zeros = glm::vec2(0, 0);
 		glm::vec2 originTex = glm::vec2(0.5, 0.5);
