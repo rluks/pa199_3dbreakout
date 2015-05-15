@@ -4,7 +4,6 @@ using namespace Rendering;
 using namespace Models;
 
 float dx = 0.0f;
-unsigned int verticesSize = 0;
 tdogl::Texture* gTexture = NULL;
 
 Circle::Circle()

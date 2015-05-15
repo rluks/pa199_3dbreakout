@@ -22,7 +22,6 @@
     <ClCompile Include="Rendering\Models\Circle.cpp" />
     <ClCompile Include="Rendering\tdogl\Bitmap.cpp" />
     <ClCompile Include="Rendering\tdogl\Texture.cpp" />
-    <ClCompile Include="Rendering\Models\Brick.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -53,7 +52,6 @@
     <ClInclude Include="Rendering\tdogl\Bitmap.h" />
     <ClInclude Include="Rendering\tdogl\Texture.h" />
     <ClInclude Include="Rendering\tdogl\stb_image.h" />
-    <ClInclude Include="Rendering\Models\Brick.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\tileable_grass_00.png" />
