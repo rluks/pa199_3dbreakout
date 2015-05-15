@@ -31,6 +31,11 @@ Models_Manager::Models_Manager()
 	circle->Create();
 	gameModelList["circle"] = circle;
 
+	Models::Brick* brick = new Models::Brick();
+	brick->SetProgram(Shader_Manager::GetShader("colorShader"));
+	brick->Create();
+	gameModelList["brick"] = brick;
+
 }
 
 Models_Manager::~Models_Manager()

@@ -3,8 +3,6 @@
 using namespace Rendering;
 using namespace Models;
 
-//float dx = 0.0f;
-
 Brick::Brick()
 {}
 
@@ -31,26 +29,15 @@ void Brick::Create()
 	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
 
 	glm::vec3 origin = glm::vec3(0, 0, 0);
+	glm::vec2 zeros = glm::vec2(0, 0);
 
-	float y = 0.0f;
-
-	/*
-	vertices.push_back(VertexFormat(glm::vec3(0, y, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 0), blue));
-	vertices.push_back(VertexFormat(origin, green));
-
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 0), blue));
-	vertices.push_back(VertexFormat(glm::vec3(0, y, 1), yellow));
-	vertices.push_back(VertexFormat(origin, green));
-
-	vertices.push_back(VertexFormat(glm::vec3(0, y, 1), yellow));
-	vertices.push_back(VertexFormat(glm::vec3(-1, y, 0), nevim));
-	vertices.push_back(VertexFormat(origin, green));*/
-
+	float y = 0.2f;
+	
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16;
 
-	for (float angle = 0.0f; angle < 2 * pi; angle += angleDelta)
+	float endAngle = pi/6.0f;
+	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		float x = cos(angle);
 		float z = sin(angle);
@@ -58,28 +45,40 @@ void Brick::Create()
 		float x2 = cos(angle + angleDelta);
 		float z2 = sin(angle + angleDelta);
 
+		float xIn = 0.3f * cos(angle);
+		float zIn = 0.3f * sin(angle);
+
+		float xIn2 = 0.3f * cos(angle + angleDelta);
+		float zIn2 = 0.3f * sin(angle + angleDelta);
+
 		glm::vec2 zeros = glm::vec2(0, 0);
 		glm::vec2 originTex = glm::vec2(0.5, 0.5);
 
 		glm::vec2 texCoord = glm::vec2(x / 2 + 0.5, z / 2 + 0.5);
 		glm::vec2 texCoord2 = glm::vec2(x2 / 2 + 0.5, z2 / 2 + 0.5);
+		glm::vec2 texCoordIn = glm::vec2(xIn / 2 + 0.5, zIn / 2 + 0.5);
+		glm::vec2 texCoordIn2 = glm::vec2(xIn2 / 2 + 0.5, zIn2 / 2 + 0.5);
 
 		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord));
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
-		vertices.push_back(VertexFormat(origin, blue, originTex));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn));
+
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, texCoordIn2));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn));
 	}
 
-	/*
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
+	/*vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue, glm::vec2(1, 0)));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green, glm::vec2(0, 1)));
 
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 1.0f), yellow));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
-	*/
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 1.0f), yellow, zeros));
+	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green, zeros));*/	
 
 	verticesSize = vertices.size();
+
+	std::cout << verticesSize;
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -103,9 +102,6 @@ void Brick::Create()
 
 void Brick::Update()
 {
-	/*dx += 0.02f;
-	if (dx > 3.0f)
-		dx = 0.0f;*/
 
 
 }

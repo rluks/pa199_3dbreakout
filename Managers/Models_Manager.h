@@ -10,6 +10,7 @@
 #include "../Rendering/Models/Cube.h"
 #include "../Rendering/Models/Sphere.h"
 #include "../Rendering/Models/Circle.h"
+#include "../Rendering/Models/Brick.h"
 
 using namespace Rendering;
 
