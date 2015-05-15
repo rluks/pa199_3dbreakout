@@ -3,6 +3,10 @@
 using namespace Rendering;
 using namespace Models;
 
+glm::mat4 Model::projectionMatrix = glm::perspective(glm::radians(35.0f),
+	800.0f / 600.0f,
+	0.1f, 10.0f);
+
 Model::Model()
 {
 	verticesSize = 0;

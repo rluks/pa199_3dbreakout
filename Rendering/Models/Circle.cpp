@@ -132,10 +132,6 @@ void Circle::Draw()
 										glm::vec3(0, 0, 0), 
 										glm::vec3(0, 1, 0));
 
-	glm::mat4 projectionMatrix = glm::perspective(glm::radians(35.0f), 
-												800.0f / 600.0f, 
-												0.1f, 10.0f);
-
 	glm::mat4 identityMx = glm::mat4(	glm::vec4(-1, 0, 0, 0),
 										glm::vec4(0, 1, 0, 0),
 										glm::vec4(0, 0, 1, 0),

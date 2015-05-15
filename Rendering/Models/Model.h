@@ -35,6 +35,8 @@ namespace Rendering
 
 			unsigned int verticesSize;
 			tdogl::Texture* gTexture;
+
+			static glm::mat4 projectionMatrix;
 		};
 	}
 }
