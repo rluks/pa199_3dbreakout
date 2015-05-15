@@ -30,6 +30,7 @@ namespace Rendering
 			GLuint vao;
 			GLuint program;
 			std::vector<GLuint> vbos;
+			unsigned int verticesSize;
 		};
 	}
 }

@@ -3,7 +3,10 @@
 using namespace Rendering;
 using namespace Models;
 
-Model::Model(){}
+Model::Model()
+{
+	verticesSize = 0;
+}
 
 Model::~Model()
 {
