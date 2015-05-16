@@ -62,14 +62,17 @@ void Sphere::Create()
 		}
 	}
 
-	indices.resize(rings * sectors * 3);
+	indices.resize(rings * sectors * 6);
 	std::vector<GLushort>::iterator i = indices.begin();
 	for (unsigned int r = 0; r < rings - 1; r++) {
 		for (unsigned int s = 0; s < sectors - 1; s++) {
 			*i++ = r * sectors + s;
 			*i++ = r * sectors + (s + 1);
 			*i++ = (r + 1) * sectors + (s + 1);
-			//*i++ = (r + 1) * sectors + s;
+
+			*i++ = (r + 1) * sectors + (s + 1);
+			*i++ = (r + 1) * sectors + s;
+			*i++ = r * sectors + s;
 		}
 	}
 	
@@ -142,8 +145,6 @@ void Sphere::Draw()
 	glUniform1i(texture2d, 0);
 
 	glBindVertexArray(vao);
-	//glDrawArrays(GL_TRIANGLES, 0, verticesSize);
-	//int size; glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
 
 }
