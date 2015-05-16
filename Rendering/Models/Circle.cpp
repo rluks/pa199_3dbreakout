@@ -36,19 +36,6 @@ void Circle::Create()
 
 	float y = 0.0f;
 
-	/*
-	vertices.push_back(VertexFormat(glm::vec3(0, y, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 0), blue));
-	vertices.push_back(VertexFormat(origin, green));
-
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 0), blue));
-	vertices.push_back(VertexFormat(glm::vec3(0, y, 1), yellow));
-	vertices.push_back(VertexFormat(origin, green));
-
-	vertices.push_back(VertexFormat(glm::vec3(0, y, 1), yellow));
-	vertices.push_back(VertexFormat(glm::vec3(-1, y, 0), nevim));
-	vertices.push_back(VertexFormat(origin, green));*/
-
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16;
 
@@ -70,16 +57,6 @@ void Circle::Create()
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
 		vertices.push_back(VertexFormat(origin, blue, originTex));
 	}
-
-	/*
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
-
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 1.0f), yellow));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green));
-	*/
 
 	verticesSize = vertices.size();
 

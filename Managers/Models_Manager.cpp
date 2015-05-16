@@ -21,10 +21,10 @@ Models_Manager::Models_Manager()
 	cube->Create();
 	gameModelList["cube"] = cube;*/
 
-	/*Models::Sphere* sphere = new Models::Sphere();
+	Models::Sphere* sphere = new Models::Sphere();
 	sphere->SetProgram(Shader_Manager::GetShader("colorShader"));
 	sphere->Create();
-	gameModelList["sphere"] = sphere;*/
+	gameModelList["sphere"] = sphere;
 
 	Models::Circle* circle = new Models::Circle();
 	circle->SetProgram(Shader_Manager::GetShader("colorShader"));

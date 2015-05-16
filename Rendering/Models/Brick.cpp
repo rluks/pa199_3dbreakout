@@ -171,7 +171,7 @@ void Brick::Draw()
 		glm::vec4(0, 0, 1, 0),
 		glm::vec4(0, 0, 0, 1));
 
-	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
