@@ -33,8 +33,8 @@ void Sphere::Create()
 	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
 
 	int n = 1;
-	unsigned int rings = 12*n;
-	unsigned int sectors = 24*n;
+	unsigned int rings = 24*n;
+	unsigned int sectors = 48*n;
 
 	float const R = 1.0f / (float)(rings - 1);
 	float const S = 1.0f / (float)(sectors - 1);
@@ -48,15 +48,8 @@ void Sphere::Create()
 			float const x = cos(2 * pi * s * S) * sin(pi * r * R);
 			float const z = sin(2 * pi * s * S) * sin(pi * r * R);
 
-			//*t++ = s*S;
-			//*t++ = r*R;
 			glm::vec2 texCoord = glm::vec2(s*S, r*R);
-
-			//*v++ = x * radius;
-			//*v++ = y * radius;
-			//*v++ = z * radius;
 			glm::vec3 vxs = glm::vec3(x, y, z);
-			//glm::vec3 vxs = glm::vec3(x, z, y);
 
 			vertices.push_back(VertexFormat(vxs, blue, texCoord));
 		}
