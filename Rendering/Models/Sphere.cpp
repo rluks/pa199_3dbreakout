@@ -4,6 +4,9 @@ using namespace Rendering;
 using namespace Models;
 
 float dxR;
+std::vector<GLushort> indices;
+GLuint ibo;//Index Buffer Object for indices
+
 Sphere::Sphere()
 {
 	dxR = 0.0f;
@@ -17,6 +20,7 @@ void Sphere::Create()
 	GLuint vao;
 	GLuint vbo;
 
+
 	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/ball.png");
 
 	gTexture = new tdogl::Texture(bmp);
@@ -28,8 +32,9 @@ void Sphere::Create()
 
 	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
 
-	unsigned int rings = 12;
-	unsigned int sectors = 24;
+	int n = 1;
+	unsigned int rings = 12*n;
+	unsigned int sectors = 24*n;
 
 	float const R = 1.0f / (float)(rings - 1);
 	float const S = 1.0f / (float)(sectors - 1);
@@ -56,12 +61,28 @@ void Sphere::Create()
 			vertices.push_back(VertexFormat(vxs, blue, texCoord));
 		}
 	}
+
+	indices.resize(rings * sectors * 3);
+	std::vector<GLushort>::iterator i = indices.begin();
+	for (unsigned int r = 0; r < rings - 1; r++) {
+		for (unsigned int s = 0; s < sectors - 1; s++) {
+			*i++ = r * sectors + s;
+			*i++ = r * sectors + (s + 1);
+			*i++ = (r + 1) * sectors + (s + 1);
+			//*i++ = (r + 1) * sectors + s;
+		}
+	}
 	
 	verticesSize = vertices.size();
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * verticesSize, &vertices[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indices.size(), &indices[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexFormat), (void*)0);
@@ -121,5 +142,8 @@ void Sphere::Draw()
 	glUniform1i(texture2d, 0);
 
 	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
+	//glDrawArrays(GL_TRIANGLES, 0, verticesSize);
+	//int size; glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
+
 }
