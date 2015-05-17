@@ -28,7 +28,8 @@ void Bat::Create()
 	std::vector<VertexFormat> vertices;
 
 	generateBatVertices(0.0f, vertices);
-	generateBatVertices(180.0f, vertices);
+	generateBatVertices(120.0f, vertices);
+	generateBatVertices(240.0f, vertices);
 
 	verticesSize = vertices.size();
 
@@ -67,13 +68,14 @@ void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &verti
 
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16.0f;
+	startAngle = glm::radians(startAngle);
 	float endAngle = pi / 6.0f;
 	float smallerRadius = 1.7f;
 	float radius = 2.0f;
 	int counter = 0;
 	int lastIteration = 3;
 
-	for (float angle = startAngle; angle < endAngle; angle += angleDelta)
+	for (float angle = startAngle; angle < startAngle+endAngle; angle += angleDelta)
 	{
 		counter++;
 
