@@ -113,10 +113,13 @@ void Circle::Draw()
 										glm::vec4(0, 1, 0, 0),
 										glm::vec4(0, 0, 1, 0),
 										glm::vec4(0, 0, 0, 1));
+
+	glm::mat4 scaledMx = glm::scale(identityMx,
+								glm::vec3(2.0f));
 	
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(identityMx));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(scaledMx));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
