@@ -21,10 +21,10 @@ Models_Manager::Models_Manager()
 	cube->Create();
 	gameModelList["cube"] = cube;*/
 
-	/*Models::Sphere* sphere = new Models::Sphere();
+	Models::Sphere* sphere = new Models::Sphere();
 	sphere->SetProgram(Shader_Manager::GetShader("colorShader"));
 	sphere->Create();
-	gameModelList["sphere"] = sphere;*/
+	gameModelList["sphere"] = sphere;
 
 	Models::Circle* circle = new Models::Circle();
 	circle->SetProgram(Shader_Manager::GetShader("colorShader"));
@@ -34,18 +34,11 @@ Models_Manager::Models_Manager()
 	/*Models::Brick* brick = new Models::Brick(0.0f);
 	brick->SetProgram(Shader_Manager::GetShader("colorShader"));
 	brick->Create();
-	gameModelList["brick"] = brick;
+	gameModelList["brick"] = brick;*/
 
-	Models::Brick* brick1 = new Models::Brick(60.0f);
-	brick1->SetProgram(Shader_Manager::GetShader("colorShader"));
-	brick1->Create();
-	gameModelList["brick1"] = brick1;*/
-
-	std::string mapKey = "brick";
 	for (int angle = 0; angle < 360; angle += 60)
 	{
-		mapKey += std::to_string(angle);
-		std::cout << mapKey;
+		std::string mapKey = "brick" + std::to_string(angle);
 		Models::Brick* temp = new Models::Brick((float)angle);
 		temp->SetProgram(Shader_Manager::GetShader("colorShader"));
 		temp->Create();
