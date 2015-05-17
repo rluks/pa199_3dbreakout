@@ -16,7 +16,7 @@ void Brick::Create()
 	GLuint vao;
 	GLuint vbo;
 
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/brick_wall2-diff-512.png");
+	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/brick.png");
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);
