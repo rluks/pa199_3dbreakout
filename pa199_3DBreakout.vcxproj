@@ -76,11 +76,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rendering\Models\Brick.cpp" />
     <ClCompile Include="Rendering\Models\Circle.cpp" />
-    <ClCompile Include="Rendering\Models\Cube.cpp" />
     <ClCompile Include="Rendering\Models\Models.cpp" />
-    <ClCompile Include="Rendering\Models\Quad.cpp" />
     <ClCompile Include="Rendering\Models\Sphere.cpp" />
-    <ClCompile Include="Rendering\Models\Triangle.cpp" />
     <ClCompile Include="Rendering\tdogl\Bitmap.cpp" />
     <ClCompile Include="Rendering\tdogl\Texture.cpp" />
   </ItemGroup>
@@ -102,11 +99,8 @@
     <ClInclude Include="Rendering\IGameObject.h" />
     <ClInclude Include="Rendering\Models\Brick.h" />
     <ClInclude Include="Rendering\Models\Circle.h" />
-    <ClInclude Include="Rendering\Models\Cube.h" />
     <ClInclude Include="Rendering\Models\Model.h" />
-    <ClInclude Include="Rendering\Models\Quad.h" />
     <ClInclude Include="Rendering\Models\Sphere.h" />
-    <ClInclude Include="Rendering\Models\Triangle.h" />
     <ClInclude Include="OpenGLIncludes.h" />
     <ClInclude Include="Rendering\tdogl\stb_image.h" />
     <ClInclude Include="Rendering\tdogl\Bitmap.h" />
