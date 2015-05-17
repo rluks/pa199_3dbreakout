@@ -32,9 +32,9 @@ void Sphere::Create()
 
 	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
 
-	int n = 1;
-	unsigned int rings = 24*n;
-	unsigned int sectors = 48*n;
+	int n = 2;//fidelity
+	unsigned int rings = 12*n;
+	unsigned int sectors = 24*n;
 
 	float const R = 1.0f / (float)(rings - 1);
 	float const S = 1.0f / (float)(sectors - 1);
@@ -112,10 +112,6 @@ void Sphere::Draw()
 
 	GLuint texture2d = glGetUniformLocation(program, "tex");
 
-	glm::vec3 topView = glm::vec3(0, 4, 0.1);
-	glm::vec3 perspectiveView = glm::vec3(0, 3, 3);
-	glm::vec3 selectedView = perspectiveView;
-
 	//eye - position of the camera's viewpoint, 
 	//center - where are you looking, up = up is Y+
 	glm::mat4 cameraMatrix = glm::lookAt(selectedView,
@@ -127,11 +123,13 @@ void Sphere::Draw()
 		glm::vec4(0, 0, 1, 0),
 		glm::vec4(0, 0, 0, 1));
 
-	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(dxR), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 modelmx = glm::translate(identityMx, glm::vec3(0.0f, 0.5f, 0.0f));
+	glm::mat4 rotated = glm::rotate(modelmx, glm::radians(dxR), glm::vec3(1.0f, 1.0f, 0.0f));
+	glm::mat4 scaledMx = glm::scale(rotated, glm::vec3(0.125f));
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(rotated));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(scaledMx));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
