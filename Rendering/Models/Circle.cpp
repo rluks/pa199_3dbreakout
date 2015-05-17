@@ -110,8 +110,7 @@ void Circle::Draw()
 										glm::vec4(0, 0, 1, 0),
 										glm::vec4(0, 0, 0, 1));
 
-	glm::mat4 scaledMx = glm::scale(identityMx,
-								glm::vec3(2.0f));
+	glm::mat4 scaledMx = glm::scale(identityMx, glm::vec3(2.0f));
 	
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
