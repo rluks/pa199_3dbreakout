@@ -41,18 +41,19 @@ void Bat::Create()
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16.0f;
 	float endAngle = pi/3.0f;
-	float smallerRadius = 0.7f;
+	float smallerRadius = 1.7f;
+	float radius = 2.0f;
 	int counter = 0;
 	int lastIteration = 6;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		counter++;
 
-		float x = cos(angle);
-		float z = sin(angle);
+		float x = radius * cos(angle);
+		float z = radius * sin(angle);
 
-		float x2 = cos(angle + angleDelta);
-		float z2 = sin(angle + angleDelta);
+		float x2 = radius * cos(angle + angleDelta);
+		float z2 = radius * sin(angle + angleDelta);
 
 		float xIn = smallerRadius * cos(angle);
 		float zIn = smallerRadius * sin(angle);
@@ -167,8 +168,9 @@ void Bat::Draw()
 		glm::vec4(0, 0, 0, 1));
 
 
+	//glm::mat4 rotatedFixed = glm::rotate(identityMx, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(dxB), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 modelmx = glm::translate(rotated, glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 modelmx = glm::translate(rotated, glm::vec3(0.0f, 0.0f, 0.0f));
 	//glm::mat4 rotated = glm::rotate(modelmx, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
