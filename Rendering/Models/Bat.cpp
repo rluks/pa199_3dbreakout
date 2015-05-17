@@ -40,11 +40,11 @@ void Bat::Create()
 	
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 16.0f;
-	float endAngle = pi/3.0f;
+	float endAngle = pi/6.0f;
 	float smallerRadius = 1.7f;
 	float radius = 2.0f;
 	int counter = 0;
-	int lastIteration = 6;
+	int lastIteration = 3;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		counter++;
