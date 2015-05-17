@@ -37,6 +37,10 @@ namespace Rendering
 			tdogl::Texture* gTexture;
 
 			static glm::mat4 projectionMatrix;
+			static glm::vec3 topView;
+			static glm::vec3 perspectiveView;
+			static glm::vec3 selectedView;
+
 		};
 	}
 }
