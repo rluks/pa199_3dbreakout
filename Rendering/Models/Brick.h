@@ -10,12 +10,14 @@ namespace Rendering
 		class Brick : public Models::Model
 		{
 		public:
-			Brick();
+			Brick(float);
 			~Brick();
 
 			void Create();
 			virtual void Draw() override final;
 			virtual void Update() override final;
+
+			float angle;
 		};
 	}
 }
