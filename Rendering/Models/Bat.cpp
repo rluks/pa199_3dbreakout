@@ -94,10 +94,10 @@ void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &verti
 		glm::vec2 zeros = glm::vec2(0, 0);
 		glm::vec2 originTex = glm::vec2(0.5, 0.5);
 
-		glm::vec2 texCoord = glm::vec2(x / 2 + 0.5, z / 2 + 0.5);
-		glm::vec2 texCoord2 = glm::vec2(x2 / 2 + 0.5, z2 / 2 + 0.5);
-		glm::vec2 texCoordIn = glm::vec2(xIn / 2 + 0.5, zIn / 2 + 0.5);
-		glm::vec2 texCoordIn2 = glm::vec2(xIn2 / 2 + 0.5, zIn2 / 2 + 0.5);
+		glm::vec2 texCoord = glm::vec2(x / 4 + 0.5, z / 4 + 0.5);
+		glm::vec2 texCoord2 = glm::vec2(x2 / 4 + 0.5, z2 / 4 + 0.5);
+		glm::vec2 texCoordIn = glm::vec2(xIn / 4 + 0.5, zIn / 4 + 0.5);
+		glm::vec2 texCoordIn2 = glm::vec2(xIn2 / 4 + 0.5, zIn2 / 4 + 0.5);
 
 		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord));
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
