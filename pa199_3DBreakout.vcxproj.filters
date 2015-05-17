@@ -20,6 +20,7 @@
     <ClCompile Include="Rendering\tdogl\Bitmap.cpp" />
     <ClCompile Include="Rendering\tdogl\Texture.cpp" />
     <ClCompile Include="Rendering\Models\Brick.cpp" />
+    <ClCompile Include="Rendering\Models\Bat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Rendering\tdogl\Texture.h" />
     <ClInclude Include="Rendering\tdogl\stb_image.h" />
     <ClInclude Include="Rendering\Models\Brick.h" />
+    <ClInclude Include="Rendering\Models\Bat.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\tileable_grass_00.png" />

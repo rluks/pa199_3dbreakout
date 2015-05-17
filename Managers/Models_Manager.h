@@ -11,6 +11,7 @@
 #include "../Rendering/Models/Sphere.h"
 #include "../Rendering/Models/Circle.h"
 #include "../Rendering/Models/Brick.h"
+#include "../Rendering/Models/Bat.h"
 
 using namespace Rendering;
 

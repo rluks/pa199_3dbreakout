@@ -74,6 +74,7 @@
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Managers\Shader_Manager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rendering\Models\Bat.cpp" />
     <ClCompile Include="Rendering\Models\Brick.cpp" />
     <ClCompile Include="Rendering\Models\Circle.cpp" />
     <ClCompile Include="Rendering\Models\Models.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Core\Init\Init_GLEW.h" />
     <ClInclude Include="Managers\Shader_Manager.h" />
     <ClInclude Include="Rendering\IGameObject.h" />
+    <ClInclude Include="Rendering\Models\Bat.h" />
     <ClInclude Include="Rendering\Models\Brick.h" />
     <ClInclude Include="Rendering\Models\Circle.h" />
     <ClInclude Include="Rendering\Models\Model.h" />

@@ -45,6 +45,11 @@ Models_Manager::Models_Manager()
 		gameModelList[mapKey] = temp;
 	}
 
+	Models::Bat* bat = new Models::Bat(0.0f);
+	bat->SetProgram(Shader_Manager::GetShader("colorShader"));
+	bat->Create();
+	gameModelList["bat"] = bat;
+
 }
 
 Models_Manager::~Models_Manager()
