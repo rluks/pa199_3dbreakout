@@ -18,6 +18,8 @@ namespace Rendering
 			virtual void Update() override final;
 
 			float angle;
+		private:
+			void generateBatVertices(float, std::vector<VertexFormat>&);
 		};
 	}
 }
