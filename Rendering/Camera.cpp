@@ -9,10 +9,12 @@ glm::vec3 Camera::topView = glm::vec3(0, 6, 0.1);
 glm::vec3 Camera::perspectiveView = glm::vec3(0, 4, 4);
 glm::vec3 Camera::selectedView = perspectiveView;
 
+glm::vec3 Camera::center = glm::vec3(0, 0, 0);
+
 //eye - position of the camera's viewpoint, 
 //center - where are you looking, up = up is Y+
 glm::mat4 Camera::cameraMatrix = glm::lookAt(Camera::selectedView, 
-												glm::vec3(0, 0, 0), 
+												center, 
 												glm::vec3(0, 1, 0));
 
 Camera::Camera(){}
@@ -36,7 +38,7 @@ void Camera::Update()
 	RotateAngle += RotateDelta;
 
 	cameraMatrix = glm::lookAt(Camera::selectedView,
-		glm::vec3(0, 0, 0),
+		center,
 		glm::vec3(0, 1, 0));
 
 	projectionMatrix = glm::perspective(glm::radians(FoV), 
@@ -61,4 +63,8 @@ void Camera::Translate(float height, float width, float depth)
 	selectedView.y += height;
 	selectedView.x += width;
 	selectedView.z += depth;
+
+	center.y += height;
+	center.x += width;
+	center.z += depth;
 }

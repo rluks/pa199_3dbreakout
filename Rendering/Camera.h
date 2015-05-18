@@ -30,5 +30,7 @@ public:
 	static float RotateDelta;
 	static float RotateAngle;
 
+private:
+	static glm::vec3 center;
 };
 

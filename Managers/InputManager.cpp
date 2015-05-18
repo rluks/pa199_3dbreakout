@@ -64,15 +64,36 @@ void InputManager::Rotate()
 	}
 }
 
-void InputManager::Up()
+void InputManager::UpCamera()
 {
 	Camera::Translate(0.5f, 0.0f, 0.0f);
 }
 
-void InputManager::Down()
+void InputManager::DownCamera()
 {
 	Camera::Translate(-0.5f, 0.0f, 0.0f);
 }
+
+void InputManager::LeftCamera()
+{
+	Camera::Translate(0.0f, -0.5f, 0.0f);
+}
+
+void InputManager::RightCamera()
+{
+	Camera::Translate(0.0f, 0.5f, 0.0f);
+}
+
+void InputManager::ForwardCamera()
+{
+	Camera::Translate(0.0f, 0.0f, -0.5f);
+}
+
+void InputManager::BackwardCamera()
+{
+	Camera::Translate(0.0f, 0.0f, 0.5f);
+}
+
 
 
 void InputManager::Watch()

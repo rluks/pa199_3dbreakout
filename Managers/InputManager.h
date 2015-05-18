@@ -23,8 +23,12 @@ class InputManager
 		static void zoomOut();
 		static void Rotate();
 
-		static void Up();
-		static void Down();
+		static void UpCamera();
+		static void DownCamera();
+		static void LeftCamera();
+		static void RightCamera();
+		static void ForwardCamera();
+		static void BackwardCamera();
 
 		static float batAngle;
 		static bool switchShaders;

@@ -47,9 +47,17 @@ void keyboardInput(unsigned char key, int x, int y)
 		InputManager::switchCamera();
 
 	if (key == 'w')
-		InputManager::Up();
+		InputManager::UpCamera();
 	if (key == 's')
-		InputManager::Down();
+		InputManager::DownCamera();
+	if (key == 'a')
+		InputManager::LeftCamera();
+	if (key == 'd')
+		InputManager::RightCamera();
+	if (key == 'f')
+		InputManager::ForwardCamera();
+	if (key == 'v')
+		InputManager::BackwardCamera();
 
 	return;
 }
