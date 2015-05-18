@@ -51,3 +51,11 @@ void Model::Destroy()
 	glDeleteBuffers(vbos.size(), &vbos[0]);
 	vbos.clear();
 }
+
+void Model::SwitchViews()
+{
+	if (selectedView == perspectiveView)
+		selectedView = topView;
+	else
+		selectedView = perspectiveView;
+}

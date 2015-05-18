@@ -70,6 +70,7 @@
   <ItemGroup>
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
     <ClCompile Include="Core\Init\Init_GLUT.cpp" />
+    <ClCompile Include="Managers\InputManager.cpp" />
     <ClCompile Include="Managers\Models_Manager.cpp" />
     <ClCompile Include="Managers\Scene_Manager.cpp" />
     <ClCompile Include="Managers\Shader_Manager.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Core\Init\FrameBufferInfo.h" />
     <ClInclude Include="Core\Init\IListener.h" />
     <ClInclude Include="Core\Init\Init_GLUT.h" />
+    <ClInclude Include="Managers\InputManager.h" />
     <ClInclude Include="Managers\Models_Manager.h" />
     <ClInclude Include="Managers\Scene_Manager.h" />
     <ClInclude Include="Core\Init\WindowInfo.h" />

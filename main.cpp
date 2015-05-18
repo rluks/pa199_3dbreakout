@@ -2,9 +2,33 @@
 
 #include "Core\Init\Init_GLUT.h"
 #include "Managers\Scene_Manager.h"
+#include "Managers\InputManager.h"
 
 using namespace Core;
 using namespace Init;
+
+void SpecialInput(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_UP:
+		//do something here
+		std::cout << "w" << std::endl;
+		break;
+	case GLUT_KEY_DOWN:
+		std::cout << "s" << std::endl;
+		//do something here
+		break;
+	case GLUT_KEY_LEFT:
+		std::cout << "a" << std::endl;
+		//do something here
+		break;
+	case GLUT_KEY_RIGHT:
+		std::cout << "d" << std::endl;
+		//do something here
+		break;
+	}
+}
 
 int main(int argc, char **argv)
 {
@@ -20,8 +44,14 @@ int main(int argc, char **argv)
 	IListener* scene = new Managers::Scene_Manager();
 	Init::Init_GLUT::setListener(scene);
 
+	InputManager* input = new InputManager();
+	//input->Watch();
+
+	glutSpecialFunc(SpecialInput);
+
 	Init_GLUT::run();
 
 	delete scene;
 	return 0;
 }
+

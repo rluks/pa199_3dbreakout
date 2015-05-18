@@ -43,6 +43,7 @@ void Init_GLUT::init(const Core::WindowInfo& windowInfo,
 	glutCloseFunc(closeCallback);
 	glutDisplayFunc(displayCallback);
 	glutReshapeFunc(reshapeCallback);//triggered when the window is reshaped
+	//glutKeyboardFunc(keyboardCallback);
 
 	//init GLEW, this can be called in main.cpp
 	Init::Init_GLEW::Init();
@@ -107,6 +108,8 @@ void Init_GLUT::closeCallback()
 {
 	close();
 }
+
+
 
 void Init_GLUT::enterFullscreen()
 {

@@ -27,6 +27,7 @@ namespace Rendering
 
 			virtual GLuint GetVao() const override;
 			virtual const std::vector<GLuint>& GetVbos() const override;
+			void SwitchViews();
 
 		protected:
 			GLuint vao;
