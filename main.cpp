@@ -16,7 +16,6 @@ void SpecialInput(int key, int x, int y)
 		std::cout << "w" << std::endl;
 		break;
 	case GLUT_KEY_DOWN:
-		std::cout << "Switching camera..." << std::endl;
 		InputManager::switchCamera();
 		break;
 	case GLUT_KEY_LEFT:
@@ -26,6 +25,20 @@ void SpecialInput(int key, int x, int y)
 		InputManager::right();
 		break;
 	}
+}
+
+void mouseWheel(int button, int dir, int x, int y)
+{
+	if (dir > 0)
+	{
+		InputManager::zoomIn();
+	}
+	else
+	{
+		InputManager::zoomOut();
+	}
+
+	return;
 }
 
 int main(int argc, char **argv)
@@ -44,6 +57,7 @@ int main(int argc, char **argv)
 
 	InputManager* input = new InputManager();
 	glutSpecialFunc(SpecialInput);
+	glutMouseWheelFunc(mouseWheel);
 
 	Init_GLUT::run();
 

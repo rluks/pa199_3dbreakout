@@ -39,6 +39,17 @@ void InputManager::right()
 	batAngle -= 3.0f;
 }
 
+void InputManager::zoomIn()
+{
+	Camera::UpdateProjectionMatrix(-5.0f);
+}
+
+void InputManager::zoomOut()
+{
+	Camera::UpdateProjectionMatrix(5.0f);
+}
+
+
 void InputManager::Watch()
 {
 	

@@ -5,6 +5,7 @@
 
 #include "..\OpenGLIncludes.h"
 #include "..\Rendering\Models\Model.h"
+#include "..\Rendering\Camera.h"
 
 using namespace std;
 
@@ -18,6 +19,8 @@ class InputManager
 		static void left();
 		static void right();
 		static void switchCamera();
+		static void zoomIn();
+		static void zoomOut();
 
 		static float batAngle;
 		static bool switchShaders;

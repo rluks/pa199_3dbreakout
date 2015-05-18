@@ -10,10 +10,14 @@ public:
 	Camera();
 	~Camera();
 	static void SwitchViews();
+	static void UpdateProjectionMatrix(float);
+
 	static glm::mat4 projectionMatrix;
 	static glm::vec3 topView;
 	static glm::vec3 perspectiveView;
 	static glm::vec3 selectedView;
+
+	static float FoV;
 
 };
 
