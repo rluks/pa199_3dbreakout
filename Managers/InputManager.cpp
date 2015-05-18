@@ -2,6 +2,7 @@
 
 float InputManager::batAngle = 0.0f;
 bool InputManager::switchShaders = false;
+bool InputManager::rotate = false;
 
 InputManager::InputManager()
 {
@@ -21,6 +22,8 @@ InputManager::InputManager()
 	MouseWhere.Y = 1;
 	EndWhere.X = 0;
 	EndWhere.Y = 3;
+
+
 }
 
 void InputManager::switchCamera()
@@ -47,6 +50,18 @@ void InputManager::zoomIn()
 void InputManager::zoomOut()
 {
 	Camera::UpdateProjectionMatrix(5.0f);
+}
+
+void InputManager::Rotate()
+{
+	rotate = !rotate;
+
+	if (rotate){
+		Camera::Rotate();
+	}
+	else{
+		Camera::DisableRotate();
+	}
 }
 
 

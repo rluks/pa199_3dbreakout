@@ -41,6 +41,16 @@ void mouseWheel(int button, int dir, int x, int y)
 	return;
 }
 
+void keyboardInput(unsigned char key, int x, int y)
+{
+	cout << "key: " << key << endl;
+
+	if (key == 'r')
+		InputManager::Rotate();
+
+	return;
+}
+
 int main(int argc, char **argv)
 {
 	WindowInfo window(std::string("PA199 3D Breakout"),
@@ -58,6 +68,7 @@ int main(int argc, char **argv)
 	InputManager* input = new InputManager();
 	glutSpecialFunc(SpecialInput);
 	glutMouseWheelFunc(mouseWheel);
+	glutKeyboardFunc(keyboardInput);
 
 	Init_GLUT::run();
 

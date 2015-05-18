@@ -11,6 +11,10 @@ public:
 	~Camera();
 	static void SwitchViews();
 	static void UpdateProjectionMatrix(float);
+	static void Rotate();
+	static void DisableRotate();
+
+	static void Update();
 
 	static glm::mat4 projectionMatrix;
 	static glm::vec3 topView;

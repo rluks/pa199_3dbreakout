@@ -21,6 +21,7 @@ class InputManager
 		static void switchCamera();
 		static void zoomIn();
 		static void zoomOut();
+		static void Rotate();
 
 		static float batAngle;
 		static bool switchShaders;
@@ -37,4 +38,6 @@ class InputManager
 		bool Continue;
 		int KeyEvents;
 		int MouseEvents;
+
+		static bool rotate;
 };
