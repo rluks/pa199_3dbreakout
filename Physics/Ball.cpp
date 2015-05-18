@@ -1,9 +1,10 @@
 #include "Ball.h"
 
 glm::vec3 Ball::position = glm::vec3(0, 0, 0);
-glm::vec3 Ball::velocity = glm::vec3(0.8, 0, 0);
+glm::vec3 Ball::velocity = glm::vec3(0.7, 0, 0.3);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
+float Ball::radius = 0.125;
 
 Ball::Ball()
 {
@@ -33,4 +34,28 @@ void Ball::Update()
 	position.z += elapsedTime * velocity.z;
 
 	startTime = endTime;
+
+	std::cout << "pos.x" << position.x << std::endl;
+
+	float distanceFromCenter = sqrt(position.x * position.x + position.z * position.z);
+
+	
+	if (distanceFromCenter > 0.0f && distanceFromCenter < 1.0f){
+		float vx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		float vz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+		if (velocity.x < 0.0f)
+			vx *= -1.0f;
+		velocity.x = vx;
+
+		if (velocity.z < 0.0f)
+			vz *= -1.0f;
+		velocity.z = vz;
+	}
+
+	if (distanceFromCenter+radius > 2.0f)
+	{
+		velocity.x *= -1.0f;
+		velocity.z *= -1.0f;
+	}
 }

@@ -17,5 +17,6 @@ public:
 
 	static double startTime;
 	static double endTime;
+	static float radius;
 };
 

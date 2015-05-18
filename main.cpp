@@ -81,6 +81,8 @@ int main(int argc, char **argv)
 	glutMouseWheelFunc(mouseWheel);
 	glutKeyboardFunc(keyboardInput);
 
+	srand(static_cast <unsigned> (time(0)));
+
 	Init_GLUT::run();
 
 	delete scene;
