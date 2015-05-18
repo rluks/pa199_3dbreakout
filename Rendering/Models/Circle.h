@@ -15,6 +15,8 @@ namespace Rendering
 			void Create();
 			virtual void Draw() override final;
 			virtual void Update() override final;
+
+			glm::mat4 scaledMx;
 		};
 	}
 }

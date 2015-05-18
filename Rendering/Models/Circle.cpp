@@ -78,6 +78,13 @@ void Circle::Create()
 	this->vao = vao;
 	this->vbos.push_back(vbo);
 
+	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
+		glm::vec4(0, 1, 0, 0),
+		glm::vec4(0, 0, 1, 0),
+		glm::vec4(0, 0, 0, 1));
+
+	scaledMx = glm::scale(identityMx, glm::vec3(2.0f));
+
 }
 
 void Circle::Update()
@@ -96,21 +103,13 @@ void Circle::Draw()
 	GLuint camera = glGetUniformLocation(program, "camera");
 	GLuint projection = glGetUniformLocation(program, "projection");
 	GLuint model = glGetUniformLocation(program, "model");
-
 	GLuint texture2d = glGetUniformLocation(program, "tex");
-
-	glm::mat4 identityMx = glm::mat4(	glm::vec4(-1, 0, 0, 0),
-										glm::vec4(0, 1, 0, 0),
-										glm::vec4(0, 0, 1, 0),
-										glm::vec4(0, 0, 0, 1));
-
-	glm::mat4 scaledMx = glm::scale(identityMx, glm::vec3(2.0f));
 	
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(scaledMx));
 
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
 	glUniform1i(texture2d, 0);
 

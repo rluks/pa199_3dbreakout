@@ -32,6 +32,8 @@ void Scene_Manager::notifyBeginFrame()
 
 void Scene_Manager::notifyDisplayFrame()
 {
+	TimeManager::CalculateFrameRate();
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -41,7 +43,7 @@ void Scene_Manager::notifyDisplayFrame()
 void Scene_Manager::notifyEndFrame()
 {
 	//nothing here for the moment
-	Ball::Update();
+	//Ball::Update();
 }
 
 void Scene_Manager::notifyReshape(int width,
