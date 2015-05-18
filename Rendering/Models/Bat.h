@@ -17,7 +17,8 @@ namespace Rendering
 			virtual void Draw() override final;
 			virtual void Update() override final;
 
-			float angle;
+			float angle;//for vertex generations
+			static float angleOffset;//for controls
 		private:
 			void generateBatVertices(float, std::vector<VertexFormat>&);
 		};

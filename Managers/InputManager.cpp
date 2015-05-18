@@ -27,12 +27,12 @@ void InputManager::switchCamera()
 
 void InputManager::left()
 {
-	Camera::SwitchViews();
+	Rendering::Models::Bat::angleOffset+=3.0f;
 }
 
 void InputManager::right()
 {
-	Camera::SwitchViews();
+	Rendering::Models::Bat::angleOffset-=3.0f;
 }
 
 void InputManager::Watch()

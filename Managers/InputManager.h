@@ -5,6 +5,7 @@
 
 #include "..\OpenGLIncludes.h"
 #include "..\Rendering\Models\Model.h"
+#include "..\Rendering\Models\Bat.h"
 
 using namespace std;
 

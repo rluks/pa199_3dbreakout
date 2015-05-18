@@ -20,11 +20,9 @@ void SpecialInput(int key, int x, int y)
 		InputManager::switchCamera();
 		break;
 	case GLUT_KEY_LEFT:
-		std::cout << "a" << std::endl;
 		InputManager::left();
 		break;
 	case GLUT_KEY_RIGHT:
-		std::cout << "d" << std::endl;
 		InputManager::right();
 		break;
 	}

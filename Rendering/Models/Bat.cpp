@@ -5,6 +5,8 @@ using namespace Models;
 
 float dxB;
 
+float Bat::angleOffset = 0.0f;
+
 Bat::Bat(float pAngle)
 {
 	angle = pAngle;
@@ -178,14 +180,14 @@ void Bat::Draw()
 
 
 	//glm::mat4 rotatedFixed = glm::rotate(identityMx, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(dxB), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 modelmx = glm::translate(rotated, glm::vec3(0.0f, 0.0f, 0.0f));
+	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(angleOffset), glm::vec3(0.0f, 1.0f, 0.0f));
+	//glm::mat4 modelmx = glm::translate(rotated, glm::vec3(0.0f, 0.0f, 0.0f));
 	//glm::mat4 rotated = glm::rotate(modelmx, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 
-	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(identityMx));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(rotated));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
