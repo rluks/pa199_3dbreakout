@@ -1,6 +1,7 @@
 #include "InputManager.h"
 
 float InputManager::batAngle = 0.0f;
+bool InputManager::switchShaders = false;
 
 InputManager::InputManager()
 {
@@ -25,6 +26,7 @@ InputManager::InputManager()
 void InputManager::switchCamera()
 {
 	Camera::SwitchViews();
+	switchShaders = !switchShaders;
 }
 
 void InputManager::left()

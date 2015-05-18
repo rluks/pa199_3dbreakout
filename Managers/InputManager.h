@@ -20,6 +20,7 @@ class InputManager
 		static void switchCamera();
 
 		static float batAngle;
+		static bool switchShaders;
 
 	private:
 		HANDLE hIn;

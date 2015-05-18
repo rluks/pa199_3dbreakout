@@ -22,12 +22,12 @@ Models_Manager::Models_Manager()
 	gameModelList["cube"] = cube;*/
 
 	Models::Sphere* sphere = new Models::Sphere();
-	sphere->SetProgram(Shader_Manager::GetShader("colorShader"));
+	sphere->SetProgram(Shader_Manager::GetShader("textureShader"));
 	sphere->Create();
 	gameModelList["sphere"] = sphere;
 
 	Models::Circle* circle = new Models::Circle();
-	circle->SetProgram(Shader_Manager::GetShader("colorShader"));
+	circle->SetProgram(Shader_Manager::GetShader("textureShader"));
 	circle->Create();
 	gameModelList["circle"] = circle;
 
@@ -40,13 +40,13 @@ Models_Manager::Models_Manager()
 	{
 		std::string mapKey = "brick" + std::to_string(angle);
 		Models::Brick* temp = new Models::Brick((float)angle);
-		temp->SetProgram(Shader_Manager::GetShader("colorShader"));
+		temp->SetProgram(Shader_Manager::GetShader("textureShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
 	}
 
 	Models::Bat* bat = new Models::Bat(0.0f);
-	bat->SetProgram(Shader_Manager::GetShader("colorShader"));
+	bat->SetProgram(Shader_Manager::GetShader("textureShader"));
 	bat->Create();
 	gameModelList["bat"] = bat;
 
@@ -79,8 +79,24 @@ void Models_Manager::Update()
 	//auto -it's a map iterator
 	for (auto model : gameModelList)
 	{
+		if (InputManager::switchShaders)
+		{
+			GLuint program = Shader_Manager::GetShader("colorShader");
+			model.second->SetProgram(program);
+		}
+		else
+		{
+			GLuint program = Shader_Manager::GetShader("textureShader");
+			model.second->SetProgram(program);
+		}
+
 		model.second->Update();
 	}
+
+	Models::Circle* circle = new Models::Circle();
+	circle->SetProgram(Shader_Manager::GetShader("textureShader"));
+	circle->Create();
+	gameModelList["circle"] = circle;
 }
 
 void Models_Manager::Draw()

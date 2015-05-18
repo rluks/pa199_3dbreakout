@@ -10,6 +10,10 @@ Scene_Manager::Scene_Manager()
 	shader_manager->CreateProgram("colorShader",
 		"Shaders\\Vertex_Shader.glsl",
 		"Shaders\\Fragment_Shader.glsl");
+
+	shader_manager->CreateProgram("textureShader",
+		"Shaders\\Texture_Vertex_Shader.glsl",
+		"Shaders\\Texture_Fragment_Shader.glsl");
 	models_manager = new Models_Manager();
 }
 
