@@ -167,7 +167,7 @@ void Bat::Draw()
 
 	//eye - position of the camera's viewpoint, 
 	//center - where are you looking, up = up is Y+
-	glm::mat4 cameraMatrix = glm::lookAt(selectedView,
+	glm::mat4 cameraMatrix = glm::lookAt(Camera::selectedView,
 		glm::vec3(0, 0, 0),
 		glm::vec3(0, 1, 0));
 
@@ -183,7 +183,7 @@ void Bat::Draw()
 	//glm::mat4 rotated = glm::rotate(modelmx, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
-	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(identityMx));
 

@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "../tdogl/Texture.h"
+#include "..\Camera.h"
 
 namespace Rendering
 {
@@ -27,7 +28,7 @@ namespace Rendering
 
 			virtual GLuint GetVao() const override;
 			virtual const std::vector<GLuint>& GetVbos() const override;
-			static void SwitchViews();
+
 
 		protected:
 			GLuint vao;
@@ -36,11 +37,6 @@ namespace Rendering
 
 			unsigned int verticesSize;
 			tdogl::Texture* gTexture;
-
-			static glm::mat4 projectionMatrix;
-			static glm::vec3 topView;
-			static glm::vec3 perspectiveView;
-			static glm::vec3 selectedView;
 
 		};
 	}

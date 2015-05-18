@@ -22,6 +22,7 @@
     <ClCompile Include="Rendering\Models\Brick.cpp" />
     <ClCompile Include="Rendering\Models\Bat.cpp" />
     <ClCompile Include="Managers\InputManager.cpp" />
+    <ClCompile Include="Rendering\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Rendering\Models\Brick.h" />
     <ClInclude Include="Rendering\Models\Bat.h" />
     <ClInclude Include="Managers\InputManager.h" />
+    <ClInclude Include="Rendering\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\tileable_grass_00.png" />

@@ -22,7 +22,17 @@ InputManager::InputManager()
 
 void InputManager::switchCamera()
 {
-	Rendering::Models::Model::SwitchViews();
+	Camera::SwitchViews();
+}
+
+void InputManager::left()
+{
+	Camera::SwitchViews();
+}
+
+void InputManager::right()
+{
+	Camera::SwitchViews();
 }
 
 void InputManager::Watch()

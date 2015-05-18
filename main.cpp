@@ -21,11 +21,11 @@ void SpecialInput(int key, int x, int y)
 		break;
 	case GLUT_KEY_LEFT:
 		std::cout << "a" << std::endl;
-		//do something here
+		InputManager::left();
 		break;
 	case GLUT_KEY_RIGHT:
 		std::cout << "d" << std::endl;
-		//do something here
+		InputManager::right();
 		break;
 	}
 }
