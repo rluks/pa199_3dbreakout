@@ -20,8 +20,15 @@ InputManager::InputManager()
 	EndWhere.Y = 3;
 }
 
+void InputManager::switchCamera()
+{
+	Rendering::Models::Model::SwitchViews();
+}
+
 void InputManager::Watch()
 {
+	
+
 	cout << "watching..." << endl;
 	Continue = 1;
 	while (Continue)

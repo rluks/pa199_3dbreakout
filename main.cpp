@@ -16,8 +16,8 @@ void SpecialInput(int key, int x, int y)
 		std::cout << "w" << std::endl;
 		break;
 	case GLUT_KEY_DOWN:
-		std::cout << "s" << std::endl;
-		//do something here
+		std::cout << "Switching camera..." << std::endl;
+		InputManager::switchCamera();
 		break;
 	case GLUT_KEY_LEFT:
 		std::cout << "a" << std::endl;
@@ -45,8 +45,6 @@ int main(int argc, char **argv)
 	Init::Init_GLUT::setListener(scene);
 
 	InputManager* input = new InputManager();
-	//input->Watch();
-
 	glutSpecialFunc(SpecialInput);
 
 	Init_GLUT::run();
