@@ -1,7 +1,7 @@
 #include "Ball.h"
 
 glm::vec3 Ball::position = glm::vec3(0, 0, 0);
-glm::vec3 Ball::velocity = glm::vec3(0, 0, 0);
+glm::vec3 Ball::velocity = glm::vec3(0.8, 0, 0);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
 

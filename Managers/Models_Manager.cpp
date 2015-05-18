@@ -95,8 +95,8 @@ void Models_Manager::Update()
 	}
 
 	/*
-	Haha, this caused drops in FPS from 60fps to only 10fps.. creating circle every update, foolish...
-
+	//Haha, this caused drops in FPS from 60fps to only 10fps.. creating circle every update, foolish...
+	
 	Models::Circle* circle = new Models::Circle();
 	circle->SetProgram(Shader_Manager::GetShader("textureShader"));
 	circle->Create();
