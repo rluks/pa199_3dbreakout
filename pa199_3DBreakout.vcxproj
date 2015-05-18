@@ -68,6 +68,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Managers\TimeManager.cpp" />
+    <ClCompile Include="Physics\Ball.cpp" />
     <ClCompile Include="Rendering\Camera.cpp" />
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
     <ClCompile Include="Core\Init\Init_GLUT.cpp" />
@@ -92,6 +94,8 @@
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Managers\TimeManager.h" />
+    <ClInclude Include="Physics\Ball.h" />
     <ClInclude Include="Rendering\Camera.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
     <ClInclude Include="Core\Init\FrameBufferInfo.h" />

@@ -23,6 +23,8 @@
     <ClCompile Include="Rendering\Models\Bat.cpp" />
     <ClCompile Include="Managers\InputManager.cpp" />
     <ClCompile Include="Rendering\Camera.cpp" />
+    <ClCompile Include="Physics\Ball.cpp" />
+    <ClCompile Include="Managers\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -56,6 +58,8 @@
     <ClInclude Include="Rendering\Models\Bat.h" />
     <ClInclude Include="Managers\InputManager.h" />
     <ClInclude Include="Rendering\Camera.h" />
+    <ClInclude Include="Physics\Ball.h" />
+    <ClInclude Include="Managers\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\tileable_grass_00.png" />

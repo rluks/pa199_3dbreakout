@@ -8,6 +8,8 @@
 
 #include <cmath>
 
+#include "..\..\Physics\Ball.h"
+
 namespace Rendering
 {
 	namespace Models
@@ -21,6 +23,7 @@ namespace Rendering
 			void Create();
 			virtual void Draw() override final;
 			virtual void Update() override final;
+			glm::vec3 spherePosition;
 		};
 	}
 }

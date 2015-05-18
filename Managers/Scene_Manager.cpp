@@ -27,6 +27,7 @@ void Scene_Manager::notifyBeginFrame()
 {
 	models_manager->Update();
 	Camera::Update();
+	Ball::Update();
 }
 
 void Scene_Manager::notifyDisplayFrame()
@@ -40,6 +41,7 @@ void Scene_Manager::notifyDisplayFrame()
 void Scene_Manager::notifyEndFrame()
 {
 	//nothing here for the moment
+	Ball::Update();
 }
 
 void Scene_Manager::notifyReshape(int width,

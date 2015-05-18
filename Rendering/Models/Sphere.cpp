@@ -10,6 +10,7 @@ GLuint ibo;//Index Buffer Object for indices
 Sphere::Sphere()
 {
 	dxR = 0.0f;
+	spherePosition = glm::vec3(0, 0, 0);
 }
 
 Sphere::~Sphere()
@@ -101,6 +102,8 @@ void Sphere::Update()
 	dxR += 1.0f;
 	if (dxR > 360.0f)
 		dxR = 0.0f;
+
+	spherePosition = Ball::position;
 }
 
 void Sphere::Draw()
@@ -117,7 +120,7 @@ void Sphere::Draw()
 		glm::vec4(0, 0, 1, 0),
 		glm::vec4(0, 0, 0, 1));
 
-	glm::mat4 modelmx = glm::translate(identityMx, glm::vec3(0.0f, 0.125f, 0.0f));
+	glm::mat4 modelmx = glm::translate(identityMx, glm::vec3(spherePosition.x, 0.125f, spherePosition.z));
 	glm::mat4 rotated = glm::rotate(modelmx, glm::radians(dxR), glm::vec3(1.0f, 1.0f, 0.0f));
 	glm::mat4 scaledMx = glm::scale(rotated, glm::vec3(0.125f));
 
