@@ -11,6 +11,11 @@ Sphere::Sphere()
 {
 	dxR = 0.0f;
 	spherePosition = glm::vec3(0, 0, 0);
+
+	identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
+		glm::vec4(0, 1, 0, 0),
+		glm::vec4(0, 0, 1, 0),
+		glm::vec4(0, 0, 0, 1));
 }
 
 Sphere::~Sphere()
@@ -104,20 +109,15 @@ void Sphere::Update()
 		dxR = 0.0f;
 
 	spherePosition = Ball::position;
+
+	modelmx = glm::translate(identityMx, glm::vec3(spherePosition.x, 0.125f, spherePosition.z));
+	rotated = glm::rotate(modelmx, glm::radians(dxR), glm::vec3(1.0f, 1.0f, 0.0f));
+	scaledMx = glm::scale(rotated, glm::vec3(0.125f));
 }
 
 void Sphere::Draw()
 {
-	glUseProgram(program);
-
-	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
-		glm::vec4(0, 1, 0, 0),
-		glm::vec4(0, 0, 1, 0),
-		glm::vec4(0, 0, 0, 1));
-
-	glm::mat4 modelmx = glm::translate(identityMx, glm::vec3(spherePosition.x, 0.125f, spherePosition.z));
-	glm::mat4 rotated = glm::rotate(modelmx, glm::radians(dxR), glm::vec3(1.0f, 1.0f, 0.0f));
-	glm::mat4 scaledMx = glm::scale(rotated, glm::vec3(0.125f));
+	glUseProgram(program);	
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));

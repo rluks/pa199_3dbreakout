@@ -17,7 +17,9 @@ namespace Rendering
 			virtual void Draw() override final;
 			virtual void Update() override final;
 
-			float angle;
+			float Angle;
+		private:
+			glm::mat4 rotated;
 		};
 	}
 }

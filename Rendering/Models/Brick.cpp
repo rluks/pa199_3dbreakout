@@ -5,7 +5,7 @@ using namespace Models;
 
 Brick::Brick(float pAngle)
 {
-	angle = pAngle;
+	Angle = pAngle;
 }
 
 Brick::~Brick()
@@ -140,6 +140,13 @@ void Brick::Create()
 	this->vao = vao;
 	this->vbos.push_back(vbo);
 
+	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
+		glm::vec4(0, 1, 0, 0),
+		glm::vec4(0, 0, 1, 0),
+		glm::vec4(0, 0, 0, 1));
+
+	rotated = glm::rotate(identityMx, glm::radians(Angle), glm::vec3(0.0f, 1.0f, 0.0f));
+
 }
 
 void Brick::Update()
@@ -150,14 +157,7 @@ void Brick::Update()
 
 void Brick::Draw()
 {
-	glUseProgram(program);
-
-	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
-		glm::vec4(0, 1, 0, 0),
-		glm::vec4(0, 0, 1, 0),
-		glm::vec4(0, 0, 0, 1));
-
-	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+	glUseProgram(program);	
 
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));

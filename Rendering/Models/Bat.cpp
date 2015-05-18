@@ -50,6 +50,10 @@ void Bat::Create()
 	this->vao = vao;
 	this->vbos.push_back(vbo);
 
+	identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
+		glm::vec4(0, 1, 0, 0),
+		glm::vec4(0, 0, 1, 0),
+		glm::vec4(0, 0, 0, 1));
 }
 
 void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &vertices)
@@ -153,26 +157,16 @@ void Bat::Update()
 		dxB = 0.0f;
 
 	angleOffset = InputManager::batAngle;
+
+	rotated = glm::rotate(identityMx, glm::radians(angleOffset), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Bat::Draw()
 {
 	glUseProgram(program);
 
-	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
-		glm::vec4(0, 1, 0, 0),
-		glm::vec4(0, 0, 1, 0),
-		glm::vec4(0, 0, 0, 1));
-
-
-	//glm::mat4 rotatedFixed = glm::rotate(identityMx, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(angleOffset), glm::vec3(0.0f, 1.0f, 0.0f));
-	//glm::mat4 modelmx = glm::translate(rotated, glm::vec3(0.0f, 0.0f, 0.0f));
-	//glm::mat4 rotated = glm::rotate(modelmx, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
-
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(rotated));
 
 	glActiveTexture(GL_TEXTURE0);

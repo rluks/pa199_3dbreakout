@@ -23,6 +23,8 @@ namespace Rendering
 			float angleOffset;//for controls
 		private:
 			void generateBatVertices(float, std::vector<VertexFormat>&);
+			glm::mat4 identityMx;
+			glm::mat4 rotated;
 		};
 	}
 }

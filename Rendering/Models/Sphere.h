@@ -24,6 +24,10 @@ namespace Rendering
 			virtual void Draw() override final;
 			virtual void Update() override final;
 			glm::vec3 spherePosition;
+			glm::mat4 identityMx;
+			glm::mat4 modelmx;
+			glm::mat4 rotated;
+			glm::mat4 scaledMx;
 		};
 	}
 }
