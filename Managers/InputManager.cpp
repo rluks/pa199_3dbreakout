@@ -64,6 +64,16 @@ void InputManager::Rotate()
 	}
 }
 
+void InputManager::Up()
+{
+	Camera::Translate(0.5f, 0.0f, 0.0f);
+}
+
+void InputManager::Down()
+{
+	Camera::Translate(-0.5f, 0.0f, 0.0f);
+}
+
 
 void InputManager::Watch()
 {

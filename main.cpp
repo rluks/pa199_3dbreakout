@@ -40,12 +40,16 @@ void mouseWheel(int button, int dir, int x, int y)
 
 void keyboardInput(unsigned char key, int x, int y)
 {
-	cout << "key: " << key << endl;
-
 	if (key == 'r')
 		InputManager::Rotate();
+
 	if (key == 'c')
 		InputManager::switchCamera();
+
+	if (key == 'w')
+		InputManager::Up();
+	if (key == 's')
+		InputManager::Down();
 
 	return;
 }

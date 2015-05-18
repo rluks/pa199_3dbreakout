@@ -23,6 +23,9 @@ class InputManager
 		static void zoomOut();
 		static void Rotate();
 
+		static void Up();
+		static void Down();
+
 		static float batAngle;
 		static bool switchShaders;
 

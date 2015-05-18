@@ -55,3 +55,10 @@ void Camera::DisableRotate()
 {
 	RotateDelta = 0.0f;
 }
+
+void Camera::Translate(float height, float width, float depth)
+{
+	selectedView.y += height;
+	selectedView.x += width;
+	selectedView.z += depth;
+}

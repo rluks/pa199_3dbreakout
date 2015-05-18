@@ -14,6 +14,8 @@ public:
 	static void Rotate();
 	static void DisableRotate();
 
+	static void Translate(float height, float width, float depth);
+
 	static void Update();
 
 	static glm::mat4 projectionMatrix;
