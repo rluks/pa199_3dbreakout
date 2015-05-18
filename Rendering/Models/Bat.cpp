@@ -3,14 +3,11 @@
 using namespace Rendering;
 using namespace Models;
 
-float dxB;
-
-float Bat::angleOffset = 0.0f;
-
 Bat::Bat(float pAngle)
 {
 	angle = pAngle;
 	dxB = 0.0f;
+	angleOffset = 0.0f;
 }
 
 Bat::~Bat()
@@ -155,6 +152,7 @@ void Bat::Update()
 	if (dxB > 360.0f)
 		dxB = 0.0f;
 
+	angleOffset = InputManager::batAngle;
 }
 
 void Bat::Draw()

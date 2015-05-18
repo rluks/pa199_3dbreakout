@@ -1,5 +1,7 @@
 #include "InputManager.h"
 
+float InputManager::batAngle = 0.0f;
+
 InputManager::InputManager()
 {
 	bool Continue = TRUE;
@@ -27,12 +29,12 @@ void InputManager::switchCamera()
 
 void InputManager::left()
 {
-	Rendering::Models::Bat::angleOffset+=3.0f;
+	batAngle += 3.0f;
 }
 
 void InputManager::right()
 {
-	Rendering::Models::Bat::angleOffset-=3.0f;
+	batAngle -= 3.0f;
 }
 
 void InputManager::Watch()

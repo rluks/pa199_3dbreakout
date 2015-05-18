@@ -2,6 +2,7 @@
 
 #include "Model.h"
 #include "../tdogl/Texture.h"
+#include "..\..\Managers\InputManager.h"
 
 namespace Rendering
 {
@@ -17,8 +18,9 @@ namespace Rendering
 			virtual void Draw() override final;
 			virtual void Update() override final;
 
+			float dxB;//for testing
 			float angle;//for vertex generations
-			static float angleOffset;//for controls
+			float angleOffset;//for controls
 		private:
 			void generateBatVertices(float, std::vector<VertexFormat>&);
 		};
