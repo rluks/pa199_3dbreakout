@@ -93,14 +93,14 @@ void Circle::Update()
 	if (dx > 3.0f)
 		dx = 0.0f;
 
-
+	cameraMatrixCopy = Camera::cameraMatrix;
 }
 
 void Circle::Draw()
 {
 	glUseProgram(program);
 	
-	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
+	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrixCopy));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(scaledMx));
 

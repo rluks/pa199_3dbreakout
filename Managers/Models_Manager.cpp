@@ -79,6 +79,7 @@ void Models_Manager::Update()
 	//auto -it's a map iterator
 	for (auto model : gameModelList)
 	{
+		/*
 		if (InputManager::switchShaders)
 		{
 			GLuint program = Shader_Manager::GetShader("colorShader");
@@ -88,15 +89,18 @@ void Models_Manager::Update()
 		{
 			GLuint program = Shader_Manager::GetShader("textureShader");
 			model.second->SetProgram(program);
-		}
+		}*/
 
 		model.second->Update();
 	}
 
+	/*
+	Haha, this caused drops in FPS from 60fps to only 10fps.. creating circle every update, foolish...
+
 	Models::Circle* circle = new Models::Circle();
 	circle->SetProgram(Shader_Manager::GetShader("textureShader"));
 	circle->Create();
-	gameModelList["circle"] = circle;
+	gameModelList["circle"] = circle;*/
 }
 
 void Models_Manager::Draw()

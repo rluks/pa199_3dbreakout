@@ -43,6 +43,8 @@ namespace Rendering
 			GLuint model;
 			GLuint texture2d;
 
+			glm::mat4 cameraMatrixCopy;
+
 		};
 	}
 }
