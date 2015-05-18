@@ -17,11 +17,16 @@ public:
 	static void Update();
 
 	static glm::mat4 projectionMatrix;
+	static glm::mat4 cameraMatrix;
+
 	static glm::vec3 topView;
 	static glm::vec3 perspectiveView;
 	static glm::vec3 selectedView;
 
+
 	static float FoV;
+	static float RotateDelta;
+	static float RotateAngle;
 
 };
 

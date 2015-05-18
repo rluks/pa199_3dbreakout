@@ -26,6 +26,7 @@ Scene_Manager::~Scene_Manager()
 void Scene_Manager::notifyBeginFrame()
 {
 	models_manager->Update();
+	Camera::Update();
 }
 
 void Scene_Manager::notifyDisplayFrame()

@@ -1,10 +1,19 @@
 #include "Camera.h"
 
 float Camera::FoV = 35.0f;
+float Camera::RotateDelta = 0.0f;
+float Camera::RotateAngle = 0.0f;
 glm::mat4 Camera::projectionMatrix = glm::perspective(glm::radians(FoV), 800.0f / 600.0f, 0.1f, 10.0f);
+
 glm::vec3 Camera::topView = glm::vec3(0, 6, 0.1);
 glm::vec3 Camera::perspectiveView = glm::vec3(0, 4, 4);
 glm::vec3 Camera::selectedView = perspectiveView;
+
+//eye - position of the camera's viewpoint, 
+//center - where are you looking, up = up is Y+
+glm::mat4 Camera::cameraMatrix = glm::lookAt(Camera::selectedView, 
+												glm::vec3(0, 0, 0), 
+												glm::vec3(0, 1, 0));
 
 Camera::Camera(){}
 Camera::~Camera(){}
@@ -20,21 +29,29 @@ void Camera::SwitchViews()
 void Camera::UpdateProjectionMatrix(float pFoV)
 {
 	FoV += pFoV;
-	projectionMatrix = glm::perspective(glm::radians(FoV), 800.0f / 600.0f, 0.1f, 10.0f);
 }
 
 void Camera::Update()
 {
+	RotateAngle += RotateDelta;
 
+	cameraMatrix = glm::lookAt(Camera::selectedView,
+		glm::vec3(0, 0, 0),
+		glm::vec3(0, 1, 0));
+
+	projectionMatrix = glm::perspective(glm::radians(FoV), 
+										800.0f / 600.0f, 
+										0.1f, 10.0f);
+
+	cameraMatrix = glm::rotate(cameraMatrix, glm::radians(RotateAngle), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Camera::Rotate()
 {
-	//glm::mat4 identityMx = glm::mat4(selectedView);
-	//selectedView = glm::rotate(selectedView, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	RotateDelta = 1.0f;
 }
 
 void Camera::DisableRotate()
 {
-	//selectedView = glm::rotate(selectedView, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	RotateDelta = 0.0f;
 }

@@ -158,12 +158,6 @@ void Brick::Draw()
 
 	GLuint texture2d = glGetUniformLocation(program, "tex");
 
-	//eye - position of the camera's viewpoint, 
-	//center - where are you looking, up = up is Y+
-	glm::mat4 cameraMatrix = glm::lookAt(Camera::selectedView,
-		glm::vec3(0, 0, 0),
-		glm::vec3(0, 1, 0));
-
 	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
 		glm::vec4(0, 1, 0, 0),
 		glm::vec4(0, 0, 1, 0),
@@ -171,7 +165,7 @@ void Brick::Draw()
 
 	glm::mat4 rotated = glm::rotate(identityMx, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
+	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(rotated));
 
