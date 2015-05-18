@@ -109,11 +109,6 @@ void Sphere::Update()
 void Sphere::Draw()
 {
 	glUseProgram(program);
-	GLuint camera = glGetUniformLocation(program, "camera");
-	GLuint projection = glGetUniformLocation(program, "projection");
-	GLuint model = glGetUniformLocation(program, "model");
-
-	GLuint texture2d = glGetUniformLocation(program, "tex");
 
 	glm::mat4 identityMx = glm::mat4(glm::vec4(-1, 0, 0, 0),
 		glm::vec4(0, 1, 0, 0),

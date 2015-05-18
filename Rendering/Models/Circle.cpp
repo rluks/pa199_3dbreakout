@@ -99,17 +99,12 @@ void Circle::Update()
 void Circle::Draw()
 {
 	glUseProgram(program);
-
-	GLuint camera = glGetUniformLocation(program, "camera");
-	GLuint projection = glGetUniformLocation(program, "projection");
-	GLuint model = glGetUniformLocation(program, "model");
-	GLuint texture2d = glGetUniformLocation(program, "tex");
 	
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(Camera::cameraMatrix));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(scaledMx));
 
-	//glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
 	glUniform1i(texture2d, 0);
 

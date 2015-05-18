@@ -27,6 +27,11 @@ void Model::Update()
 void Model::SetProgram(GLuint program)
 {
 	this->program = program;
+
+	camera = glGetUniformLocation(program, "camera");
+	projection = glGetUniformLocation(program, "projection");
+	model = glGetUniformLocation(program, "model");
+	texture2d = glGetUniformLocation(program, "tex");
 }
 
 GLuint Model::GetVao() const

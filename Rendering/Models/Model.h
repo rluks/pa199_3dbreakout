@@ -38,6 +38,11 @@ namespace Rendering
 			unsigned int verticesSize;
 			tdogl::Texture* gTexture;
 
+			GLuint camera;
+			GLuint projection;
+			GLuint model;
+			GLuint texture2d;
+
 		};
 	}
 }
