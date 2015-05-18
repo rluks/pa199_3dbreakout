@@ -12,11 +12,8 @@ void SpecialInput(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_UP:
-		//do something here
-		std::cout << "w" << std::endl;
 		break;
 	case GLUT_KEY_DOWN:
-		InputManager::switchCamera();
 		break;
 	case GLUT_KEY_LEFT:
 		InputManager::left();
@@ -47,6 +44,8 @@ void keyboardInput(unsigned char key, int x, int y)
 
 	if (key == 'r')
 		InputManager::Rotate();
+	if (key == 'c')
+		InputManager::switchCamera();
 
 	return;
 }
