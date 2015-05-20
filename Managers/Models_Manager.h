@@ -9,6 +9,7 @@
 #include "../Rendering/Models/Circle.h"
 #include "../Rendering/Models/Brick.h"
 #include "../Rendering/Models/Bat.h"
+#include "../Rendering/Models/Ray.h"
 
 #include "InputManager.h"
 

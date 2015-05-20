@@ -50,6 +50,11 @@ Models_Manager::Models_Manager()
 	bat->Create();
 	gameModelList["bat"] = bat;
 
+	Models::Ray* ray = new Models::Ray();
+	ray->SetProgram(Shader_Manager::GetShader("colorShader"));
+	ray->Create();
+	gameModelList["ray"] = ray;
+
 }
 
 Models_Manager::~Models_Manager()
