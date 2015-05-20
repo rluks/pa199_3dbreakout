@@ -35,12 +35,13 @@ void Ball::Update()
 
 	startTime = endTime;
 
-	std::cout << "pos.x" << position.x << std::endl;
+	//std::cout << "pos.x" << position.x << std::endl;
 
 	float distanceFromCenter = sqrt(position.x * position.x + position.z * position.z);
 
 	
-	if (distanceFromCenter > 0.0f && distanceFromCenter < 1.0f){
+	
+	/*if (distanceFromCenter > 0.0f && distanceFromCenter < 1.0f){
 		//float vx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 		float vx = 0.1f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.2f - 0.1f)));
 		//float vz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -53,7 +54,7 @@ void Ball::Update()
 		if (velocity.z < 0.0f)
 			vz *= -1.0f;
 		velocity.z = vz;
-	}
+	}*/
 
 	if (distanceFromCenter+radius > 2.0f)
 	{

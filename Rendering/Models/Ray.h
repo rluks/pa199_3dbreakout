@@ -22,6 +22,8 @@ namespace Rendering
 			glm::vec3 spherePosition;
 			glm::mat4 identityMx;
 			glm::mat4 modelmx;
+
+			std::vector<VertexFormat> vertices;
 		};
 	}
 }
