@@ -1,10 +1,11 @@
 #include "Ball.h"
 
-glm::vec3 Ball::position = glm::vec3(0, 0, 0);
+float Ball::radius = 0.125;
+glm::vec3 Ball::position = glm::vec3(0, radius, 0);
 glm::vec3 Ball::velocity = glm::vec3(0.7, 0, 0.3);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
-float Ball::radius = 0.125;
+
 
 Ball::Ball()
 {
@@ -41,7 +42,7 @@ void Ball::Update()
 
 	
 	
-	if (distanceFromCenter > 0.0f && distanceFromCenter < 0.5f){
+	/*if (distanceFromCenter > 0.0f && distanceFromCenter < 0.5f){
 		float vx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 		//float vx = 0.8f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.9f - 0.8f)));
 		float vz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -54,7 +55,7 @@ void Ball::Update()
 		if (velocity.z < 0.0f)
 			vz *= -1.0f;
 		velocity.z = vz;
-	}
+	}*/
 
 	if (distanceFromCenter+radius > 2.0f)
 	{
