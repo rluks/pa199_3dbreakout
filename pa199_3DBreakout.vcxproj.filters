@@ -27,6 +27,7 @@
     <ClCompile Include="Managers\TimeManager.cpp" />
     <ClCompile Include="Rendering\Models\Ray.cpp" />
     <ClCompile Include="Physics\Block.cpp" />
+    <ClCompile Include="Rendering\Models\BrickCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -64,6 +65,7 @@
     <ClInclude Include="Managers\TimeManager.h" />
     <ClInclude Include="Rendering\Models\Ray.h" />
     <ClInclude Include="Physics\Block.h" />
+    <ClInclude Include="Rendering\Models\BrickCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\tileable_grass_00.png" />

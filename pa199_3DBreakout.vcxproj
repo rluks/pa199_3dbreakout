@@ -71,6 +71,7 @@
     <ClCompile Include="Physics\Block.cpp" />
     <ClCompile Include="Managers\TimeManager.cpp" />
     <ClCompile Include="Physics\Ball.cpp" />
+    <ClCompile Include="Rendering\Models\BrickCollider.cpp" />
     <ClCompile Include="Rendering\Models\Ray.cpp" />
     <ClCompile Include="Rendering\Camera.cpp" />
     <ClCompile Include="Core\Init\Init_GLEW.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="Physics\Block.h" />
     <ClInclude Include="Managers\TimeManager.h" />
     <ClInclude Include="Physics\Ball.h" />
+    <ClInclude Include="Rendering\Models\BrickCollider.h" />
     <ClInclude Include="Rendering\Models\Ray.h" />
     <ClInclude Include="Rendering\Camera.h" />
     <ClInclude Include="Core\Init\ContextInfo.h" />
