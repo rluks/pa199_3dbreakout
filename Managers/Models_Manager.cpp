@@ -36,15 +36,15 @@ Models_Manager::Models_Manager()
 	brick->Create();
 	gameModelList["brick"] = brick;*/
 
-	for (int angle = 0; angle < 360; angle += 60)
+	for (float angle = 0.0f; angle < 360.0f; angle += 67.5f)
 	{
 		std::string mapKey = "brick" + std::to_string(angle);
-		Models::Brick* temp = new Models::Brick((float)angle);
+		Models::Brick* temp = new Models::Brick(angle);
 		temp->SetProgram(Shader_Manager::GetShader("textureShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
 
-		Models::BrickCollider* brickCollider = new Models::BrickCollider((float)angle);
+		Models::BrickCollider* brickCollider = new Models::BrickCollider(angle);
 		brickCollider->SetProgram(Shader_Manager::GetShader("colorShader"));
 		brickCollider->Create();
 		gameModelList[mapKey + "Collider"] = brickCollider;
