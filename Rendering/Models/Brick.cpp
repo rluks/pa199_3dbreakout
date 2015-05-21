@@ -22,8 +22,6 @@ void Brick::Create()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	std::vector<VertexFormat> vertices;
-
 	glm::vec4 red = glm::vec4(1, 0, 0, 1);
 	glm::vec4 green = glm::vec4(0, 1, 0, 1);
 	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
@@ -36,15 +34,11 @@ void Brick::Create()
 	float y = 0.2f;
 	
 	float pi = 3.14159265358979323846f;
-	float angleDelta = pi / 16.0f;
+	float angleDelta = pi / 8.0f;
 	float endAngle = pi/3.0f;
 	float smallerRadius = 0.7f;
-	int counter = 0;
-	int lastIteration = 6;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
-		counter++;
-
 		float x = cos(angle);
 		float z = sin(angle);
 
@@ -88,29 +82,58 @@ void Brick::Create()
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(1, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(1, 0)));
-
-		if (angle == 0.0f)//vertical wall
-		{
-			vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
-			
-			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
-
-		} 
-		else if (counter == lastIteration)
-		{
-			vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-
-			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
-		}	
 	}
+
+	float angle = 0.0f;
+
+	{//one end wall
+	
+		float x = cos(angle);
+		float z = sin(angle);
+
+		float x2 = cos(angle + angleDelta);
+		float z2 = sin(angle + angleDelta);
+
+		float xIn = smallerRadius * cos(angle);
+		float zIn = smallerRadius * sin(angle);
+
+		float xIn2 = smallerRadius * cos(angle + angleDelta);
+		float zIn2 = smallerRadius * sin(angle + angleDelta);
+
+		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
+
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
+	}
+
+	angle += pi / 8.0f;
+	angle += pi / 8.0f;
+
+	{//second end wall
+		float x = cos(angle);
+		float z = sin(angle);
+
+		float x2 = cos(angle + angleDelta);
+		float z2 = sin(angle + angleDelta);
+
+		float xIn = smallerRadius * cos(angle);
+		float zIn = smallerRadius * sin(angle);
+
+		float xIn2 = smallerRadius * cos(angle + angleDelta);
+		float zIn2 = smallerRadius * sin(angle + angleDelta);
+
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
+
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+	}
+		
 
 	/*vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red, zeros));
 	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue, glm::vec2(1, 0)));
@@ -168,4 +191,7 @@ void Brick::Draw()
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
+
+	//glDrawArrays(GL_LINES, 0, verticesSize);
+
 }

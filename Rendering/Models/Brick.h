@@ -18,6 +18,7 @@ namespace Rendering
 			virtual void Update() override final;
 
 			float Angle;
+			std::vector<VertexFormat> vertices;
 		private:
 			glm::mat4 rotated;
 		};
