@@ -24,6 +24,7 @@ namespace Rendering
 			glm::mat4 modelmx;
 
 			std::vector<VertexFormat> vertices;
+			GLuint vbo;
 		};
 	}
 }

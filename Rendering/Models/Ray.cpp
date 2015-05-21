@@ -15,10 +15,8 @@ Ray::~Ray()
 void Ray::Create()
 {
 	GLuint vao;
-	GLuint vbo;
 
 	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/grass.png");
-
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);
@@ -63,12 +61,15 @@ void Ray::Create()
 void Ray::Update()
 {
 	spherePosition = Ball::position;
+
 	glm::vec4 red = glm::vec4(1, 0, 0, 1);
 	glm::vec2 texCoord = glm::vec2(0, 0);
-	vertices[0] = VertexFormat(spherePosition, red, texCoord);
-	vertices[1] = VertexFormat(Ball::velocity, red, texCoord);
 
-	//modelmx = glm::translate(identityMx, glm::vec3(spherePosition.x, 0.125f, spherePosition.z));
+	vertices[0] = VertexFormat(spherePosition, red, texCoord);
+	vertices[1] = VertexFormat(spherePosition+Ball::velocity, red, texCoord);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);//update data in buffer!!!
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * verticesSize, &vertices[0], GL_DYNAMIC_DRAW);
 
 	cameraMatrixCopy = Camera::cameraMatrix;
 }

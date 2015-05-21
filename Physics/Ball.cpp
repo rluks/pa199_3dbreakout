@@ -41,11 +41,11 @@ void Ball::Update()
 
 	
 	
-	/*if (distanceFromCenter > 0.0f && distanceFromCenter < 1.0f){
-		//float vx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		float vx = 0.1f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.2f - 0.1f)));
-		//float vz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		float vz = 0.4f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.6f - 0.4f)));
+	if (distanceFromCenter > 0.0f && distanceFromCenter < 0.5f){
+		float vx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//float vx = 0.8f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.9f - 0.8f)));
+		float vz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//float vz = 0.4f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.6f - 0.4f)));
 
 		if (velocity.x < 0.0f)
 			vx *= -1.0f;
@@ -54,7 +54,7 @@ void Ball::Update()
 		if (velocity.z < 0.0f)
 			vz *= -1.0f;
 		velocity.z = vz;
-	}*/
+	}
 
 	if (distanceFromCenter+radius > 2.0f)
 	{
