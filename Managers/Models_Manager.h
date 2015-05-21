@@ -10,6 +10,7 @@
 #include "../Rendering/Models/Brick.h"
 #include "../Rendering/Models/Bat.h"
 #include "../Rendering/Models/Ray.h"
+#include "../Rendering/Models/BrickCollider.h"
 
 #include "InputManager.h"
 
