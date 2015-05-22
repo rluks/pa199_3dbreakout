@@ -102,17 +102,17 @@ void BrickCollider::Create()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), yellow, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), yellow, glm::vec2(1, 0)));
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), yellow, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), yellow, glm::vec2(0, 1)));
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), yellow, glm::vec2(0, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), yellow, glm::vec2(1, 1)));
 
-		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), yellow, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), yellow, glm::vec2(1, 1)));
 
 	}
 
@@ -132,17 +132,17 @@ void BrickCollider::Create()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), green, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), green, glm::vec2(1, 0)));
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), green, glm::vec2(0, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), green, glm::vec2(1, 1)));
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), green, glm::vec2(0, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), green, glm::vec2(0, 0)));
 
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), green, glm::vec2(1, 1)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), green, glm::vec2(1, 0)));
 	}
 
 	verticesSize = vertices.size();
