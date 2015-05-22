@@ -68,6 +68,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Rendering\Models\Line.cpp" />
     <ClCompile Include="Physics\Block.cpp" />
     <ClCompile Include="Managers\TimeManager.cpp" />
     <ClCompile Include="Physics\Ball.cpp" />
@@ -97,6 +98,7 @@
     <None Include="Shaders\Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Rendering\Models\Line.h" />
     <ClInclude Include="Physics\Block.h" />
     <ClInclude Include="Managers\TimeManager.h" />
     <ClInclude Include="Physics\Ball.h" />

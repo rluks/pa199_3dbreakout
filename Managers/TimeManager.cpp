@@ -19,7 +19,7 @@ double TimeManager::GetTime()
 
 double TimeManager::CalculateFrameRate()
 {
-	bool writeToConsole = true;
+	bool writeToConsole = false;
 
 	// Below we create a bunch of static variables to track the deltas of the time.
 
