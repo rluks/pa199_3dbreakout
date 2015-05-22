@@ -6,6 +6,7 @@
 #include "..\OpenGLIncludes.h"
 #include "..\Rendering\Models\Model.h"
 #include "..\Rendering\Camera.h"
+#include "..\Physics\Ball.h"
 
 using namespace std;
 
@@ -29,6 +30,9 @@ class InputManager
 		static void RightCamera();
 		static void ForwardCamera();
 		static void BackwardCamera();
+
+		static void stopBall();
+		static void playBall();
 
 		static float batAngle;
 		static bool switchShaders;

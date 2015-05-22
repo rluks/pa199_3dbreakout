@@ -18,5 +18,7 @@ public:
 	static double startTime;
 	static double endTime;
 	static float radius;
+
+	static bool enableMovement;
 };
 

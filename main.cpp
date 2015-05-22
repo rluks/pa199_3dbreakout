@@ -12,8 +12,10 @@ void SpecialInput(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_UP:
+		InputManager::playBall();
 		break;
 	case GLUT_KEY_DOWN:
+		InputManager::stopBall();
 		break;
 	case GLUT_KEY_LEFT:
 		InputManager::left();

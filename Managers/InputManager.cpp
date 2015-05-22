@@ -26,6 +26,16 @@ InputManager::InputManager()
 
 }
 
+void InputManager::stopBall()
+{
+	Ball::enableMovement = false;
+}
+
+void InputManager::playBall()
+{
+	Ball::enableMovement = true;
+}
+
 void InputManager::switchCamera()
 {
 	Camera::SwitchViews();

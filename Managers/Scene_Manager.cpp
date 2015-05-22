@@ -57,6 +57,9 @@ Scene_Manager::Scene_Manager()
 		float normalx = -1*dz;
 		float normaly = dx;
 
+		block.normal.x = normalx + middle.x;
+		block.normal.y = normaly + middle.z;
+
 		models_manager->AddLine(glm::vec3(normalx+middle.x, y, normaly+middle.z), middle, color);
 
 		counter++;
@@ -75,10 +78,32 @@ void Scene_Manager::notifyBeginFrame()
 {
 	glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
 	glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
-	float distance = glm::dot(block.normal, ballPosition2D);
+	float x0 = ballPosition2D.x;
+	float y0 = ballPosition2D.y;
+
+	float x1 = block.A.x;
+	float y1 = block.A.z;
+
+	float x2 = block.B.x;
+	float y2 = block.B.z;
+
+	float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
+	float dole = sqrt((y2-y1)*(y2-y1) +  (x2-x1)*(x2-x1));
+	float distance = nahore / dole;
+	distance -= Ball::radius;
 
 	std::cout << "distance " <<  distance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
+	float minDistance = 0.000005f;
+
+	if (distance < minDistance){
+		std::cout << "HIT" << std::endl;
+		//Ball::velocity.x = 0.0f;
+		//Ball::velocity.z = 0.0f;
+
+		Ball::velocity.x *= -1.0f;
+		Ball::velocity.z *= -1.0f;
+	}
 	//glm::vec2 reflected = block.normal * (block.normal * ballVelocity2D);
 	//Ball::velocity -= glm::vec3(2*reflected.x, 0, 2*reflected.y);
 		

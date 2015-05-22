@@ -1,10 +1,11 @@
 #include "Ball.h"
 
 float Ball::radius = 0.125;
-glm::vec3 Ball::position = glm::vec3(1, radius, 1);
-glm::vec3 Ball::velocity = glm::vec3(0.1, 0, 0.15);
+glm::vec3 Ball::position = glm::vec3(0, radius, 0);
+glm::vec3 Ball::velocity = glm::vec3(0.2, 0, 0.3);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
+bool Ball::enableMovement = true;
 
 
 Ball::Ball()
@@ -29,10 +30,10 @@ void Ball::Update()
 	else
 		elapsedTime = endTime - startTime;
 
-	//std::cout << "elapsed:" << elapsedTime << std::endl;
-
-	position.x += elapsedTime * velocity.x;
-	position.z += elapsedTime * velocity.z;
+	if (enableMovement){
+		position.x += elapsedTime * velocity.x;
+		position.z += elapsedTime * velocity.z;
+	}
 
 	startTime = endTime;
 
