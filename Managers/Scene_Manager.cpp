@@ -15,6 +15,46 @@ Scene_Manager::Scene_Manager()
 		"Shaders\\Texture_Vertex_Shader.glsl",
 		"Shaders\\Texture_Fragment_Shader.glsl");
 	models_manager = new Models_Manager();
+
+	float y = 0.125f;
+	float pi = 3.14159265358979323846f;
+	float angleDelta = pi / 8.0f;
+	float endAngle = pi / 3.0f;
+	float smallerRadius = 0.7f;
+	int counter = 0;
+	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
+	{
+		float x = cos(angle);
+		float z = sin(angle);
+
+		float x2 = cos(angle + angleDelta);
+		float z2 = sin(angle + angleDelta);
+
+		glm::vec4 color;
+		glm::vec4 red = glm::vec4(1, 0, 0, 1);
+		glm::vec4 green = glm::vec4(0, 1, 0, 1);
+		glm::vec4 blue = glm::vec4(0, 0, 1, 1);
+		glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
+		glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
+		glm::vec4 pink = glm::vec4(1, 0, 1, 1);
+
+		if (counter == 0)
+			color = yellow;
+		else if (counter == 1)
+			color = pink;
+		else
+			color = green;
+
+		glm::vec3 a = glm::vec3(x, y, z);
+		glm::vec3 b = glm::vec3(x2, y, z2);
+
+		block = Block(a, b);
+		models_manager->AddLine(a, b, color);
+
+		counter++;
+	}
+
+
 }
 
 Scene_Manager::~Scene_Manager()
@@ -25,6 +65,11 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
+	glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
+	float distance = glm::dot(block.normal, ballPosition2D);
+
+	//std::cout << distance << std::endl;
+		
 	models_manager->Update();
 	Camera::Update();
 	Ball::Update();
