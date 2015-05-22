@@ -30,37 +30,20 @@ void Ball::Update()
 	else
 		elapsedTime = endTime - startTime;
 
+	startTime = endTime;
+	
 	if (enableMovement){
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
+
+		float distanceFromCenter = sqrt(position.x * position.x + position.z * position.z);
+
+		if (distanceFromCenter + radius > 2.0f)
+		{
+			velocity.x *= -1.0f;
+			velocity.z *= -1.0f;
+		}
 	}
 
-	startTime = endTime;
 
-	//std::cout << "pos.x" << position.x << std::endl;
-
-	float distanceFromCenter = sqrt(position.x * position.x + position.z * position.z);
-
-	
-	
-	/*if (distanceFromCenter > 0.0f && distanceFromCenter < 0.5f){
-		float vx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		//float vx = 0.8f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.9f - 0.8f)));
-		float vz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		//float vz = 0.4f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (0.6f - 0.4f)));
-
-		if (velocity.x < 0.0f)
-			vx *= -1.0f;
-		velocity.x = vx;
-
-		if (velocity.z < 0.0f)
-			vz *= -1.0f;
-		velocity.z = vz;
-	}*/
-
-	if (distanceFromCenter+radius > 2.0f)
-	{
-		velocity.x *= -1.0f;
-		velocity.z *= -1.0f;
-	}
 }
