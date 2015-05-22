@@ -54,11 +54,12 @@ Scene_Manager::Scene_Manager()
 
 		float dx = a.x - b.x;
 		float dz = a.z - b.z;
+
 		float normalx = -1*dz;
 		float normaly = dx;
 
-		block.normal.x = normalx + middle.x;
-		block.normal.y = normaly + middle.z;
+		//block.normal.x = normalx + middle.x;
+		//block.normal.y = normaly + middle.z;
 
 		models_manager->AddLine(glm::vec3(normalx+middle.x, y, normaly+middle.z), middle, color);
 
@@ -101,8 +102,12 @@ void Scene_Manager::notifyBeginFrame()
 		//Ball::velocity.x = 0.0f;
 		//Ball::velocity.z = 0.0f;
 
-		Ball::velocity.x *= -1.0f;
-		Ball::velocity.z *= -1.0f;
+		//Ball::velocity.x *= -1.0f;
+		//Ball::velocity.z *= -1.0f;
+
+		glm::vec3 vel = Ball::velocity;
+		glm::vec3 normal = glm::vec3(block.normal.x, 0, block.normal.y);
+		Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 	}
 	//glm::vec2 reflected = block.normal * (block.normal * ballVelocity2D);
 	//Ball::velocity -= glm::vec3(2*reflected.x, 0, 2*reflected.y);
