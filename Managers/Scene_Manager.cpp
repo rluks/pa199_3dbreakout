@@ -49,19 +49,15 @@ Scene_Manager::Scene_Manager()
 		glm::vec3 b = glm::vec3(x2, y, z2);
 		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z + z2)/2.0f);
 
-		block = Block(a, b);
+		Block blocktemp = Block(a, b);
+		blocks.push_back(blocktemp);
+
 		models_manager->AddLine(a, b, color);
-
-		float dx = a.x - b.x;
-		float dz = a.z - b.z;
-
-		float normalx = -1*dz;
-		float normaly = dx;
 
 		//block.normal.x = normalx + middle.x;
 		//block.normal.y = normaly + middle.z;
 
-		models_manager->AddLine(glm::vec3(normalx+middle.x, y, normaly+middle.z), middle, color);
+		models_manager->AddLine(glm::vec3(blocktemp.normal.x+ middle.x, y, blocktemp.normal.y + middle.z), middle, color);
 
 		counter++;
 	}
@@ -82,22 +78,50 @@ void Scene_Manager::notifyBeginFrame()
 	float x0 = ballPosition2D.x;
 	float y0 = ballPosition2D.y;
 
-	float x1 = block.A.x;
-	float y1 = block.A.z;
+	std::vector<Block> closerSelection;
+	for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+	{
+		Block block = *it;
+		glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
+		float distancex = middle.x - ballPosition2D.x;
+		float distancez = middle.z - ballPosition2D.y;
+		float distanceFromMid = sqrt(distancex * distancex + distancez*distancez);
 
-	float x2 = block.B.x;
-	float y2 = block.B.z;
+		if (distanceFromMid < 1.0f)
+			closerSelection.push_back(block);
+	}
 
-	float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
-	float dole = sqrt((y2-y1)*(y2-y1) +  (x2-x1)*(x2-x1));
-	float distance = nahore / dole;
-	distance -= Ball::radius;
+	float minimalDistance = 100.0f;
+	Block closestBlock;
+	for (std::vector<Block>::iterator it = closerSelection.begin(); it != closerSelection.end(); ++it)
+	{
+		Block block = *it;
 
-	std::cout << "distance " <<  distance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+		float x1 = block.A.x;
+		float y1 = block.A.z;
+
+		float x2 = block.B.x;
+		float y2 = block.B.z;
+
+		float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
+		float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
+		float distance = abs(nahore / dole);
+		distance -= Ball::radius;
+
+		std::cout << distance << std::endl;
+
+		if (distance < minimalDistance){
+			minimalDistance = distance;
+			closestBlock = block;
+		}
+	}
+
+
+	std::cout << "distance " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 	float minDistance = 0.000005f;
 
-	if (distance < minDistance){
+	if (minimalDistance <= 0.0f || minimalDistance < minDistance){
 		std::cout << "HIT" << std::endl;
 		//Ball::velocity.x = 0.0f;
 		//Ball::velocity.z = 0.0f;
@@ -106,7 +130,7 @@ void Scene_Manager::notifyBeginFrame()
 		//Ball::velocity.z *= -1.0f;
 
 		glm::vec3 vel = Ball::velocity;
-		glm::vec3 normal = glm::vec3(block.normal.x, 0, block.normal.y);
+		glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
 		Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 	}
 	//glm::vec2 reflected = block.normal * (block.normal * ballVelocity2D);
