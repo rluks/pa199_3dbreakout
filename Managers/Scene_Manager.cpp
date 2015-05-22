@@ -108,6 +108,14 @@ void Scene_Manager::notifyBeginFrame()
 		float distance = abs(nahore / dole);
 		distance -= Ball::radius;
 
+		//this should work great, but causes false collisions in the center, and no collisions where it supposed to...
+		//distance = plane.normal · sphere.position 
+		distance = glm::dot(block.normal, ballPosition2D);
+
+		glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
+		glm::vec2 fakeblocknormal = glm::vec2(block.normal.x + middle.x, block.normal.y + middle.z);
+		distance = glm::dot(fakeblocknormal, ballPosition2D);
+
 		std::cout << distance << std::endl;
 
 		if (distance < minimalDistance){
