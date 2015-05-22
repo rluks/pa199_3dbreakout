@@ -11,6 +11,7 @@
 #include "../Rendering/Models/Bat.h"
 #include "../Rendering/Models/Ray.h"
 #include "../Rendering/Models/BrickCollider.h"
+#include "../Rendering/Models/Line.h"
 
 #include "InputManager.h"
 
@@ -29,6 +30,7 @@ namespace Managers
 
 			void DeleteModel(const std::string& gameModelName);
 			const IGameObject& GetModel(const std::string& gameModelName) const;
+			void AddLine(glm::vec3, glm::vec3, const glm::vec4 &);
 
 		private:
 			std::map<std::string, IGameObject*> gameModelList;

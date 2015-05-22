@@ -36,18 +36,44 @@ Models_Manager::Models_Manager()
 	brick->Create();
 	gameModelList["brick"] = brick;*/
 
-	for (float angle = 0.0f; angle < 360.0f; angle += 67.5f)
+	/*float y = 0.125f;
+	float pi = 3.14159265358979323846f;
+	float angleDelta = pi / 8.0f;
+	float endAngle = pi / 3.0f;
+	float smallerRadius = 0.7f;
+	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
+	{
+		float x = cos(angle);
+		float z = sin(angle);
+
+		float x2 = cos(angle + angleDelta);
+		float z2 = sin(angle + angleDelta);
+
+		glm::vec3 a = glm::vec3(x, y, z);
+		glm::vec3 b = glm::vec3(x2, y, z2);
+
+		glm::vec4 pink = glm::vec4(1, 0, 1, 1);
+
+		std::string mapKey = "line" + std::to_string(angle);
+		Models::Line* line = new Models::Line(a, b, pink);
+		line->SetProgram(Shader_Manager::GetShader("colorShader"));
+		line->Create();
+		gameModelList[mapKey] = line;
+	}*/
+
+	for (float angle = 0.0f; angle < 60.0f; angle += 67.5f)
 	{
 		std::string mapKey = "brick" + std::to_string(angle);
+
 		Models::Brick* temp = new Models::Brick(angle);
 		temp->SetProgram(Shader_Manager::GetShader("textureShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
 
-		Models::BrickCollider* brickCollider = new Models::BrickCollider(angle);
+		/*Models::BrickCollider* brickCollider = new Models::BrickCollider(angle);
 		brickCollider->SetProgram(Shader_Manager::GetShader("colorShader"));
 		brickCollider->Create();
-		gameModelList[mapKey + "Collider"] = brickCollider;
+		gameModelList[mapKey + "Collider"] = brickCollider;*/
 	}
 
 	Models::Bat* bat = new Models::Bat(0.0f);
@@ -84,6 +110,16 @@ void Models_Manager::DeleteModel(const std::string& gameModelName)
 const IGameObject& Models_Manager::GetModel(const std::string& gameModelName) const
 {
 	return (*gameModelList.at(gameModelName));
+}
+
+void Models_Manager::AddLine(glm::vec3 a, glm::vec3 b, const glm::vec4 &color)
+{
+	std::string mapKey = "line" + std::to_string(gameModelList.size());
+
+	Models::Line* line = new Models::Line(a, b, color);
+	line->SetProgram(Shader_Manager::GetShader("colorShader"));
+	line->Create();
+	gameModelList[mapKey] = line;
 }
 
 void Models_Manager::Update()
