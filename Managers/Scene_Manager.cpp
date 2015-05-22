@@ -47,17 +47,17 @@ Scene_Manager::Scene_Manager()
 
 		glm::vec3 a = glm::vec3(x, y, z);
 		glm::vec3 b = glm::vec3(x2, y, z2);
-		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z+z2)/2.0f);
+		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z + z2)/2.0f);
 
 		block = Block(a, b);
 		models_manager->AddLine(a, b, color);
 
-		float dx = b.x - a.x;
-		float dz = b.z - a.z;
-		float normalx = -1 * dz;
+		float dx = a.x - b.x;
+		float dz = a.z - b.z;
+		float normalx = -1*dz;
 		float normaly = dx;
 
-		models_manager->AddLine(glm::vec3(normalx, y, normaly), middle, color);
+		models_manager->AddLine(glm::vec3(normalx+middle.x, y, normaly+middle.z), middle, color);
 
 		counter++;
 	}
