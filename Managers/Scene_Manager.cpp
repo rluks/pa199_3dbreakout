@@ -73,76 +73,77 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
-	glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
-	glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
-	float x0 = ballPosition2D.x;
-	float y0 = ballPosition2D.y;
+	if (Ball::enableMovement){
+		glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
+		glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
 
-	std::vector<Block> closerSelection;
-	for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
-	{
-		Block block = *it;
-		glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
-		float distancex = middle.x - ballPosition2D.x;
-		float distancez = middle.z - ballPosition2D.y;
-		float distanceFromMid = sqrt(distancex * distancex + distancez*distancez);
+		std::vector<Block> closerSelection;
+		for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+		{
+			Block block = *it;
+			glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
+			float distancex = middle.x - ballPosition2D.x;
+			float distancez = middle.z - ballPosition2D.y;
+			float distanceFromMid = sqrt(distancex * distancex + distancez*distancez);
 
-		if (distanceFromMid < 1.0f)
-			closerSelection.push_back(block);
-	}
+			if (distanceFromMid < 0.3f)
+				closerSelection.push_back(block);
+		}
 
-	float minimalDistance = 100.0f;
-	Block closestBlock;
-	for (std::vector<Block>::iterator it = closerSelection.begin(); it != closerSelection.end(); ++it)
-	{
-		Block block = *it;
+		float minimalDistance = 100.0f;
+		Block closestBlock;
+		std::string distancesStr = "";
+		for (std::vector<Block>::iterator it = closerSelection.begin(); it != closerSelection.end(); ++it)
+		{
+			Block block = *it;
 
-		float x1 = block.A.x;
-		float y1 = block.A.z;
+			float x0 = ballPosition2D.x;
+			float y0 = ballPosition2D.y;
 
-		float x2 = block.B.x;
-		float y2 = block.B.z;
+			float x1 = block.A.x;
+			float y1 = block.A.z;
 
-		float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
-		float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
-		float distance = abs(nahore / dole);
-		distance -= Ball::radius;
+			float x2 = block.B.x;
+			float y2 = block.B.z;
 
-		//this should work great, but causes false collisions in the center, and no collisions where it supposed to...
-		//distance = plane.normal · sphere.position 
-		distance = glm::dot(block.normal, ballPosition2D);
+			float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
+			float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
+			float distance = abs(nahore / dole);
+			distance -= Ball::radius;
 
-		glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
-		glm::vec2 fakeblocknormal = glm::vec2(block.normal.x + middle.x, block.normal.y + middle.z);
-		distance = glm::dot(fakeblocknormal, ballPosition2D);
+			//this should work great, but causes false collisions in the center, and no collisions where it supposed to...
+			//distance = plane.normal · sphere.position 
+			//distance = glm::dot(block.normal, ballPosition2D);
 
-		std::cout << distance << std::endl;
 
-		if (distance < minimalDistance){
-			minimalDistance = distance;
-			closestBlock = block;
+			//glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
+			//glm::vec2 fakeblocknormal = glm::vec2(block.normal.x + middle.x, block.normal.y + middle.z);
+			//distance = glm::dot(fakeblocknormal, ballPosition2D);
+
+			//std::cout << distance << std::endl;
+			distancesStr += std::to_string(distance) + " ";
+
+			if (distance < minimalDistance){
+				minimalDistance = distance;
+				closestBlock = block;
+			}
+		}
+
+
+		float minDistance = 0.000005f;
+
+		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
+			std::cout << "HIT, distances: " << distancesStr << std::endl;
+			std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+
+			//Ball::velocity.x = 0.0f;
+			//Ball::velocity.z = 0.0f;
+
+			glm::vec3 vel = Ball::velocity;
+			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
+			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 		}
 	}
-
-
-	std::cout << "distance " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
-
-	float minDistance = 0.000005f;
-
-	if (minimalDistance <= 0.0f || minimalDistance < minDistance){
-		std::cout << "HIT" << std::endl;
-		//Ball::velocity.x = 0.0f;
-		//Ball::velocity.z = 0.0f;
-
-		//Ball::velocity.x *= -1.0f;
-		//Ball::velocity.z *= -1.0f;
-
-		glm::vec3 vel = Ball::velocity;
-		glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
-		Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
-	}
-	//glm::vec2 reflected = block.normal * (block.normal * ballVelocity2D);
-	//Ball::velocity -= glm::vec3(2*reflected.x, 0, 2*reflected.y);
 		
 	models_manager->Update();
 	Camera::Update();
@@ -151,7 +152,7 @@ void Scene_Manager::notifyBeginFrame()
 
 void Scene_Manager::notifyDisplayFrame()
 {
-	TimeManager::CalculateFrameRate();
+	//TimeManager::CalculateFrameRate();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
