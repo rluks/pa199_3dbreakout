@@ -47,9 +47,17 @@ Scene_Manager::Scene_Manager()
 
 		glm::vec3 a = glm::vec3(x, y, z);
 		glm::vec3 b = glm::vec3(x2, y, z2);
+		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z+z2)/2.0f);
 
 		block = Block(a, b);
 		models_manager->AddLine(a, b, color);
+
+		float dx = b.x - a.x;
+		float dz = b.z - a.z;
+		float normalx = -1 * dz;
+		float normaly = dx;
+
+		models_manager->AddLine(glm::vec3(normalx, y, normaly), middle, color);
 
 		counter++;
 	}
@@ -66,9 +74,13 @@ Scene_Manager::~Scene_Manager()
 void Scene_Manager::notifyBeginFrame()
 {
 	glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
+	glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
 	float distance = glm::dot(block.normal, ballPosition2D);
 
-	//std::cout << distance << std::endl;
+	std::cout << "distance " <<  distance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+
+	//glm::vec2 reflected = block.normal * (block.normal * ballVelocity2D);
+	//Ball::velocity -= glm::vec3(2*reflected.x, 0, 2*reflected.y);
 		
 	models_manager->Update();
 	Camera::Update();
