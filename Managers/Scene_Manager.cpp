@@ -82,12 +82,38 @@ void Scene_Manager::notifyBeginFrame()
 		{
 			Block block = *it;
 			glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
-			float distancex = middle.x - ballPosition2D.x;
+			//triangle A,B,midd+normal - is ball in this triangle?
+			//ball
+			float x = ballPosition2D.x;
+			float y = ballPosition2D.y;
+			//A
+			float x1 = block.A.x;
+			float y1 = block.A.z;
+			//B
+			float x2 = block.B.x;
+			float y2 = block.B.z;
+			//midd+normal
+			float x3 = middle.x + block.normal.x;
+			float y3 = middle.z + block.normal.y;
+
+			//barycentric solution
+			// a = ((y 2  - y 3 )*(x - x 3 ) + (x 3  - x 2 )*(y - y 3 )) / ((y 2  - y 3 )*(x 1  - x 3 ) + (x 3 - x 2)*(y 1 - y 3))
+			// b = ((y 3 - y 1)*(x - x 3) + (x 1 - x 3)*(y - y 3)) / ((y 2 - y 3)*(x 1 -x 3) + (x 3 - x 2)*(y 1 - y 3))
+			// c = 1 - a - b
+
+			float a = ((y2 - y3)*(x - x3) + (x3 - x2)*(y - y3)) / ((y2 - y3)*(x1 - x3) + (x3 - x2)*(y1 - y3));
+			float b = ((y3 - y1)*(x - x3) + (x1 - x3)*(y - y3)) / ((y2 - y3)*(x1 - x3) + (x3 - x2)*(y1 - y3));
+			float c = 1.0f - a - b;
+
+			if(0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c<= 1)
+				closerSelection.push_back(block);
+
+			/*float distancex = middle.x - ballPosition2D.x;
 			float distancez = middle.z - ballPosition2D.y;
 			float distanceFromMid = sqrt(distancex * distancex + distancez*distancez);
 
 			if (distanceFromMid < 0.3f)
-				closerSelection.push_back(block);
+				closerSelection.push_back(block);*/
 		}
 
 		float minimalDistance = 100.0f;
