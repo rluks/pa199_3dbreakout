@@ -2,7 +2,7 @@
 
 float Ball::radius = 0.125;
 glm::vec3 Ball::position = glm::vec3(1.0, radius, 1.3);
-glm::vec3 Ball::velocity = glm::vec3(-0.23, 0, -0.4);
+glm::vec3 Ball::velocity = 8.0f*glm::vec3(-0.23, 0, -0.4);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
 bool Ball::enableMovement = true;
@@ -10,7 +10,7 @@ bool Ball::enableMovement = true;
 
 Ball::Ball()
 {
-	
+
 }
 
 
@@ -33,6 +33,17 @@ void Ball::Update()
 	startTime = endTime;
 	
 	if (enableMovement){
+
+		/*if (velocity.x < 0)
+			velocity.x = velocity.x - 0.01f;
+		else
+			velocity.x = velocity.x + 0.01f;
+
+		if (velocity.z < 0)
+			velocity.z = velocity.z - 0.01f;
+		else
+			velocity.z = velocity.z + 0.01f;*/
+
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
 
@@ -52,10 +63,10 @@ void Ball::Update()
 
 			std::cout << "dx:" << dx << " dz: " << dz << std::endl;
 
-			float normalx = -1.0f * dz;//actual dx
+			/*float normalx = -1.0f * dz;//actual dx
 			float normaly = dx;
 
-			std::cout << "circle nx:" << normalx << " ny: " << normaly << std::endl;
+			std::cout << "circle nx:" << normalx << " ny: " << normaly << std::endl;*/
 
 			glm::vec3 vel = velocity;
 			glm::vec3 normal = glm::vec3(dx, 0, dz);

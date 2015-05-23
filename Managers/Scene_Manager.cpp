@@ -50,7 +50,7 @@ Scene_Manager::Scene_Manager()
 		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z + z2)/2.0f);
 
 		Block blocktemp = Block(a, b);
-		blocks.push_back(blocktemp);
+		//blocks.push_back(blocktemp);
 
 		models_manager->AddLine(a, b, color);
 
