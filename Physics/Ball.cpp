@@ -36,32 +36,34 @@ void Ball::Update()
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
 
-		float distanceFromCenter = sqrt(position.x * position.x + position.z * position.z);
+		glm::vec2 fakenormal = glm::vec2(0.0f - position.x, 0.0f - position.z);
+		float distanceFromCenter = glm::length(fakenormal);//sqrt(position.x * position.x + position.z * position.z);
 
 		if (distanceFromCenter + radius > 2.0f)
 		{
-			//velocity.x *= -1.0f;
-			//velocity.z *= -1.0f;
+			fakenormal = glm::normalize(fakenormal);
+			fakenormal = -1.0f * fakenormal;
 
-			//float dx = a.x - b.x;
-			//float dz = a.z - b.z;
+			std::cout << "ball has reached outer wall" << std::endl;
+			std::cout << "x: " << position.x << " y: " << position.z << std::endl;
 
-			float dx = -0.1f;
-			float dz = -0.1f;
+			float dx = fakenormal.x;
+			float dz = fakenormal.y;
 
-			//float dx = b.x - a.x;
-			//float dz = b.z - a.z;
+			std::cout << "dx:" << dx << " dz: " << dz << std::endl;
 
-			float normalx = -1 * dz;
+			float normalx = -1.0f * dz;//actual dx
 			float normaly = dx;
 
-			glm::vec3 vel = Ball::velocity;
-			glm::vec3 normal = glm::vec3(normalx, 0, normaly);
-			normal = glm::normalize(normal);
-			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
+			std::cout << "circle nx:" << normalx << " ny: " << normaly << std::endl;
 
-			velocity.x *= -1.0f;
-			velocity.z *= -1.0f;
+			glm::vec3 vel = velocity;
+			glm::vec3 normal = glm::vec3(dx, 0, dz);
+			normal = glm::normalize(normal);
+			velocity = vel - 2 * glm::dot(vel, normal) * normal;
+
+			//velocity.x *= -1.0f;
+			//velocity.z *= -1.0f;
 		}
 	}
 
