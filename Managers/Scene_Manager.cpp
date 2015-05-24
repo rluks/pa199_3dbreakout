@@ -54,10 +54,6 @@ Scene_Manager::Scene_Manager()
 		blocks.push_back(blocktemp);
 
 		models_manager->AddLine(a, b, color);
-
-		//block.normal.x = normalx + middle.x;
-		//block.normal.y = normaly + middle.z;
-
 		models_manager->AddLine(glm::vec3(blocktemp.normal.x+ middle.x, y, blocktemp.normal.y + middle.z), middle, color);
 
 		counter++;
@@ -109,12 +105,6 @@ void Scene_Manager::notifyBeginFrame()
 			if(0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c<= 1)
 				closerSelection.push_back(block);
 
-			/*float distancex = middle.x - ballPosition2D.x;
-			float distancez = middle.z - ballPosition2D.y;
-			float distanceFromMid = sqrt(distancex * distancex + distancez*distancez);
-
-			if (distanceFromMid < 0.3f)
-				closerSelection.push_back(block);*/
 		}
 
 		float minimalDistance = 100.0f;
@@ -138,15 +128,6 @@ void Scene_Manager::notifyBeginFrame()
 			float distance = abs(nahore / dole);
 			distance -= Ball::radius;
 
-			//this should work great, but causes false collisions in the center, and no collisions where it supposed to...
-			//distance = plane.normal · sphere.position 
-			//distance = glm::dot(block.normal, ballPosition2D);
-
-
-			//glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
-			//glm::vec2 fakeblocknormal = glm::vec2(block.normal.x + middle.x, block.normal.y + middle.z);
-			//distance = glm::dot(fakeblocknormal, ballPosition2D);
-
 			//std::cout << distance << std::endl;
 			distancesStr += std::to_string(distance) + " ";
 
@@ -162,9 +143,6 @@ void Scene_Manager::notifyBeginFrame()
 		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
 			std::cout << "HIT, distances: " << distancesStr << std::endl;
 			std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
-
-			//Ball::velocity.x = 0.0f;
-			//Ball::velocity.z = 0.0f;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
