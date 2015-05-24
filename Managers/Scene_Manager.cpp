@@ -19,7 +19,8 @@ Scene_Manager::Scene_Manager()
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 8.0f;
-	float endAngle = pi / 3.0f;
+	//float endAngle = pi / 3.0f;
+	float endAngle = 2.0f * pi;
 	float smallerRadius = 0.7f;
 	int counter = 0;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
@@ -50,7 +51,7 @@ Scene_Manager::Scene_Manager()
 		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z + z2)/2.0f);
 
 		Block blocktemp = Block(a, b);
-		//blocks.push_back(blocktemp);
+		blocks.push_back(blocktemp);
 
 		models_manager->AddLine(a, b, color);
 

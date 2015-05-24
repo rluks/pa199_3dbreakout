@@ -61,7 +61,7 @@ Models_Manager::Models_Manager()
 		gameModelList[mapKey] = line;
 	}*/
 
-	for (float angle = 0.0f; angle < 60.0f; angle += 67.5f)
+	for (float angle = 0.0f; angle < 360.0f; angle += 67.5f)
 	{
 		std::string mapKey = "brick" + std::to_string(angle);
 
