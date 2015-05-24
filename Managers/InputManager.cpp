@@ -107,11 +107,13 @@ void InputManager::BackwardCamera()
 void InputManager::ConfirmVelocity()
 {
 	Ball::enableMovement = true;
+	Ball::selectVelocity = false;
 }
 
 void InputManager::SelectVelocity()
 {
 	Ball::enableMovement = false;
+	Ball::selectVelocity = true;
 }
 
 

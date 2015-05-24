@@ -20,5 +20,7 @@ public:
 	static float radius;
 
 	static bool enableMovement;
+	static bool selectVelocity;
+	static float velocityAngle;
 };
 

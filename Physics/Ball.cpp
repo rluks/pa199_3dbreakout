@@ -1,11 +1,13 @@
 #include "Ball.h"
 
-float Ball::radius = 0.125;
+float Ball::radius = 0.125f;
 glm::vec3 Ball::position = glm::vec3(1.0, radius, 1.3);
 glm::vec3 Ball::velocity = 8.0f*glm::vec3(-0.23, 0, -0.4);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
 bool Ball::enableMovement = true;
+bool Ball::selectVelocity = false;
+float Ball::velocityAngle = 0.0f;
 
 
 Ball::Ball()
@@ -31,6 +33,19 @@ void Ball::Update()
 		elapsedTime = endTime - startTime;
 
 	startTime = endTime;
+
+	if (selectVelocity){
+		float pi = 3.14159265358979323846f;
+		float angleDelta = pi / 64.0f;
+
+		float x = cos(velocityAngle);
+		float z = sin(velocityAngle);
+
+		velocity.x = x;
+		velocity.z = z;
+
+		velocityAngle += angleDelta;
+	}
 	
 	if (enableMovement){
 
