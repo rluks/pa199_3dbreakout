@@ -104,6 +104,16 @@ void InputManager::BackwardCamera()
 	Camera::Translate(0.0f, 0.0f, 0.5f);
 }
 
+void InputManager::ConfirmVelocity()
+{
+	Ball::enableMovement = true;
+}
+
+void InputManager::SelectVelocity()
+{
+	Ball::enableMovement = false;
+}
+
 
 
 void InputManager::Watch()

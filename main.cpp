@@ -61,6 +61,11 @@ void keyboardInput(unsigned char key, int x, int y)
 	if (key == 'v')
 		InputManager::BackwardCamera();
 
+	if (key == 'n')
+		InputManager::SelectVelocity();
+	if (key == 'm')
+		InputManager::ConfirmVelocity();
+
 	return;
 }
 

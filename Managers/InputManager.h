@@ -37,6 +37,9 @@ class InputManager
 		static float batAngle;
 		static bool switchShaders;
 
+		static void SelectVelocity();
+		static void ConfirmVelocity();
+
 	private:
 		HANDLE hIn;
 		HANDLE hOut;
