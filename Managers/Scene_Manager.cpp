@@ -20,7 +20,7 @@ Scene_Manager::Scene_Manager()
 
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
-	float angleDelta = pi / 8.0f;
+	float angleDelta = pi / 12.0f;
 	float endAngle = 2.0f * pi;
 	float smallerRadius = 0.7f;
 	int counter = 0;
@@ -49,13 +49,15 @@ Scene_Manager::Scene_Manager()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		if (counter > 0 && counter <= 3)
+		if (counter > 0 && counter <= 4)
 			color = yellow;
-		else if (counter > 3 && counter <= 6)
+		else if (counter > 4 && counter <= 8)
 			color = green;
-		else if (counter > 6 && counter <= 9)
+		else if (counter > 8 && counter <= 12)
 			color = pink;
-		else if (counter > 9 && counter <= 12)
+		else if (counter > 12 && counter <= 16)
+			color = nevim;
+		else if (counter > 16 && counter <= 20)
 			color = blue;
 		else
 			color = red;
