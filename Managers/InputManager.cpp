@@ -13,8 +13,8 @@ InputManager::InputManager()
 	hIn = GetStdHandle(STD_INPUT_HANDLE);
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	cout << "Key Events   : " << endl;
-	cout << "Mouse Events : " << flush;
+	//cout << "Key Events   : " << endl;
+	//cout << "Mouse Events : " << flush;
 
 	KeyWhere.X = 15;
 	KeyWhere.Y = 0;

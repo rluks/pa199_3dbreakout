@@ -163,7 +163,7 @@ void Scene_Manager::notifyBeginFrame()
 
 			glm::vec4 color = glm::vec4(r, g, b, 1);
 
-			std::cout << r << g << b << std::endl;
+			//std::cout << r << g << b << std::endl;
 
 			//std::cout << "HIT, distances: " << distancesStr << std::endl;
 			//std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;

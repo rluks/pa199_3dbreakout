@@ -115,6 +115,7 @@ const IGameObject& Models_Manager::GetModel(const std::string& gameModelName) co
 void Models_Manager::AddLine(glm::vec3 a, glm::vec3 b, const glm::vec4 &color)
 {
 	std::string mapKey = "line" + std::to_string(gameModelList.size());
+	//std::cout << "mapkey" << mapKey << std::endl;
 
 	Models::Line* line = new Models::Line(a, b, color);
 	line->SetProgram(Shader_Manager::GetShader("colorShader"));
@@ -127,28 +128,8 @@ void Models_Manager::Update()
 	//auto -it's a map iterator
 	for (auto model : gameModelList)
 	{
-		/*
-		if (InputManager::switchShaders)
-		{
-			GLuint program = Shader_Manager::GetShader("colorShader");
-			model.second->SetProgram(program);
-		}
-		else
-		{
-			GLuint program = Shader_Manager::GetShader("textureShader");
-			model.second->SetProgram(program);
-		}*/
-
 		model.second->Update();
 	}
-
-	/*
-	//Haha, this caused drops in FPS from 60fps to only 10fps.. creating circle every update, foolish...
-	
-	Models::Circle* circle = new Models::Circle();
-	circle->SetProgram(Shader_Manager::GetShader("textureShader"));
-	circle->Create();
-	gameModelList["circle"] = circle;*/
 }
 
 void Models_Manager::Draw()
