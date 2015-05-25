@@ -69,8 +69,35 @@ Models_Manager::Models_Manager()
 	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
 	glm::vec4 azure = glm::vec4(0, 1, 1, 1);
 	glm::vec4 color = yellow;
-	for (float angle = 0.0f; angle < 60.0f; angle += 60.0f)
+	int counter = 0;
+	for (float angle = 0.0f; angle < 360.0f; angle += 60.0f)
 	{
+		switch (counter){
+			case 0:
+				color = yellow;
+				break;
+			case 1:
+				color = azure;
+				break;
+			case 2:
+				color = blue;
+				break;
+			case 3:
+				color = grey;
+				break;
+			case 4:
+				color = pink;
+				break;
+			case 5:
+				color = green;
+				break;
+			default:
+				std::cout << "wrong color" << std::endl;
+				color = glm::vec4(0.1, 0.3, 0.6, 1.0);
+				break;
+
+		}
+
 		std::string mapKey = "brick" + GetColorName(color);
 
 		Models::Brick* temp = new Models::Brick(angle, color);
@@ -82,6 +109,7 @@ Models_Manager::Models_Manager()
 		brickCollider->SetProgram(Shader_Manager::GetShader("colorShader"));
 		brickCollider->Create();
 		gameModelList[mapKey + "Collider"] = brickCollider;*/
+		counter++;
 	}
 
 	Models::Bat* bat = new Models::Bat(0.0f);

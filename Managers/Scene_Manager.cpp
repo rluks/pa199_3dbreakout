@@ -21,8 +21,8 @@ Scene_Manager::Scene_Manager()
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 12.0f;
-	//float endAngle = 2.0f * pi - angleDelta;
-	float endAngle = pi/2.0f;
+	float endAngle = 2.0f * pi - angleDelta;
+	//float endAngle = pi/2.0f;
 	float smallerRadius = 0.7f;
 	int counter = 0;
 	
@@ -198,29 +198,9 @@ void Scene_Manager::notifyBeginFrame()
 
 			Ball::Update();
 
-			//models_manager->AddLine(closestBlock.A, closestBlock.B, color);
-			std::string closestBlockColorStr = Models_Manager::GetColorName(closestBlock.color);
-			std::cout << "Hit block no." << closestBlock.number << " which is " << closestBlockColorStr << std::endl;
+			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << std::endl;
+			EraseBlocksWithColor(closestBlock.color);
 
-			std::string brickName = "brick" + closestBlockColorStr;
-			models_manager->DeleteModel(brickName);
-
-			std::vector<Block>::iterator iter;
-			for (iter = blocks.begin(); iter != blocks.end();) {
-				Block block = *iter;
-				if (block.color == closestBlock.color)
-					iter = blocks.erase(iter);
-				else
-					++iter;
-			}
-
-			std::cout << "Erased " << closestBlockColorStr << " brick and blocks" << std::endl;
-
-			for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
-			{
-				Block block = *it;
-				std::cout << Models_Manager::GetColorName(block.color) << std::endl;
-			}
 		}
 	}
 		
@@ -231,7 +211,23 @@ void Scene_Manager::notifyBeginFrame()
 
 void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 {
+	std::string closestBlockColorStr = Models_Manager::GetColorName(color);
 
+	std::cout << "Erasing all " << closestBlockColorStr << " bricks and blocks" << std::endl;
+
+	std::string brickName = "brick" + closestBlockColorStr;
+	models_manager->DeleteModel(brickName);
+
+	std::vector<Block>::iterator iter;
+	for (iter = blocks.begin(); iter != blocks.end();) {
+		Block block = *iter;
+		if (block.color == color)
+			iter = blocks.erase(iter);
+		else
+			++iter;
+	}
+
+	std::cout << "Erased " << Models_Manager::GetColorName(color) << " brick and blocks" << std::endl;
 }
 
 
