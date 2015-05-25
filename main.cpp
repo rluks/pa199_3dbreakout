@@ -9,13 +9,14 @@ using namespace Init;
 
 void SpecialInput(int key, int x, int y)
 {
+
 	switch (key)
 	{
 	case GLUT_KEY_UP:
-		InputManager::playBall();
+		InputManager::ConfirmVelocity();
 		break;
 	case GLUT_KEY_DOWN:
-		InputManager::stopBall();
+		InputManager::SelectVelocity();
 		break;
 	case GLUT_KEY_LEFT:
 		InputManager::left();
@@ -60,11 +61,6 @@ void keyboardInput(unsigned char key, int x, int y)
 		InputManager::ForwardCamera();
 	if (key == 'v')
 		InputManager::BackwardCamera();
-
-	if (key == 'n')
-		InputManager::SelectVelocity();
-	if (key == 'm')
-		InputManager::ConfirmVelocity();
 
 	return;
 }

@@ -2,7 +2,7 @@
 
 float Ball::radius = 0.125f;
 glm::vec3 Ball::position = glm::vec3(1.0, radius, 1.0);
-glm::vec3 Ball::velocity = 1.25f*glm::vec3(0.1, 0, 0.1);
+glm::vec3 Ball::velocity = 1.0f*glm::vec3(-1.0, 0, -1.0);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
 bool Ball::enableMovement = true;
@@ -57,6 +57,8 @@ void Ball::Update()
 
 		if (distanceFromCenter + radius > 2.0f)
 		{
+			std::cout << "reached outer wall of arena" << std::endl;
+
 			normal = glm::normalize(normal);
 			normal = -1.0f * normal;
 

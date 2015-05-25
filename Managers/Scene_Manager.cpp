@@ -21,7 +21,8 @@ Scene_Manager::Scene_Manager()
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 12.0f;
-	float endAngle = 2.0f * pi - angleDelta;
+	//float endAngle = 2.0f * pi - angleDelta;
+	float endAngle = pi/2.0f;
 	float smallerRadius = 0.7f;
 	int counter = 0;
 	
@@ -88,6 +89,12 @@ Scene_Manager::Scene_Manager()
 		models_manager->AddLine(a, b, color);
 		models_manager->AddLine(aa, bb, color);
 
+		float x3 = blocktemp.middle.x + blocktemp.normal.x;
+		float y3 = blocktemp.middle.z + blocktemp.normal.y;
+
+		models_manager->AddLine(glm::vec3(x3, y, y3), blocktemp.middle, color);
+		models_manager->AddLine(glm::vec3(blocktemp2.normal.x + blocktemp2.middle.x, y, blocktemp2.normal.y + blocktemp2.middle.z), blocktemp2.middle, color);
+
 	}
 
 	/*for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
@@ -96,7 +103,8 @@ Scene_Manager::Scene_Manager()
 		std::cout << GetColorName(block.color) << std::endl;
 	}*/
 
-
+	Ball::selectVelocity = true;
+	Ball::enableMovement = false;
 }
 
 Scene_Manager::~Scene_Manager()
@@ -144,6 +152,8 @@ void Scene_Manager::notifyBeginFrame()
 
 			if (0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1){
 
+				//cout << "Inside triangle of Block no." << block.number << " - " << Models_Manager::GetColorName(block.color) << std::endl;
+
 				float x0 = ballPosition2D.x;
 				float y0 = ballPosition2D.y;
 
@@ -179,8 +189,8 @@ void Scene_Manager::notifyBeginFrame()
 
 			//std::cout << r << g << b << std::endl;
 
-			//std::cout << "HIT, distances: " << distancesStr << std::endl;
-			//std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+			std::cout << "HIT, distances: " << distancesStr << std::endl;
+			std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
