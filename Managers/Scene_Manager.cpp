@@ -88,11 +88,13 @@ void Scene_Manager::notifyBeginFrame()
 		glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
 		glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
 
-		std::vector<Block> closerSelection;
+		float minimalDistance = 100.0f;
+		Block closestBlock;
+		std::string distancesStr = "";
+
 		for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
 		{
 			Block block = *it;
-			//glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
 
 			//triangle A,B,midd+normal - is ball in this triangle?
 			//ball
@@ -117,41 +119,30 @@ void Scene_Manager::notifyBeginFrame()
 			float b = ((y3 - y1)*(x - x3) + (x1 - x3)*(y - y3)) / ((y2 - y3)*(x1 - x3) + (x3 - x2)*(y1 - y3));
 			float c = 1.0f - a - b;
 
-			if(0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c<= 1)
-				closerSelection.push_back(block);
+			if (0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1){
 
-		}
+				float x0 = ballPosition2D.x;
+				float y0 = ballPosition2D.y;
 
-		float minimalDistance = 100.0f;
-		Block closestBlock;
-		std::string distancesStr = "";
-		for (std::vector<Block>::iterator it = closerSelection.begin(); it != closerSelection.end(); ++it)
-		{
-			Block block = *it;
+				float x1 = block.A.x;
+				float y1 = block.A.z;
 
-			float x0 = ballPosition2D.x;
-			float y0 = ballPosition2D.y;
+				float x2 = block.B.x;
+				float y2 = block.B.z;
 
-			float x1 = block.A.x;
-			float y1 = block.A.z;
+				float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
+				float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
+				float distance = abs(nahore / dole);
+				distance -= Ball::radius;
 
-			float x2 = block.B.x;
-			float y2 = block.B.z;
+				distancesStr += std::to_string(distance) + " ";
 
-			float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
-			float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
-			float distance = abs(nahore / dole);
-			distance -= Ball::radius;
-
-			//std::cout << distance << std::endl;
-			distancesStr += std::to_string(distance) + " ";
-
-			if (distance < minimalDistance){
-				minimalDistance = distance;
-				closestBlock = block;
+				if (distance < minimalDistance){
+					minimalDistance = distance;
+					closestBlock = block;
+				}
 			}
 		}
-
 
 		float minDistance = 0.000005f;
 
