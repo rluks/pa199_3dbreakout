@@ -196,7 +196,7 @@ void Scene_Manager::notifyBeginFrame()
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
 			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 
-			/*Ball::Update();
+			Ball::Update();
 
 			//models_manager->AddLine(closestBlock.A, closestBlock.B, color);
 			std::string closestBlockColorStr = Models_Manager::GetColorName(closestBlock.color);
@@ -205,18 +205,33 @@ void Scene_Manager::notifyBeginFrame()
 			std::string brickName = "brick" + closestBlockColorStr;
 			models_manager->DeleteModel(brickName);
 
+			std::vector<Block>::iterator iter;
+			for (iter = blocks.begin(); iter != blocks.end();) {
+				Block block = *iter;
+				if (block.color == closestBlock.color)
+					iter = blocks.erase(iter);
+				else
+					++iter;
+			}
+
+			std::cout << "Erased " << closestBlockColorStr << " brick and blocks" << std::endl;
+
 			for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
 			{
 				Block block = *it;
-				if (block.color == closestBlock.color)
-					it = blocks.erase(it);
-			}*/
+				std::cout << Models_Manager::GetColorName(block.color) << std::endl;
+			}
 		}
 	}
 		
 	models_manager->Update();
 	Camera::Update();
 	Ball::Update();
+}
+
+void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
+{
+
 }
 
 
