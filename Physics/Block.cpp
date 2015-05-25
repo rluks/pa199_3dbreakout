@@ -1,5 +1,7 @@
 #include "Block.h"
 
+int Block::blockCounter = 0;
+
 Block::Block(){}
 
 Block::Block(glm::vec3 a, glm::vec3 b)
@@ -16,6 +18,9 @@ Block::Block(glm::vec3 a, glm::vec3 b)
 	normal = glm::normalize(normal);
 
 	middle = glm::vec3((a.x + b.x) / 2.0f, 0, (a.z + b.z) / 2.0f);
+
+	blockCounter++;
+	number = blockCounter;
 }
 
 

@@ -172,7 +172,8 @@ void Scene_Manager::notifyBeginFrame()
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
 			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 
-			models_manager->AddLine(closestBlock.A, closestBlock.B, color);
+			//models_manager->AddLine(closestBlock.A, closestBlock.B, color);
+			std::cout << "Hit block no." << closestBlock.number << std::endl;
 		}
 	}
 		
