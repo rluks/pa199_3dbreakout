@@ -60,16 +60,11 @@ void Ball::Update()
 			fakenormal = glm::normalize(fakenormal);
 			fakenormal = -1.0f * fakenormal;
 
-			std::cout << "ball has reached outer wall" << std::endl;
-			std::cout << "x: " << position.x << " y: " << position.z << std::endl;
-
-			float dx = fakenormal.x;
-			float dz = fakenormal.y;
-
-			std::cout << "dx:" << dx << " dz: " << dz << std::endl;
+			//std::cout << "ball has reached outer wall" << std::endl;
+			//std::cout << "x: " << position.x << " y: " << position.z << std::endl;
 
 			glm::vec3 vel = velocity;
-			glm::vec3 normal = glm::vec3(dx, 0, dz);
+			glm::vec3 normal = glm::vec3(fakenormal.x, 0, fakenormal.y);
 			normal = glm::normalize(normal);
 			velocity = vel - 2 * glm::dot(vel, normal) * normal;
 		}
