@@ -186,10 +186,21 @@ void Scene_Manager::notifyBeginFrame()
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
 			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 
+			/*Ball::Update();
+
 			//models_manager->AddLine(closestBlock.A, closestBlock.B, color);
-			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << std::endl;
-			std::string brickName = "brick" + Models_Manager::GetColorName(closestBlock.color);
+			std::string closestBlockColorStr = Models_Manager::GetColorName(closestBlock.color);
+			std::cout << "Hit block no." << closestBlock.number << " which is " << closestBlockColorStr << std::endl;
+
+			std::string brickName = "brick" + closestBlockColorStr;
 			models_manager->DeleteModel(brickName);
+
+			for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+			{
+				Block block = *it;
+				if (block.color == closestBlock.color)
+					it = blocks.erase(it);
+			}*/
 		}
 	}
 		

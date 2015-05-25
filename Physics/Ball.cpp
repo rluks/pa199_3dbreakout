@@ -36,7 +36,7 @@ void Ball::Update()
 
 	if (selectVelocity){
 		float pi = 3.14159265358979323846f;
-		float angleDelta = pi / 128.0f;
+		float angleDelta = pi / 100.0f;
 
 		float x = cos(velocityAngle);
 		float z = sin(velocityAngle);
