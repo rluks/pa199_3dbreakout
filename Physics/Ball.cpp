@@ -1,8 +1,8 @@
 #include "Ball.h"
 
 float Ball::radius = 0.125f;
-glm::vec3 Ball::position = glm::vec3(-1.6, radius, -0.3);
-glm::vec3 Ball::velocity = 1.25f*glm::vec3(0.99, 0, -0.1);
+glm::vec3 Ball::position = glm::vec3(1.0, radius, 1.0);
+glm::vec3 Ball::velocity = 1.25f*glm::vec3(0.1, 0, 0.1);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
 bool Ball::enableMovement = true;
@@ -52,20 +52,15 @@ void Ball::Update()
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
 
-		glm::vec2 fakenormal = glm::vec2(0.0f - position.x, 0.0f - position.z);
-		float distanceFromCenter = glm::length(fakenormal);
+		glm::vec3 normal = glm::vec3(0.0f - position.x, 0, 0.0f - position.z);
+		float distanceFromCenter = glm::length(normal);
 
 		if (distanceFromCenter + radius > 2.0f)
 		{
-			fakenormal = glm::normalize(fakenormal);
-			fakenormal = -1.0f * fakenormal;
-
-			//std::cout << "ball has reached outer wall" << std::endl;
-			//std::cout << "x: " << position.x << " y: " << position.z << std::endl;
+			normal = glm::normalize(normal);
+			normal = -1.0f * normal;
 
 			glm::vec3 vel = velocity;
-			glm::vec3 normal = glm::vec3(fakenormal.x, 0, fakenormal.y);
-			normal = glm::normalize(normal);
 			velocity = vel - 2 * glm::dot(vel, normal) * normal;
 		}
 	}
