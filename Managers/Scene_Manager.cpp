@@ -156,17 +156,23 @@ void Scene_Manager::notifyBeginFrame()
 		float minDistance = 0.000005f;
 
 		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
-			glm::vec4 azure = glm::vec4(0, 1, 1, 1);
-			glm::vec4 color;
 
-			std::cout << "HIT, distances: " << distancesStr << std::endl;
-			std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+			float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			float g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			float b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+			glm::vec4 color = glm::vec4(r, g, b, 1);
+
+			std::cout << r << g << b << std::endl;
+
+			//std::cout << "HIT, distances: " << distancesStr << std::endl;
+			//std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
 			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 
-			models_manager->AddLine(closestBlock.A, closestBlock.B, azure);
+			models_manager->AddLine(closestBlock.A, closestBlock.B, color);
 		}
 	}
 		
