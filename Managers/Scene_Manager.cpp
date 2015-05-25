@@ -21,18 +21,17 @@ Scene_Manager::Scene_Manager()
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 8.0f;
-	//float endAngle = pi / 3.0f;
 	float endAngle = 2.0f * pi;
 	float smallerRadius = 0.7f;
 	int counter = 0;
-	glm::vec4 color;
+	
 	glm::vec4 red = glm::vec4(1, 0, 0, 1);
 	glm::vec4 green = glm::vec4(0, 1, 0, 1);
 	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
 	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
 	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
 	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
-	color = yellow;
+	glm::vec4 color = yellow;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		float x = cos(angle);
@@ -57,7 +56,7 @@ Scene_Manager::Scene_Manager()
 		Block blocktemp = Block(a, b);
 		blocks.push_back(blocktemp);
 
-		models_manager->AddLine(a, b, color);
+		//models_manager->AddLine(a, b, color);
 
 		//inner walls of well
 		glm::vec3 aa = glm::vec3(xIn, y, zIn);
@@ -68,7 +67,7 @@ Scene_Manager::Scene_Manager()
 		blocks.push_back(blocktemp2);
 
 		color = yellow;
-		models_manager->AddLine(aa, bb, color);
+		//models_manager->AddLine(aa, bb, color);
 
 		counter++;
 		color = pink;

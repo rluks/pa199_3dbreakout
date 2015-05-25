@@ -1,8 +1,8 @@
 #include "Ball.h"
 
 float Ball::radius = 0.125f;
-glm::vec3 Ball::position = glm::vec3(0.0, radius, 0.0);
-glm::vec3 Ball::velocity = 0.25f*glm::vec3(-0.23, 0, -0.4);
+glm::vec3 Ball::position = glm::vec3(1.0, radius, 1.0);
+glm::vec3 Ball::velocity = 1.25f*glm::vec3(-0.23, 0, -0.4);
 double Ball::startTime = 0.0;
 double Ball::endTime = 0.0;
 bool Ball::enableMovement = true;
