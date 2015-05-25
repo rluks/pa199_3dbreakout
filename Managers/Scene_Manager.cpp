@@ -16,6 +16,8 @@ Scene_Manager::Scene_Manager()
 		"Shaders\\Texture_Fragment_Shader.glsl");
 	models_manager = new Models_Manager();
 
+	std::cout << "Loading physics..." << std::endl;
+
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 8.0f;
@@ -30,6 +32,12 @@ Scene_Manager::Scene_Manager()
 
 		float x2 = cos(angle + angleDelta);
 		float z2 = sin(angle + angleDelta);
+
+		float xIn = smallerRadius * cos(angle);
+		float zIn = smallerRadius * sin(angle);
+
+		float xIn2 = smallerRadius * cos(angle + angleDelta);
+		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
 		glm::vec4 color;
 		glm::vec4 red = glm::vec4(1, 0, 0, 1);
@@ -46,6 +54,7 @@ Scene_Manager::Scene_Manager()
 		else
 			color = green;
 
+		//outer walls
 		glm::vec3 a = glm::vec3(x, y, z);
 		glm::vec3 b = glm::vec3(x2, y, z2);
 		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z + z2)/2.0f);
@@ -54,7 +63,23 @@ Scene_Manager::Scene_Manager()
 		blocks.push_back(blocktemp);
 
 		models_manager->AddLine(a, b, color);
-		models_manager->AddLine(glm::vec3(blocktemp.normal.x+ middle.x, y, blocktemp.normal.y + middle.z), middle, color);
+		//models_manager->AddLine(glm::vec3(blocktemp.normal.x+ middle.x, y, blocktemp.normal.y + middle.z), middle, color);
+
+		//inner walls of well
+		glm::vec3 aa = glm::vec3(xIn, y, zIn);
+		glm::vec3 bb = glm::vec3(xIn2, y, zIn2);
+		glm::vec3 middle2 = glm::vec3((xIn + xIn2) / 2.0f, 0, (zIn + zIn2) / 2.0f);
+
+		Block blocktemp2 = Block(aa, bb);
+		blocktemp2.normal *= -1.0f;
+		
+		blocks.push_back(blocktemp2);
+
+		color = yellow;
+
+		models_manager->AddLine(aa, bb, color);
+		models_manager->AddLine(glm::vec3(blocktemp2.normal.x + middle2.x, y, blocktemp2.normal.y + middle2.z), middle2, color);
+
 
 		counter++;
 	}
