@@ -31,9 +31,12 @@ Scene_Manager::Scene_Manager()
 	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
 	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
 	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
-	glm::vec4 color = yellow;
+	glm::vec4 color;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
+		counter++;
+		std::cout << counter << std::endl;
+
 		float x = cos(angle);
 		float z = sin(angle);
 
@@ -46,8 +49,16 @@ Scene_Manager::Scene_Manager()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		if (counter > 2)
+		if (counter > 0 && counter <= 3)
+			color = yellow;
+		else if (counter > 3 && counter <= 6)
 			color = green;
+		else if (counter > 6 && counter <= 9)
+			color = pink;
+		else if (counter > 9 && counter <= 12)
+			color = blue;
+		else
+			color = red;
 
 		//outer walls
 		glm::vec3 a = glm::vec3(x, y, z);
@@ -55,8 +66,7 @@ Scene_Manager::Scene_Manager()
 
 		Block blocktemp = Block(a, b);
 		blocks.push_back(blocktemp);
-
-		//models_manager->AddLine(a, b, color);
+		models_manager->AddLine(a, b, color);
 
 		//inner walls of well
 		glm::vec3 aa = glm::vec3(xIn, y, zIn);
@@ -65,12 +75,8 @@ Scene_Manager::Scene_Manager()
 		Block blocktemp2 = Block(aa, bb);
 		blocktemp2.normal *= -1.0f;	
 		blocks.push_back(blocktemp2);
+		models_manager->AddLine(aa, bb, color);
 
-		color = yellow;
-		//models_manager->AddLine(aa, bb, color);
-
-		counter++;
-		color = pink;
 	}
 
 
