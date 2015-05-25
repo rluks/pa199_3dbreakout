@@ -34,7 +34,7 @@ void Brick::Create()
 	float y = 0.2f;
 	
 	float pi = 3.14159265358979323846f;
-	float angleDelta = pi / 8.0f;
+	float angleDelta = pi / 12.0f;
 	float endAngle = pi/3.0f;
 	float smallerRadius = 0.7f;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
@@ -109,8 +109,9 @@ void Brick::Create()
 		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
 	}
 
-	angle += pi / 8.0f;
-	angle += pi / 8.0f;
+	angle += angleDelta;
+	angle += angleDelta;
+	angle += angleDelta;
 
 	{//second end wall
 		float x = cos(angle);
@@ -133,15 +134,6 @@ void Brick::Create()
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
 	}
-		
-
-	/*vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, -1.0f), red, zeros));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue, glm::vec2(1, 0)));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green, glm::vec2(0, 1)));
-
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, -1.0f), blue, zeros));
-	vertices.push_back(VertexFormat(glm::vec3(1.0f, y, 1.0f), yellow, zeros));
-	vertices.push_back(VertexFormat(glm::vec3(-1.0f, y, 1.0f), green, zeros));*/	
 
 	verticesSize = vertices.size();
 
