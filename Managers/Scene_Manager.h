@@ -23,6 +23,7 @@ namespace Managers
 			int height,
 			int previous_width,
 			int previous_height);
+
 	private:
 		Managers::Shader_Manager* shader_manager;
 		Managers::Models_Manager* models_manager;

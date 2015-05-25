@@ -61,12 +61,20 @@ Models_Manager::Models_Manager()
 		gameModelList[mapKey] = line;
 	}*/
 
+	glm::vec4 red = glm::vec4(1, 0, 0, 1);
+	glm::vec4 green = glm::vec4(0, 1, 0, 1);
+	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
+	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
+	glm::vec4 grey = glm::vec4(0.5, 0.5, 0.5, 1);
+	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
+	glm::vec4 azure = glm::vec4(0, 1, 1, 1);
+	glm::vec4 color = yellow;
 	for (float angle = 0.0f; angle < 60.0f; angle += 60.0f)
 	{
-		std::string mapKey = "brick" + std::to_string(angle);
+		std::string mapKey = "brick" + GetColorName(color);
 
-		Models::Brick* temp = new Models::Brick(angle);
-		temp->SetProgram(Shader_Manager::GetShader("textureShader"));
+		Models::Brick* temp = new Models::Brick(angle, color);
+		temp->SetProgram(Shader_Manager::GetShader("colorShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
 
@@ -139,4 +147,35 @@ void Models_Manager::Draw()
 	{
 		model.second->Draw();
 	}
+}
+
+std::string Models_Manager::GetColorName(const glm::vec4 &color)
+{
+	glm::vec4 red = glm::vec4(1, 0, 0, 1);
+	glm::vec4 green = glm::vec4(0, 1, 0, 1);
+	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
+	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
+	glm::vec4 grey = glm::vec4(0.5, 0.5, 0.5, 1);
+	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
+	glm::vec4 azure = glm::vec4(0, 1, 1, 1);
+
+	if (color == red)
+		return "red";
+	else if (color == green)
+		return "green";
+	else if (color == blue)
+		return "blue";
+	else if (color == yellow)
+		return "yellow";
+	else if (color == grey)
+		return "grey";
+	else if (color == pink)
+		return "pink";
+	else if (color == azure)
+		return "azure";
+	else{
+		std::string colorStr = std::to_string(color.a) + "," + std::to_string(color.g) + "," + std::to_string(color.b);
+		return colorStr;
+	}
+
 }

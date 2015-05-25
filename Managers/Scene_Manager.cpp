@@ -32,7 +32,7 @@ Scene_Manager::Scene_Manager()
 	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
 	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
 	glm::vec4 azure = glm::vec4(0, 1, 1, 1);
-	glm::vec4 color;
+	glm::vec4 color = yellow;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		counter++;
@@ -53,29 +53,21 @@ Scene_Manager::Scene_Manager()
 		//outer walls
 		glm::vec3 a = glm::vec3(x, y, z);
 		glm::vec3 b = glm::vec3(x2, y, z2);
-
 		Block blocktemp = Block(a, b);
-		blocks.push_back(blocktemp);
 
 		//inner walls of well
 		glm::vec3 aa = glm::vec3(xIn, y, zIn);
 		glm::vec3 bb = glm::vec3(xIn2, y, zIn2);
-
 		Block blocktemp2 = Block(aa, bb);
-		blocktemp2.normal *= -1.0f;	
-		blocks.push_back(blocktemp2);
+		blocktemp2.normal *= -1.0f;	//normal facing inside circle
 
 		int blockCounter = Block::blockCounter;
 		std::cout << blockCounter << std::endl;
 
-		if (blockCounter > 0 && blockCounter <= 8){
+		if (blockCounter <= 8)
 			color = yellow;
-			std::cout << "y" << std::endl;
-		}
-		else if (blockCounter > 8 && blockCounter <= 16){
+		else if (blockCounter > 8 && blockCounter <= 16)
 			color = green;
-			std::cout << "g" << std::endl;
-		}
 		else if (blockCounter > 16 && blockCounter <= 24)
 			color = pink;
 		else if (blockCounter > 24 && blockCounter <= 32)
@@ -87,23 +79,22 @@ Scene_Manager::Scene_Manager()
 		else
 			color = red;
 
-		/*if (counter > 0 && counter <= 4)
-		color = yellow;
-		else if (counter > 4 && counter <= 8)
-		color = green;
-		else if (counter > 8 && counter <= 12)
-		color = pink;
-		else if (counter > 12 && counter <= 16)
-		color = nevim;
-		else if (counter > 16 && counter <= 20)
-		color = blue;
-		else
-		color = red;*/
+		blocktemp.color = color;
+		blocktemp2.color = color;
+
+		blocks.push_back(blocktemp);
+		blocks.push_back(blocktemp2);
 
 		models_manager->AddLine(a, b, color);
 		models_manager->AddLine(aa, bb, color);
 
 	}
+
+	/*for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+	{
+		Block block = *it;
+		std::cout << GetColorName(block.color) << std::endl;
+	}*/
 
 
 }
@@ -196,7 +187,9 @@ void Scene_Manager::notifyBeginFrame()
 			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 
 			//models_manager->AddLine(closestBlock.A, closestBlock.B, color);
-			std::cout << "Hit block no." << closestBlock.number << std::endl;
+			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << std::endl;
+			std::string brickName = "brick" + Models_Manager::GetColorName(closestBlock.color);
+			models_manager->DeleteModel(brickName);
 		}
 	}
 		
@@ -204,6 +197,8 @@ void Scene_Manager::notifyBeginFrame()
 	Camera::Update();
 	Ball::Update();
 }
+
+
 
 void Scene_Manager::notifyDisplayFrame()
 {

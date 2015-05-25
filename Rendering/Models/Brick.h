@@ -10,7 +10,7 @@ namespace Rendering
 		class Brick : public Models::Model
 		{
 		public:
-			Brick(float);
+			Brick(float, const glm::vec4 &);
 			~Brick();
 
 			void Create();
@@ -18,6 +18,8 @@ namespace Rendering
 			virtual void Update() override final;
 
 			float Angle;
+			glm::vec4 Color;
+
 			std::vector<VertexFormat> vertices;
 		private:
 			glm::mat4 rotated;

@@ -16,7 +16,9 @@ public:
 	glm::vec3 A;
 	glm::vec3 B;
 	glm::vec3 middle;
+
 	int number;
+	glm::vec4 color;
 
 	static int blockCounter;
 };
