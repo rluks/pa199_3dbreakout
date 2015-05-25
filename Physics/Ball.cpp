@@ -49,21 +49,11 @@ void Ball::Update()
 	
 	if (enableMovement){
 
-		/*if (velocity.x < 0)
-			velocity.x = velocity.x - 0.01f;
-		else
-			velocity.x = velocity.x + 0.01f;
-
-		if (velocity.z < 0)
-			velocity.z = velocity.z - 0.01f;
-		else
-			velocity.z = velocity.z + 0.01f;*/
-
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
 
 		glm::vec2 fakenormal = glm::vec2(0.0f - position.x, 0.0f - position.z);
-		float distanceFromCenter = glm::length(fakenormal);//sqrt(position.x * position.x + position.z * position.z);
+		float distanceFromCenter = glm::length(fakenormal);
 
 		if (distanceFromCenter + radius > 2.0f)
 		{
@@ -78,18 +68,10 @@ void Ball::Update()
 
 			std::cout << "dx:" << dx << " dz: " << dz << std::endl;
 
-			/*float normalx = -1.0f * dz;//actual dx
-			float normaly = dx;
-
-			std::cout << "circle nx:" << normalx << " ny: " << normaly << std::endl;*/
-
 			glm::vec3 vel = velocity;
 			glm::vec3 normal = glm::vec3(dx, 0, dz);
 			normal = glm::normalize(normal);
 			velocity = vel - 2 * glm::dot(vel, normal) * normal;
-
-			//velocity.x *= -1.0f;
-			//velocity.z *= -1.0f;
 		}
 	}
 

@@ -31,6 +31,7 @@ Scene_Manager::Scene_Manager()
 	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
 	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
 	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
+	glm::vec4 azure = glm::vec4(0, 1, 1, 1);
 	glm::vec4 color;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
@@ -155,12 +156,17 @@ void Scene_Manager::notifyBeginFrame()
 		float minDistance = 0.000005f;
 
 		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
+			glm::vec4 azure = glm::vec4(0, 1, 1, 1);
+			glm::vec4 color;
+
 			std::cout << "HIT, distances: " << distancesStr << std::endl;
 			std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
 			Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
+
+			models_manager->AddLine(closestBlock.A, closestBlock.B, azure);
 		}
 	}
 		
