@@ -21,7 +21,7 @@ Scene_Manager::Scene_Manager()
 	float y = 0.125f;
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 12.0f;
-	float endAngle = 2.0f * pi;
+	float endAngle = 2.0f * pi - angleDelta;
 	float smallerRadius = 0.7f;
 	int counter = 0;
 	
@@ -36,7 +36,7 @@ Scene_Manager::Scene_Manager()
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		counter++;
-		std::cout << counter << std::endl;
+		//std::cout << counter << std::endl;
 
 		float x = cos(angle);
 		float z = sin(angle);
@@ -50,26 +50,12 @@ Scene_Manager::Scene_Manager()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		if (counter > 0 && counter <= 4)
-			color = yellow;
-		else if (counter > 4 && counter <= 8)
-			color = green;
-		else if (counter > 8 && counter <= 12)
-			color = pink;
-		else if (counter > 12 && counter <= 16)
-			color = nevim;
-		else if (counter > 16 && counter <= 20)
-			color = blue;
-		else
-			color = red;
-
 		//outer walls
 		glm::vec3 a = glm::vec3(x, y, z);
 		glm::vec3 b = glm::vec3(x2, y, z2);
 
 		Block blocktemp = Block(a, b);
 		blocks.push_back(blocktemp);
-		models_manager->AddLine(a, b, color);
 
 		//inner walls of well
 		glm::vec3 aa = glm::vec3(xIn, y, zIn);
@@ -78,6 +64,43 @@ Scene_Manager::Scene_Manager()
 		Block blocktemp2 = Block(aa, bb);
 		blocktemp2.normal *= -1.0f;	
 		blocks.push_back(blocktemp2);
+
+		int blockCounter = Block::blockCounter;
+		std::cout << blockCounter << std::endl;
+
+		if (blockCounter > 0 && blockCounter <= 8){
+			color = yellow;
+			std::cout << "y" << std::endl;
+		}
+		else if (blockCounter > 8 && blockCounter <= 16){
+			color = green;
+			std::cout << "g" << std::endl;
+		}
+		else if (blockCounter > 16 && blockCounter <= 24)
+			color = pink;
+		else if (blockCounter > 24 && blockCounter <= 32)
+			color = nevim;
+		else if (blockCounter > 32 && blockCounter <= 40)
+			color = blue;
+		else if (blockCounter > 40 && blockCounter <= 48)
+			color = azure;
+		else
+			color = red;
+
+		/*if (counter > 0 && counter <= 4)
+		color = yellow;
+		else if (counter > 4 && counter <= 8)
+		color = green;
+		else if (counter > 8 && counter <= 12)
+		color = pink;
+		else if (counter > 12 && counter <= 16)
+		color = nevim;
+		else if (counter > 16 && counter <= 20)
+		color = blue;
+		else
+		color = red;*/
+
+		models_manager->AddLine(a, b, color);
 		models_manager->AddLine(aa, bb, color);
 
 	}
@@ -157,11 +180,11 @@ void Scene_Manager::notifyBeginFrame()
 
 		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
 
-			float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			/*float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 			float g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 			float b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
-			glm::vec4 color = glm::vec4(r, g, b, 1);
+			glm::vec4 color = glm::vec4(r, g, b, 1);*/
 
 			//std::cout << r << g << b << std::endl;
 
