@@ -4,20 +4,18 @@ Block::Block(){}
 
 Block::Block(glm::vec3 a, glm::vec3 b)
 {
-	//std::cout << "block a " << a.x << ", " << a.y << ", " << a.z << " b " << b.x << ", " << b.y << ", " << b.z << std::endl;
 	A = a;
 	B = b;
 
 	float dx = a.x - b.x;
 	float dz = a.z - b.z;
 
-	//float dx = b.x - a.x;
-	//float dz = b.z - a.z;
-
 	normal.x = -1.0f * dz;
 	normal.y = dx;
 
 	normal = glm::normalize(normal);
+
+	middle = glm::vec3((a.x + b.x) / 2.0f, 0, (a.z + b.z) / 2.0f);
 }
 
 

@@ -25,6 +25,14 @@ Scene_Manager::Scene_Manager()
 	float endAngle = 2.0f * pi;
 	float smallerRadius = 0.7f;
 	int counter = 0;
+	glm::vec4 color;
+	glm::vec4 red = glm::vec4(1, 0, 0, 1);
+	glm::vec4 green = glm::vec4(0, 1, 0, 1);
+	glm::vec4 blue = glm::vec4(0, 0, 1, 1);
+	glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
+	glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
+	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
+	color = yellow;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		float x = cos(angle);
@@ -39,49 +47,31 @@ Scene_Manager::Scene_Manager()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		glm::vec4 color;
-		glm::vec4 red = glm::vec4(1, 0, 0, 1);
-		glm::vec4 green = glm::vec4(0, 1, 0, 1);
-		glm::vec4 blue = glm::vec4(0, 0, 1, 1);
-		glm::vec4 yellow = glm::vec4(1, 1, 0, 1);
-		glm::vec4 nevim = glm::vec4(0.5, 0.5, 0.5, 1);
-		glm::vec4 pink = glm::vec4(1, 0, 1, 1);
-
-		if (counter == 0)
-			color = yellow;
-		else if (counter == 1)
-			color = pink;
-		else
+		if (counter > 2)
 			color = green;
 
 		//outer walls
 		glm::vec3 a = glm::vec3(x, y, z);
 		glm::vec3 b = glm::vec3(x2, y, z2);
-		glm::vec3 middle = glm::vec3((x + x2)/2.0f, 0, (z + z2)/2.0f);
 
 		Block blocktemp = Block(a, b);
 		blocks.push_back(blocktemp);
 
 		models_manager->AddLine(a, b, color);
-		//models_manager->AddLine(glm::vec3(blocktemp.normal.x+ middle.x, y, blocktemp.normal.y + middle.z), middle, color);
 
 		//inner walls of well
 		glm::vec3 aa = glm::vec3(xIn, y, zIn);
 		glm::vec3 bb = glm::vec3(xIn2, y, zIn2);
-		glm::vec3 middle2 = glm::vec3((xIn + xIn2) / 2.0f, 0, (zIn + zIn2) / 2.0f);
 
 		Block blocktemp2 = Block(aa, bb);
-		blocktemp2.normal *= -1.0f;
-		
+		blocktemp2.normal *= -1.0f;	
 		blocks.push_back(blocktemp2);
 
 		color = yellow;
-
 		models_manager->AddLine(aa, bb, color);
-		models_manager->AddLine(glm::vec3(blocktemp2.normal.x + middle2.x, y, blocktemp2.normal.y + middle2.z), middle2, color);
-
 
 		counter++;
+		color = pink;
 	}
 
 
@@ -103,7 +93,8 @@ void Scene_Manager::notifyBeginFrame()
 		for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
 		{
 			Block block = *it;
-			glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
+			//glm::vec3 middle = glm::vec3((block.A.x + block.B.x) / 2.0f, 0, (block.A.z + block.B.z) / 2.0f);
+
 			//triangle A,B,midd+normal - is ball in this triangle?
 			//ball
 			float x = ballPosition2D.x;
@@ -115,8 +106,8 @@ void Scene_Manager::notifyBeginFrame()
 			float x2 = block.B.x;
 			float y2 = block.B.z;
 			//midd+normal
-			float x3 = middle.x + block.normal.x;
-			float y3 = middle.z + block.normal.y;
+			float x3 = block.middle.x + block.normal.x;
+			float y3 = block.middle.z + block.normal.y;
 
 			//barycentric solution
 			// a = ((y 2  - y 3 )*(x - x 3 ) + (x 3  - x 2 )*(y - y 3 )) / ((y 2  - y 3 )*(x 1  - x 3 ) + (x 3 - x 2)*(y 1 - y 3))
