@@ -83,12 +83,24 @@ Scene_Manager::Scene_Manager()
 			color = red;
 
 		//sides of bricks
-		if (blockCounter % 8 == 0)
+		if (blockCounter % 8 == 0)//end
 		{
 			glm::vec3 aaa = glm::vec3(x2, y, z2);
 			glm::vec3 bbb = glm::vec3(xIn2, y, zIn2);
 			Block blocktempSide = Block(aaa, bbb);
 			blocktempSide.color = color;
+			blocks.push_back(blocktempSide);
+			models_manager->AddLine(aaa, bbb, color);
+			//models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
+		}
+
+		if (blockCounter % 8 == 2)//start
+		{
+			glm::vec3 aaa = glm::vec3(x, y, z);
+			glm::vec3 bbb = glm::vec3(xIn, y, zIn);
+			Block blocktempSide = Block(aaa, bbb);
+			blocktempSide.color = color;
+			blocktempSide.normal *= -1.0f;
 			blocks.push_back(blocktempSide);
 			models_manager->AddLine(aaa, bbb, color);
 			models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
