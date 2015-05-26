@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 
 class Bats
 {
@@ -15,6 +16,7 @@ class Bats
 		~Bats();
 
 		std::vector<Block> blocks;
+		std::vector<Block> blocksRotated;
 		void GenerateBats(float);
 		void Update();
 

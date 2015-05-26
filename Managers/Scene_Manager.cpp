@@ -159,7 +159,7 @@ void Scene_Manager::notifyBeginFrame()
 		//dealing with bats blocks
 		blocks.resize(60);
 		bats.Update();
-		blocks.insert(blocks.end(), bats.blocks.begin(), bats.blocks.end());//append new blocks
+		blocks.insert(blocks.end(), bats.blocksRotated.begin(), bats.blocksRotated.end());//append new blocks
 
 		float minimalDistance = 100.0f;
 		Block closestBlock;
