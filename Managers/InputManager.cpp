@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-float InputManager::batAngle = 0.0f;
+
 bool InputManager::switchShaders = false;
 bool InputManager::rotate = false;
 
@@ -44,12 +44,12 @@ void InputManager::switchCamera()
 
 void InputManager::left()
 {
-	batAngle += 3.0f;
+	Bats::batAngle += 3.0f;
 }
 
 void InputManager::right()
 {
-	batAngle -= 3.0f;
+	Bats::batAngle -= 3.0f;
 }
 
 void InputManager::zoomIn()
@@ -115,49 +115,4 @@ void InputManager::SelectVelocity()
 {
 	Ball::enableMovement = false;
 	Ball::selectVelocity = true;
-}
-
-
-
-void InputManager::Watch()
-{
-	
-
-	cout << "watching..." << endl;
-	Continue = 1;
-	while (Continue)
-	{
-		cout << "oi" << endl;
-
-		ReadConsoleInput(hIn,
-			&InRec,
-			1,
-			&NumRead);
-
-		switch (InRec.EventType)
-		{
-		case KEY_EVENT:
-			++KeyEvents;
-			SetConsoleCursorPosition(hOut,
-				KeyWhere);
-			cout << KeyEvents << flush;
-			if (InRec.Event.KeyEvent.uChar.AsciiChar == 'x')
-			{
-				SetConsoleCursorPosition(hOut,
-					EndWhere);
-				cout << "Exiting..." << endl;
-				Continue = FALSE;
-			}
-			break;
-
-		case MOUSE_EVENT:
-			++MouseEvents;
-			SetConsoleCursorPosition(hOut,
-				MouseWhere);
-			cout << MouseEvents << flush;
-			break;
-		}
-	}
-
-	return;
 }

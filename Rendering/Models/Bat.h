@@ -3,6 +3,7 @@
 #include "Model.h"
 #include "../tdogl/Texture.h"
 #include "..\..\Managers\InputManager.h"
+#include "..\..\Physics\Bats.h"
 
 namespace Rendering
 {

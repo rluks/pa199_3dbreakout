@@ -7,6 +7,7 @@
 #include "..\Rendering\Models\Model.h"
 #include "..\Rendering\Camera.h"
 #include "..\Physics\Ball.h"
+#include "..\Physics\Bats.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class InputManager
 {
 	public:
 		InputManager();
-		void Watch();
+
 		void SpecialInput(int key, int x, int y);
 
 		static void left();
@@ -34,7 +35,6 @@ class InputManager
 		static void stopBall();
 		static void playBall();
 
-		static float batAngle;
 		static bool switchShaders;
 
 		static void SelectVelocity();

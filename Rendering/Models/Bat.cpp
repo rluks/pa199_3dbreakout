@@ -152,11 +152,7 @@ void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &verti
 
 void Bat::Update()
 {
-	dxB += 1.0f;
-	if (dxB > 360.0f)
-		dxB = 0.0f;
-
-	angleOffset = InputManager::batAngle;
+	angleOffset = Bats::batAngle;
 
 	rotated = glm::rotate(identityMx, glm::radians(angleOffset), glm::vec3(0.0f, 1.0f, 0.0f));
 

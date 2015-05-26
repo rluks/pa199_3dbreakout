@@ -29,6 +29,7 @@
     <ClCompile Include="Physics\Block.cpp" />
     <ClCompile Include="Rendering\Models\BrickCollider.cpp" />
     <ClCompile Include="Rendering\Models\Line.cpp" />
+    <ClCompile Include="Physics\Bats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -68,6 +69,7 @@
     <ClInclude Include="Physics\Block.h" />
     <ClInclude Include="Rendering\Models\BrickCollider.h" />
     <ClInclude Include="Rendering\Models\Line.h" />
+    <ClInclude Include="Physics\Bats.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\tileable_grass_00.png" />
