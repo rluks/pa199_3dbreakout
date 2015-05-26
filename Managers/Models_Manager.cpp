@@ -101,7 +101,7 @@ Models_Manager::Models_Manager()
 		std::string mapKey = "brick" + GetColorName(color);
 
 		Models::Brick* temp = new Models::Brick(angle, color);
-		temp->SetProgram(Shader_Manager::GetShader("colorShader"));
+		temp->SetProgram(Shader_Manager::GetShader("textureShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
 

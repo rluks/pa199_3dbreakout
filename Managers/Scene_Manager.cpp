@@ -34,6 +34,7 @@ Scene_Manager::Scene_Manager()
 	glm::vec4 pink = glm::vec4(1, 0, 1, 1);
 	glm::vec4 azure = glm::vec4(0, 1, 1, 1);
 	glm::vec4 color = yellow;
+	int blockCounter = 0;
 	for (float angle = 0.0f; angle < endAngle; angle += angleDelta)
 	{
 		counter++;
@@ -62,7 +63,8 @@ Scene_Manager::Scene_Manager()
 		Block blocktemp2 = Block(aa, bb);
 		blocktemp2.normal *= -1.0f;	//normal facing inside circle
 
-		int blockCounter = Block::blockCounter;
+		//int blockCounter = Block::blockCounter;
+		blockCounter += 2;//this is ugly, but time is short xD
 		std::cout << blockCounter << std::endl;
 
 		if (blockCounter <= 8)
@@ -80,6 +82,18 @@ Scene_Manager::Scene_Manager()
 		else
 			color = red;
 
+		//sides of bricks
+		if (blockCounter % 8 == 0)
+		{
+			glm::vec3 aaa = glm::vec3(x2, y, z2);
+			glm::vec3 bbb = glm::vec3(xIn2, y, zIn2);
+			Block blocktempSide = Block(aaa, bbb);
+			blocktempSide.color = color;
+			blocks.push_back(blocktempSide);
+			models_manager->AddLine(aaa, bbb, color);
+			models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
+		}
+
 		blocktemp.color = color;
 		blocktemp2.color = color;
 
@@ -89,11 +103,11 @@ Scene_Manager::Scene_Manager()
 		models_manager->AddLine(a, b, color);
 		models_manager->AddLine(aa, bb, color);
 
-		float x3 = blocktemp.middle.x + blocktemp.normal.x;
-		float y3 = blocktemp.middle.z + blocktemp.normal.y;
+		//float x3 = blocktemp.middle.x + blocktemp.normal.x;
+		//float y3 = blocktemp.middle.z + blocktemp.normal.y;
 
-		models_manager->AddLine(glm::vec3(x3, y, y3), blocktemp.middle, color);
-		models_manager->AddLine(glm::vec3(blocktemp2.normal.x + blocktemp2.middle.x, y, blocktemp2.normal.y + blocktemp2.middle.z), blocktemp2.middle, color);
+		//models_manager->AddLine(glm::vec3(x3, y, y3), blocktemp.middle, color);
+		//models_manager->AddLine(glm::vec3(blocktemp2.normal.x + blocktemp2.middle.x, y, blocktemp2.normal.y + blocktemp2.middle.z), blocktemp2.middle, color);
 
 	}
 
