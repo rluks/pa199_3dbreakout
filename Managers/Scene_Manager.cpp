@@ -129,6 +129,15 @@ Scene_Manager::Scene_Manager()
 		std::cout << GetColorName(block.color) << std::endl;
 	}*/
 
+	Bats bats = Bats();
+	for (std::vector<Block>::iterator it = bats.blocks.begin(); it != bats.blocks.end(); ++it)
+	{
+		Block block = *it;
+		models_manager->AddLine(block.A, block.B, block.color);
+		models_manager->AddLine(glm::vec3(block.normal.x + block.middle.x, y, block.normal.y + block.middle.z), block.middle, color);
+	}
+
+
 	Ball::selectVelocity = true;
 	Ball::enableMovement = false;
 }
@@ -237,6 +246,11 @@ void Scene_Manager::notifyBeginFrame()
 
 void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 {
+	if (color == glm::vec4(0, 0, 0, 0)){
+		std::cout << "Computer is refusing to erase this color. Sorry. Probably hit ball with bats..." << std::endl;
+		return;
+	}
+
 	std::string closestBlockColorStr = Models_Manager::GetColorName(color);
 
 	std::cout << "Erasing all " << closestBlockColorStr << " bricks and blocks" << std::endl;
