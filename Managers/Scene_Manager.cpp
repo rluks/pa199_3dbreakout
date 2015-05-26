@@ -129,7 +129,9 @@ Scene_Manager::Scene_Manager()
 		std::cout << GetColorName(block.color) << std::endl;
 	}*/
 
-	Bats bats = Bats();
+	//std::cout << "Blocks so far.." << blocks.size() << std::endl;//60
+
+	bats = Bats();
 	for (std::vector<Block>::iterator it = bats.blocks.begin(); it != bats.blocks.end(); ++it)
 	{
 		Block block = *it;
@@ -153,6 +155,11 @@ void Scene_Manager::notifyBeginFrame()
 	if (Ball::enableMovement){
 		glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
 		glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
+
+		//dealing with bats blocks
+		blocks.resize(60);
+		bats.Update();
+		blocks.insert(blocks.end(), bats.blocks.begin(), bats.blocks.end());//append new blocks
 
 		float minimalDistance = 100.0f;
 		Block closestBlock;

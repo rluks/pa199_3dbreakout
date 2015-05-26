@@ -16,6 +16,7 @@ class Bats
 
 		std::vector<Block> blocks;
 		void GenerateBats(float);
+		void Update();
 
 		static float batAngle;
 };

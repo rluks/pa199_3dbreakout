@@ -47,6 +47,12 @@ void Bats::GenerateBats(float startAngle)
 
 }
 
+void Bats::Update()//rotate blocks of bats
+{
+
+
+}
+
 
 Bats::~Bats()
 {
