@@ -90,7 +90,7 @@ Scene_Manager::Scene_Manager()
 			Block blocktempSide = Block(aaa, bbb);
 			blocktempSide.color = color;
 			blocks.push_back(blocktempSide);
-			models_manager->AddLine(aaa, bbb, color);
+			//models_manager->AddLine(aaa, bbb, color);
 			//models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
 		}
 
@@ -102,8 +102,8 @@ Scene_Manager::Scene_Manager()
 			blocktempSide.color = color;
 			blocktempSide.normal *= -1.0f;
 			blocks.push_back(blocktempSide);
-			models_manager->AddLine(aaa, bbb, color);
-			models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
+			//models_manager->AddLine(aaa, bbb, color);
+			//models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
 		}
 
 		blocktemp.color = color;
@@ -112,8 +112,8 @@ Scene_Manager::Scene_Manager()
 		blocks.push_back(blocktemp);
 		blocks.push_back(blocktemp2);
 
-		models_manager->AddLine(a, b, color);
-		models_manager->AddLine(aa, bb, color);
+		//models_manager->AddLine(a, b, color);
+		//models_manager->AddLine(aa, bb, color);
 
 		//float x3 = blocktemp.middle.x + blocktemp.normal.x;
 		//float y3 = blocktemp.middle.z + blocktemp.normal.y;
