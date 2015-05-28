@@ -37,6 +37,8 @@
     <None Include="Shaders\Vertex_Shader.glsl" />
     <None Include="Shaders\Texture_Fragment_Shader.glsl" />
     <None Include="Shaders\Texture_Vertex_Shader.glsl" />
+    <None Include="Shaders\TextureAlpha_Fragment_Shader.glsl" />
+    <None Include="Shaders\TextureAlpha_Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Init\WindowInfo.h" />

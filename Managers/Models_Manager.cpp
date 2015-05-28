@@ -101,7 +101,7 @@ Models_Manager::Models_Manager()
 		std::string mapKey = "brick" + GetColorName(color);
 
 		Models::Brick* temp = new Models::Brick(angle, color);
-		temp->SetProgram(Shader_Manager::GetShader("textureShader"));
+		temp->SetProgram(Shader_Manager::GetShader("textureAlphaShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
 
@@ -113,7 +113,7 @@ Models_Manager::Models_Manager()
 	}
 
 	Models::Bat* bat = new Models::Bat(0.0f);
-	bat->SetProgram(Shader_Manager::GetShader("textureShader"));
+	bat->SetProgram(Shader_Manager::GetShader("textureAlphaShader"));
 	bat->Create();
 	gameModelList["bat"] = bat;
 

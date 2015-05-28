@@ -171,6 +171,9 @@ void Bat::Draw()
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
 	glUniform1i(texture2d, 0);
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
 }
