@@ -16,6 +16,9 @@ Scene_Manager::Scene_Manager()
 		"Shaders\\Texture_Fragment_Shader.glsl");
 	models_manager = new Models_Manager();
 
+	Score = 0; 
+	std::cout << "Score: " + std::to_string(Score) << std::endl;
+
 	std::cout << "Loading physics..." << std::endl;
 
 	float y = 0.125f;
@@ -243,12 +246,31 @@ void Scene_Manager::notifyBeginFrame()
 			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << std::endl;
 			EraseBlocksWithColor(closestBlock.color);
 
+			Score += 100;
+			std::cout << "Score: " + std::to_string(Score) << std::endl;
 		}
 	}
 		
 	models_manager->Update();
 	Camera::Update();
 	Ball::Update();
+
+	glm::vec3 normal = glm::vec3(0.0f - Ball::position.x, 0, 0.0f - Ball::position.z);
+	float distanceFromCenter = glm::length(normal);
+
+	if (distanceFromCenter + Ball::radius > 2.0f)
+	{
+		std::cout << "reached outer wall of arena" << std::endl;
+
+		Score -= 10;
+		std::cout << "Score: " + std::to_string(Score) << std::endl;
+
+		normal = glm::normalize(normal);
+		normal = -1.0f * normal;
+
+		glm::vec3 vel = Ball::velocity;
+		Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
+	}
 }
 
 void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)

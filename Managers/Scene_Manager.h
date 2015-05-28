@@ -25,6 +25,7 @@ namespace Managers
 			int previous_height);
 
 		void EraseBlocksWithColor(const glm::vec4 &);
+		int Score;
 
 	private:
 		Managers::Shader_Manager* shader_manager;

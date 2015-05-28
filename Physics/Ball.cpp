@@ -51,20 +51,6 @@ void Ball::Update()
 
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
-
-		glm::vec3 normal = glm::vec3(0.0f - position.x, 0, 0.0f - position.z);
-		float distanceFromCenter = glm::length(normal);
-
-		if (distanceFromCenter + radius > 2.0f)
-		{
-			std::cout << "reached outer wall of arena" << std::endl;
-
-			normal = glm::normalize(normal);
-			normal = -1.0f * normal;
-
-			glm::vec3 vel = velocity;
-			velocity = vel - 2 * glm::dot(vel, normal) * normal;
-		}
 	}
 
 
