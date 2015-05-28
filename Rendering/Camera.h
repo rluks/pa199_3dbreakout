@@ -4,6 +4,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../Physics/Ball.h"
+
 class Camera
 {
 public:
@@ -24,6 +26,7 @@ public:
 	static glm::vec3 topView;
 	static glm::vec3 perspectiveView;
 	static glm::vec3 selectedView;
+	static glm::vec3 ballView;
 
 
 	static float FoV;

@@ -39,7 +39,7 @@ void InputManager::playBall()
 void InputManager::switchCamera()
 {
 	Camera::SwitchViews();
-	switchShaders = !switchShaders;
+	//switchShaders = !switchShaders;
 }
 
 void InputManager::left()

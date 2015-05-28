@@ -7,6 +7,7 @@ glm::mat4 Camera::projectionMatrix = glm::perspective(glm::radians(FoV), 800.0f 
 
 glm::vec3 Camera::topView = glm::vec3(0, 6, 0.1);
 glm::vec3 Camera::perspectiveView = glm::vec3(0, 4, 4);
+glm::vec3 Camera::ballView = Ball::position;
 glm::vec3 Camera::selectedView = perspectiveView;
 
 glm::vec3 Camera::center = glm::vec3(0, 0, 0);
@@ -24,6 +25,8 @@ void Camera::SwitchViews()
 {
 	if (selectedView == perspectiveView)
 		selectedView = topView;
+	else if (selectedView == topView)
+		selectedView = ballView;
 	else
 		selectedView = perspectiveView;
 }
@@ -37,8 +40,17 @@ void Camera::Update()
 {
 	RotateAngle += RotateDelta;
 
-	cameraMatrix = glm::lookAt(Camera::selectedView,
-		center,
+	glm::vec3 selectedViewTemp = Camera::selectedView;
+	glm::vec3 centerTemp = center;
+
+	if (selectedView == ballView){
+		centerTemp = Ball::position;
+		centerTemp.x *= -1.0f;
+		selectedViewTemp = Ball::position + glm::vec3(0, 2, 2);
+	}
+
+	cameraMatrix = glm::lookAt(selectedViewTemp,
+		centerTemp,
 		glm::vec3(0, 1, 0));
 
 	projectionMatrix = glm::perspective(glm::radians(FoV), 
