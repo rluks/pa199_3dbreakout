@@ -47,7 +47,7 @@ void Bats::GenerateBats(float startAngle)
 
 void Bats::Update()//rotate blocks of bats
 {
-	std::cout << "block 0: " << blocks[0].A.x << std::endl;
+	//std::cout << "block 0: " << blocks[0].A.x << std::endl;
 	for (std::vector<int>::size_type i = 0; i != blocks.size(); i++) {
 		Block block = blocks[i];
 		block.A = glm::rotate(block.A, glm::radians(batAngle), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -56,7 +56,7 @@ void Bats::Update()//rotate blocks of bats
 		block.normal = glm::rotate(block.normal, glm::radians(batAngle));
 		blocksRotated.push_back(block);
 	}
-	std::cout << "block" << blocks[0].A.x << std::endl;
+	//std::cout << "block" << blocks[0].A.x << std::endl;
 
 	/*for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
 	{

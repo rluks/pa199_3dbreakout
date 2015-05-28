@@ -73,7 +73,7 @@ Scene_Manager::Scene_Manager()
 
 		//int blockCounter = Block::blockCounter;
 		blockCounter += 2;//this is ugly, but time is short xD
-		std::cout << blockCounter << std::endl;
+		//std::cout << blockCounter << std::endl;
 
 		if (blockCounter <= 8)
 			color = yellow;
@@ -231,16 +231,7 @@ void Scene_Manager::notifyBeginFrame()
 
 		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
 
-			/*float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-			float g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-			float b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-
-			glm::vec4 color = glm::vec4(r, g, b, 1);*/
-
-			//std::cout << r << g << b << std::endl;
-
-			std::cout << "HIT, distances: " << distancesStr << std::endl;
-			std::cout << "min   distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+			std::cout << "HIT, distances: " << distancesStr << " ,min distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
@@ -287,7 +278,7 @@ void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 
 	std::string closestBlockColorStr = Models_Manager::GetColorName(color);
 
-	std::cout << "Erasing all " << closestBlockColorStr << " bricks and blocks" << std::endl;
+	//std::cout << "Erasing all " << closestBlockColorStr << " bricks and blocks" << std::endl;
 
 	std::string brickName = "brick" + closestBlockColorStr;
 	models_manager->DeleteModel(brickName);
@@ -301,7 +292,7 @@ void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 			++iter;
 	}
 
-	std::cout << "Erased " << Models_Manager::GetColorName(color) << " brick and blocks" << std::endl;
+	//std::cout << "Erased " << Models_Manager::GetColorName(color) << " brick and blocks" << std::endl;
 }
 
 
