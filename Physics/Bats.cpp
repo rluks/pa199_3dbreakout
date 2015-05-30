@@ -47,6 +47,40 @@ void Bats::GenerateBats(float startAngle)
 		blocks.push_back(blocktempSide);
 	}
 
+	
+
+	{//one side of bat
+		float angle = startAngle;
+		float x = radius * cos(angle);
+		float z = radius * sin(angle);
+
+		float xIn = smallerRadius * cos(angle);
+		float zIn = smallerRadius * sin(angle);
+
+		glm::vec3 aaa = glm::vec3(x, y, z);
+		glm::vec3 bbb = glm::vec3(xIn, y, zIn);
+		Block blocktempSide = Block(aaa, bbb);
+		blocktempSide.color = color;
+		blocktempSide.normal *= -1.0f;
+		blocks.push_back(blocktempSide);
+	}
+
+		{//other side of bat
+			float angle = startAngle + endAngle;
+			float x = radius * cos(angle);
+			float z = radius * sin(angle);
+
+			float xIn = smallerRadius * cos(angle);
+			float zIn = smallerRadius * sin(angle);
+
+			glm::vec3 aaa = glm::vec3(x, y, z);
+			glm::vec3 bbb = glm::vec3(xIn, y, zIn);
+			Block blocktempSide = Block(aaa, bbb);
+			blocktempSide.color = color;
+			blocks.push_back(blocktempSide);
+		}
+
+
 }
 
 void Bats::Update()//rotate blocks of bats
