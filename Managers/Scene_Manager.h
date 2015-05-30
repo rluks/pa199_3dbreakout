@@ -31,6 +31,7 @@ namespace Managers
 		Managers::Shader_Manager* shader_manager;
 		Managers::Models_Manager* models_manager;
 		Bats bats;
+		int numberOfBlocksAlive;
 
 		std::vector<Block> blocks;
 	};

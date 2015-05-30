@@ -13,7 +13,7 @@ Bats::Bats(int useless)
 
 void Bats::GenerateBats(float startAngle)
 {
-	std::cout << "GenerateBats" << std::endl;
+	//std::cout << "GenerateBats" << std::endl;
 
 	float y = 0.2f;
 

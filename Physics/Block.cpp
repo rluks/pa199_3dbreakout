@@ -25,7 +25,7 @@ Block::Block(glm::vec3 a, glm::vec3 b)
 	blockCounter++;
 	number = blockCounter;
 
-	std::cout << " no." << number << " ax" << A.x << " ay" << A.y << " az"<< A.z << std::endl;
+	//std::cout << " no." << number << " ax" << A.x << " ay" << A.y << " az"<< A.z << std::endl;
 }
 
 void Block::CalculateMidNorm()

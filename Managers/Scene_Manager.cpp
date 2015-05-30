@@ -21,6 +21,8 @@ Scene_Manager::Scene_Manager()
 
 	models_manager = new Models_Manager();
 
+	numberOfBlocksAlive = 60;
+
 	Score = 0; 
 	std::cout << "Score: " + std::to_string(Score) << std::endl;
 
@@ -169,7 +171,7 @@ void Scene_Manager::notifyBeginFrame()
 	}*/
 
 	//dealing with bats blocks
-	blocks.resize(60);
+	blocks.resize(numberOfBlocksAlive);
 	bats.Update();
 	blocks.insert(blocks.end(), bats.blocksRotated.begin(), bats.blocksRotated.end());//append new blocks
 
@@ -192,9 +194,14 @@ void Scene_Manager::notifyBeginFrame()
 		Block closestBlock;
 		std::string distancesStr = "";
 
+		//std::cout << "--------------------------------------------" << std::endl;
 		for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
 		{
 			Block block = *it;
+
+			if (Models_Manager::GetColorName(block.color) == "UNKNOWN"){
+				//std::cout << "testing block no." << block.number << " ax" << block.A.x << " az" << block.A.z << std::endl;
+			}
 
 			//triangle A,B,midd+normal - is ball in this triangle?
 			//ball
@@ -258,11 +265,14 @@ void Scene_Manager::notifyBeginFrame()
 
 			Ball::Update();
 
-			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << " ax" << closestBlock.A.x << " az" << closestBlock.A.z << std::endl;
+			//std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << " ax" << closestBlock.A.x << " az" << closestBlock.A.z << std::endl;
 			EraseBlocksWithColor(closestBlock.color);
 
 			Score += 100;
-			//std::cout << "Score: " + std::to_string(Score) << std::endl;
+			std::cout << "Score: " + std::to_string(Score) << std::endl;
+
+			if (numberOfBlocksAlive == 0)
+				std::cout << "Winner!!!" << std::endl;
 		}
 	}
 		
@@ -278,7 +288,7 @@ void Scene_Manager::notifyBeginFrame()
 		//std::cout << "reached outer wall of arena" << std::endl;
 
 		Score -= 10;
-		//std::cout << "Score: " + std::to_string(Score) << std::endl;
+		std::cout << "Score: " + std::to_string(Score) << std::endl;
 
 		normal = glm::normalize(normal);
 		normal = -1.0f * normal;
@@ -303,15 +313,21 @@ void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 	models_manager->DeleteModel(brickName);
 
 	std::vector<Block>::iterator iter;
+	int counter = 0;
 	for (iter = blocks.begin(); iter != blocks.end();) {
 		Block block = *iter;
-		if (block.color == color)
+		if (block.color == color){
 			iter = blocks.erase(iter);
-		else
+			counter++;
+		}
+		else{
 			++iter;
+		}
 	}
 
-	//std::cout << "Erased " << Models_Manager::GetColorName(color) << " brick and blocks" << std::endl;
+	//std::cout << "Erased " << counter << " blocks" << Models_Manager::GetColorName(color) << " brick and blocks" << std::endl;
+
+	numberOfBlocksAlive -= counter;
 }
 
 
