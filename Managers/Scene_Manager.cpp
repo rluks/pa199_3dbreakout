@@ -327,7 +327,15 @@ void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 
 	}
 
-	if (livesLeft > 0){
+	if (livesLeft == 3){
+		std::string brickName = "brick" + closestBlockColorStr + "4";
+		models_manager->DeleteModel(brickName);
+	}
+	if (livesLeft == 2){
+		std::string brickName = "brick" + closestBlockColorStr + "3";
+		models_manager->DeleteModel(brickName);
+	}
+	else if (livesLeft == 1){
 		std::string brickName = "brick" + closestBlockColorStr + "2";
 		models_manager->DeleteModel(brickName);
 	}

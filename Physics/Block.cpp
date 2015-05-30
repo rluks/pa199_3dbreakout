@@ -22,7 +22,7 @@ Block::Block(glm::vec3 a, glm::vec3 b)
 
 	middle = glm::vec3((a.x + b.x) / 2.0f, 0, (a.z + b.z) / 2.0f);*/
 
-	lives = 2;
+	lives = 4;
 
 	blockCounter++;
 	number = blockCounter;
