@@ -7,6 +7,21 @@
 using namespace Core;
 using namespace Init;
 
+std::string helpMsg = 
+"Welcome to PA199_3DBreakout :-)\n\
+\n\
+School project for subject PA199\n\
+made by Roman Luks in C++\n\
+OpenGL 3 is required\n\
+Controls:\n\
+left and right arrow for moving the platforms\n\
+r - rotate camera\n\
+c - switching views (perspective/top/ball)\n\
+mouse wheel for zooming\n\
+w,s,a,d,fv - moving camera\n\
+up arrow starts the game \n\
+up and down arrows can be used for cheating\n\
+\n";
 void SpecialInput(int key, int x, int y)
 {
 
@@ -67,6 +82,8 @@ void keyboardInput(unsigned char key, int x, int y)
 
 int main(int argc, char **argv)
 {
+	std::cout << helpMsg << std::endl;
+
 	WindowInfo window(std::string("PA199 3D Breakout"),
 		400, 200,//position
 		800, 600, //size

@@ -137,8 +137,8 @@ Scene_Manager::Scene_Manager()
 	for (std::vector<Block>::iterator it = bats.blocks.begin(); it != bats.blocks.end(); ++it)
 	{
 		Block block = *it;
-		models_manager->AddLine(block.A, block.B, block.color);
-		models_manager->AddLine(glm::vec3(block.normal.x + block.middle.x, y, block.normal.y + block.middle.z), block.middle, color);
+		//models_manager->AddLine(block.A, block.B, block.color);
+		//models_manager->AddLine(glm::vec3(block.normal.x + block.middle.x, y, block.normal.y + block.middle.z), block.middle, color);
 		//std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << std::endl;
 	}
 
@@ -271,8 +271,11 @@ void Scene_Manager::notifyBeginFrame()
 			Score += 100;
 			std::cout << "Score: " + std::to_string(Score) << std::endl;
 
-			if (numberOfBlocksAlive == 0)
+			if (numberOfBlocksAlive == 0){
 				std::cout << "Winner!!!" << std::endl;
+				Ball::enableMovement = false;
+			}
+			
 		}
 	}
 		
