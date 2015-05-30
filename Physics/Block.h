@@ -19,6 +19,7 @@ public:
 
 	int number;
 	glm::vec4 color;
+	int lives;
 
 	static int blockCounter;
 

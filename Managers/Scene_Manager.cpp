@@ -309,18 +309,43 @@ void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 
 	//std::cout << "Erasing all " << closestBlockColorStr << " bricks and blocks" << std::endl;
 
-	std::string brickName = "brick" + closestBlockColorStr;
-	models_manager->DeleteModel(brickName);
+	int livesLeft = 0;
+	for (std::vector<int>::size_type i = 0; i != blocks.size(); i++) 
+	{
+		Block block = blocks[i];
+
+		if (block.color == color)
+		{
+			//std::cout << "reducing lives of block" << std::endl;
+			livesLeft = block.lives - 1;
+			block.lives--;
+			blocks[i] = block;
+		}
+
+	}
+
+	if (livesLeft > 0){
+		std::string brickName = "brick" + closestBlockColorStr + "2";
+		models_manager->DeleteModel(brickName);
+	}
+	else if(livesLeft == 0){
+		std::string brickName = "brick" + closestBlockColorStr;
+		models_manager->DeleteModel(brickName);
+	}
 
 	std::vector<Block>::iterator iter;
 	int counter = 0;
-	for (iter = blocks.begin(); iter != blocks.end();) {
+	for (iter = blocks.begin(); iter != blocks.end();) 
+	{
 		Block block = *iter;
-		if (block.color == color){
+		if (block.color == color && block.lives <= 0)
+		{
+			//std::cout << "erasing block" << std::endl;
 			iter = blocks.erase(iter);
 			counter++;
 		}
-		else{
+		else
+		{
 			++iter;
 		}
 	}

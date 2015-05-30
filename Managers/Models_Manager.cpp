@@ -147,6 +147,11 @@ Models_Manager::~Models_Manager()
 
 void Models_Manager::DeleteModel(const std::string& gameModelName)
 {
+	if (gameModelList.find(gameModelName) == gameModelList.end()){
+		std::cout << "Unable to find desired model" << std::endl;
+		return;
+	}
+
 	IGameObject* model = gameModelList[gameModelName];
 	model->Destroy();
 	gameModelList.erase(gameModelName);
