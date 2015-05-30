@@ -21,5 +21,7 @@ public:
 	glm::vec4 color;
 
 	static int blockCounter;
+
+	void CalculateMidNorm();
 };
 

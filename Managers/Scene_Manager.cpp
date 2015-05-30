@@ -131,25 +131,26 @@ Scene_Manager::Scene_Manager()
 
 	}
 
-	/*for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
-	{
-		Block block = *it;
-		std::cout << GetColorName(block.color) << std::endl;
-	}*/
-
-	//std::cout << "Blocks so far.." << blocks.size() << std::endl;//60
-
-	bats = Bats();
+	bats = Bats(0);
 	for (std::vector<Block>::iterator it = bats.blocks.begin(); it != bats.blocks.end(); ++it)
 	{
 		Block block = *it;
 		models_manager->AddLine(block.A, block.B, block.color);
 		models_manager->AddLine(glm::vec3(block.normal.x + block.middle.x, y, block.normal.y + block.middle.z), block.middle, color);
+		//std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << std::endl;
 	}
 
 
 	Ball::selectVelocity = true;
 	Ball::enableMovement = false;
+
+	//std::cout << "s blocks size" << blocks.size() << std::endl;
+
+	/*for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+	{
+		Block block = *it;
+		std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << std::endl;
+	}*/
 }
 
 Scene_Manager::~Scene_Manager()
@@ -160,14 +161,32 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
+	/*std::cout << "------------------before blocks size--------------------------" << blocks.size() << std::endl;
+	for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+	{
+		Block block = *it;
+		std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << " ax" << block.A.x << " ay" << block.A.y << " az" << block.A.z << std::endl;
+	}*/
+
+	//dealing with bats blocks
+	blocks.resize(60);
+	bats.Update();
+	blocks.insert(blocks.end(), bats.blocksRotated.begin(), bats.blocksRotated.end());//append new blocks
+
+	//std::cout << "after blocks size" << blocks.size() << std::endl;
+	//std::cout << "--------------------------------------------" << std::endl;
+	for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
+	{
+		Block block = *it;
+		if (Models_Manager::GetColorName(block.color) == "UNKNOWN"){
+			//std::cout << " no." << block.number << " ax" << block.A.x << " az" << block.A.z << std::endl;
+		}
+		//std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << " ax" << block.A.x << " ay" << block.A.y << " az" << block.A.z << std::endl;
+	}
+
 	if (Ball::enableMovement){
 		glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
 		glm::vec2 ballVelocity2D = glm::vec2(Ball::velocity.x, Ball::velocity.z);
-
-		//dealing with bats blocks
-		blocks.resize(60);
-		bats.Update();
-		blocks.insert(blocks.end(), bats.blocksRotated.begin(), bats.blocksRotated.end());//append new blocks
 
 		float minimalDistance = 100.0f;
 		Block closestBlock;
@@ -202,7 +221,7 @@ void Scene_Manager::notifyBeginFrame()
 
 			if (0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1){
 
-				//cout << "Inside triangle of Block no." << block.number << " - " << Models_Manager::GetColorName(block.color) << std::endl;
+				//std::cout << "Inside triangle of Block no." << block.number << " - " << Models_Manager::GetColorName(block.color) << std::endl;
 
 				float x0 = ballPosition2D.x;
 				float y0 = ballPosition2D.y;
@@ -231,7 +250,7 @@ void Scene_Manager::notifyBeginFrame()
 
 		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
 
-			std::cout << "HIT, distances: " << distancesStr << " ,min distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+			//std::cout << "HIT, distances: " << distancesStr << " ,min distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
@@ -239,11 +258,11 @@ void Scene_Manager::notifyBeginFrame()
 
 			Ball::Update();
 
-			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << std::endl;
+			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << " ax" << closestBlock.A.x << " az" << closestBlock.A.z << std::endl;
 			EraseBlocksWithColor(closestBlock.color);
 
 			Score += 100;
-			std::cout << "Score: " + std::to_string(Score) << std::endl;
+			//std::cout << "Score: " + std::to_string(Score) << std::endl;
 		}
 	}
 		
@@ -256,10 +275,10 @@ void Scene_Manager::notifyBeginFrame()
 
 	if (distanceFromCenter + Ball::radius > 2.0f)
 	{
-		std::cout << "reached outer wall of arena" << std::endl;
+		//std::cout << "reached outer wall of arena" << std::endl;
 
 		Score -= 10;
-		std::cout << "Score: " + std::to_string(Score) << std::endl;
+		//std::cout << "Score: " + std::to_string(Score) << std::endl;
 
 		normal = glm::normalize(normal);
 		normal = -1.0f * normal;
@@ -272,7 +291,7 @@ void Scene_Manager::notifyBeginFrame()
 void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
 {
 	if (color == glm::vec4(0, 0, 0, 0)){
-		std::cout << "Computer is refusing to erase this color. Sorry. Probably hit ball with bats..." << std::endl;
+		//std::cout << "Computer is refusing to erase this color. Sorry. Probably hit ball with bats..." << std::endl;
 		return;
 	}
 

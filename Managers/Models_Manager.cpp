@@ -202,7 +202,8 @@ std::string Models_Manager::GetColorName(const glm::vec4 &color)
 	else if (color == azure)
 		return "azure";
 	else{
-		std::string colorStr = std::to_string(color.a) + "," + std::to_string(color.g) + "," + std::to_string(color.b);
+		//std::string colorStr = std::to_string(color.a) + "," + std::to_string(color.g) + "," + std::to_string(color.b);
+		std::string colorStr = "UNKNOWN";
 		return colorStr;
 	}
 

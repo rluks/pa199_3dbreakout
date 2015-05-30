@@ -13,6 +13,7 @@ class Bats
 {
 	public:
 		Bats();
+		Bats(int);
 		~Bats();
 
 		std::vector<Block> blocks;
