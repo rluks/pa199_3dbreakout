@@ -3,10 +3,11 @@
 using namespace Rendering;
 using namespace Models;
 
-Brick::Brick(float pAngle, const glm::vec4 & pColor)
+Brick::Brick(float pAngle, const glm::vec4 & pColor, float pYpsilon)
 {
 	Angle = pAngle;
 	Color = pColor;
+	Ypsilon = pYpsilon;
 }
 
 Brick::~Brick()
@@ -26,7 +27,7 @@ void Brick::Create()
 	glm::vec3 origin = glm::vec3(0, 0, 0);
 	glm::vec2 zeros = glm::vec2(0, 0);
 
-	float y = 0.2f;
+	float y = Ypsilon + 0.2f;
 	
 	float pi = 3.14159265358979323846f;
 	float angleDelta = pi / 12.0f;
@@ -64,19 +65,19 @@ void Brick::Create()
 
 		//outer wall
 		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
 		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(0, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
 
 		//inner wall
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, Ypsilon, zIn2), Color, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(1, 0)));
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(1, 0)));
 	}
 
 	float angle = 0.0f;
@@ -95,13 +96,13 @@ void Brick::Create()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0)));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1)));
 
 		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0)));
 	}
 
 	angle += angleDelta;
@@ -121,13 +122,13 @@ void Brick::Create()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, Ypsilon, zIn2), Color, glm::vec2(0, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
 
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
 		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
 	}
 
 	verticesSize = vertices.size();

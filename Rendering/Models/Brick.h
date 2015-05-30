@@ -10,7 +10,7 @@ namespace Rendering
 		class Brick : public Models::Model
 		{
 		public:
-			Brick(float, const glm::vec4 &);
+			Brick(float, const glm::vec4 &, float);
 			~Brick();
 
 			void Create();
@@ -19,6 +19,7 @@ namespace Rendering
 
 			float Angle;
 			glm::vec4 Color;
+			float Ypsilon;
 
 			std::vector<VertexFormat> vertices;
 		private:

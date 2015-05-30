@@ -100,10 +100,19 @@ Models_Manager::Models_Manager()
 
 		std::string mapKey = "brick" + GetColorName(color);
 
-		Models::Brick* temp = new Models::Brick(angle, color);
+		float ypsilon = 0.0f;
+		Models::Brick* temp = new Models::Brick(angle, color, ypsilon);
 		temp->SetProgram(Shader_Manager::GetShader("textureAlphaShader"));
 		temp->Create();
 		gameModelList[mapKey] = temp;
+
+		mapKey += "2";
+		ypsilon = 0.2f;
+
+		Models::Brick* temp2 = new Models::Brick(angle, color, ypsilon);
+		temp2->SetProgram(Shader_Manager::GetShader("textureAlphaShader"));
+		temp2->Create();
+		gameModelList[mapKey] = temp2;
 
 		/*Models::BrickCollider* brickCollider = new Models::BrickCollider(angle);
 		brickCollider->SetProgram(Shader_Manager::GetShader("colorShader"));

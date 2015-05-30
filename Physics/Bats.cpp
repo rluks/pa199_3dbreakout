@@ -8,7 +8,7 @@ Bats::Bats(int useless)
 {
 	GenerateBats(0.0f);
 	GenerateBats(120.0f);
-	//GenerateBats(240.0f);
+	GenerateBats(240.0f);
 }
 
 void Bats::GenerateBats(float startAngle)
