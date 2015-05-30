@@ -18,7 +18,7 @@ void Bat::Create()
 	GLuint vao;
 	GLuint vbo;
 
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/bat.png");
+	tdogl::Bitmap bmp = Model::batTexture;
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);

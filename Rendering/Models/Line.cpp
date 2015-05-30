@@ -27,7 +27,7 @@ void Line::Create()
 	GLuint vao;
 	GLuint vbo;
 
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/brick.png");
+	tdogl::Bitmap bmp = Model::brickTexture;
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);

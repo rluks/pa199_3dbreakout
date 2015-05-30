@@ -27,8 +27,7 @@ void Sphere::Create()
 	GLuint vbo;
 
 
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/ball.png");
-
+	tdogl::Bitmap bmp = Model::ballTexture;
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);

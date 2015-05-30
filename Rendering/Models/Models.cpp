@@ -3,6 +3,11 @@
 using namespace Rendering;
 using namespace Models;
 
+tdogl::Bitmap Model::ballTexture = tdogl::Bitmap::bitmapFromFile("Textures/ball.png");
+tdogl::Bitmap Model::batTexture = tdogl::Bitmap::bitmapFromFile("Textures/bat.png");
+tdogl::Bitmap Model::brickTexture = tdogl::Bitmap::bitmapFromFile("Textures/brick.png");
+tdogl::Bitmap Model::grassTexture = tdogl::Bitmap::bitmapFromFile("Textures/grass.png");
+
 Model::Model()
 {
 	verticesSize = 0;

@@ -16,7 +16,7 @@ void Ray::Create()
 {
 	GLuint vao;
 
-	tdogl::Bitmap bmp = tdogl::Bitmap::bitmapFromFile("Textures/grass.png");
+	tdogl::Bitmap bmp = Model::grassTexture;
 	gTexture = new tdogl::Texture(bmp);
 
 	glGenVertexArrays(1, &vao);

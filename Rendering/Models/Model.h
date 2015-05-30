@@ -29,6 +29,10 @@ namespace Rendering
 			virtual GLuint GetVao() const override;
 			virtual const std::vector<GLuint>& GetVbos() const override;
 
+			static tdogl::Bitmap ballTexture;
+			static tdogl::Bitmap batTexture;
+			static tdogl::Bitmap brickTexture;
+			static tdogl::Bitmap grassTexture;
 
 		protected:
 			GLuint vao;
