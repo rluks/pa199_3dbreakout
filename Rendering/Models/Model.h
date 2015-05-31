@@ -49,6 +49,9 @@ namespace Rendering
 			GLuint model;
 			GLuint texture2d;
 
+			GLuint lightPosition;
+			GLuint lightColor;
+
 			glm::mat4 cameraMatrixCopy;
 
 		};

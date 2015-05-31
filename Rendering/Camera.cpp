@@ -12,6 +12,8 @@ glm::vec3 Camera::selectedView = perspectiveView;
 
 glm::vec3 Camera::center = glm::vec3(0, 0, 0);
 
+glm::vec3 Camera::myLightColor = glm::vec3(1, 1, 1);
+
 //eye - position of the camera's viewpoint, 
 //center - where are you looking, up = up is Y+
 glm::mat4 Camera::cameraMatrix = glm::lookAt(Camera::selectedView, 

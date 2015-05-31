@@ -28,6 +28,8 @@ public:
 	static glm::vec3 selectedView;
 	static glm::vec3 ballView;
 
+	static glm::vec3 myLightColor;
+
 
 	static float FoV;
 	static float RotateDelta;

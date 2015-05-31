@@ -46,6 +46,9 @@ void Model::SetProgram(GLuint program)
 	projection = glGetUniformLocation(program, "projection");
 	model = glGetUniformLocation(program, "model");
 	texture2d = glGetUniformLocation(program, "tex");
+
+	//lightColor = glGetUniformLocation(program, "lightColor");
+	//lightPosition = glGetUniformLocation(program, "lightPosition");
 }
 
 GLuint Model::GetVao() const

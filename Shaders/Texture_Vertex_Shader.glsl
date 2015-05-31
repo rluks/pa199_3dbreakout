@@ -12,9 +12,11 @@ layout(location = 3) in vec3 vertNormal;
 out vec4 color;
 out vec2 fragTexCoord;
 out vec3 fragNormal;
+out vec3 fragVert;
 
 void main()
 {
+	fragVert = in_position;
 	fragNormal = vertNormal;
 	fragTexCoord = vertTexCoord;
 	color = in_color;
