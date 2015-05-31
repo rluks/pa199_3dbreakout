@@ -22,7 +22,7 @@ void main(void)
     vec3 fragPosition = vec3(model * vec4(fragVert, 1));
     
     //calculate the vector from this pixels surface to the light source
-    vec3 surfaceToLight = lightPosition - fragPosition;
+    vec3 surfaceToLight = vec3(1 - lightPosition.x, lightPosition.y, lightPosition.z) - fragPosition;
 
     //calculate the cosine of the angle of incidence
     float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));
