@@ -55,29 +55,32 @@ void Brick::Create()
 		glm::vec2 texCoordIn = glm::vec2(xIn / 2 + 0.5, zIn / 2 + 0.5);
 		glm::vec2 texCoordIn2 = glm::vec2(xIn2 / 2 + 0.5, zIn2 / 2 + 0.5);
 
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, texCoord));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, texCoord2));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, texCoordIn));
+		glm::vec3 upNormal = glm::vec3(0, 1, 0);
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, texCoord, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, texCoord2, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, texCoordIn, upNormal));
 
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, texCoord2));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, texCoordIn2));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, texCoordIn));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, texCoord2, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, texCoordIn2, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, texCoordIn, upNormal));
 
 		//outer wall
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
+		glm::vec3 outerWallNormal = Model::getNorm(glm::vec3(x, y, z), glm::vec3(x, Ypsilon, z), glm::vec3(x2, Ypsilon, z2));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(0, 1), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(0, 0), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(0, 1), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, glm::vec2(1, 1), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0), outerWallNormal));
 
 		//inner wall
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, Ypsilon, zIn2), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(1, 0)));
+		glm::vec3 innerWallNormal = Model::getNorm(glm::vec3(xIn2, y, zIn2), glm::vec3(xIn2, Ypsilon, zIn2), glm::vec3(xIn, Ypsilon, zIn));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, Ypsilon, zIn2), Color, glm::vec2(0, 0), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(1, 0), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(1, 1), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(1, 0), innerWallNormal));
 	}
 
 	float angle = 0.0f;
@@ -96,13 +99,15 @@ void Brick::Create()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1)));
+		glm::vec3 verticalWallNormal = Model::getNorm(glm::vec3(xIn, Ypsilon, zIn), glm::vec3(x, Ypsilon, z), glm::vec3(xIn, y, zIn));
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(0, 0), verticalWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0), verticalWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1), verticalWallNormal));
+
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1), verticalWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), Color, glm::vec2(1, 1), verticalWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0), verticalWallNormal));
 	}
 
 	angle += angleDelta;
@@ -122,13 +127,15 @@ void Brick::Create()
 		float xIn2 = smallerRadius * cos(angle + angleDelta);
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, Ypsilon, zIn2), Color, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
+		glm::vec3 verticalWallNormal2 = Model::getNorm(glm::vec3(xIn2, Ypsilon, zIn2), glm::vec3(x2, Ypsilon, z2), glm::vec3(xIn2, y, zIn2));
 
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0)));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, Ypsilon, zIn2), Color, glm::vec2(0, 0), verticalWallNormal2));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0), verticalWallNormal2));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1), verticalWallNormal2));
+
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), Color, glm::vec2(0, 1), verticalWallNormal2));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), Color, glm::vec2(1, 1), verticalWallNormal2));
+		vertices.push_back(VertexFormat(glm::vec3(x2, Ypsilon, z2), Color, glm::vec2(1, 0), verticalWallNormal2));
 	}
 
 	verticesSize = vertices.size();

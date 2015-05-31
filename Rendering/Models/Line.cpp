@@ -34,8 +34,10 @@ void Line::Create()
 	glBindVertexArray(vao);
 
 	glm::vec4 nevim = glm::vec4(0.7, 0.7, 0.7, 1);
-	vertices.push_back(VertexFormat(A, mcolor, glm::vec2(0, 1)));
-	vertices.push_back(VertexFormat(B, nevim, glm::vec2(0, 0)));
+	glm::vec3 upNormal = glm::vec3(0, 1, 0);
+
+	vertices.push_back(VertexFormat(A, mcolor, glm::vec2(0, 1), upNormal));
+	vertices.push_back(VertexFormat(B, nevim, glm::vec2(0, 0), upNormal));
 
 	verticesSize = vertices.size();
 

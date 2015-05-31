@@ -5,6 +5,7 @@ using namespace Models;
 
 float dxR;
 std::vector<GLushort> indices;
+//std::vector<GLfloat> normals;
 GLuint ibo;//Index Buffer Object for indices
 
 Sphere::Sphere()
@@ -46,6 +47,7 @@ void Sphere::Create()
 
 	float pi = 3.14159265358979323846f;
 
+	//std::vector<GLfloat>::iterator n = normals.begin();
 	for (unsigned int r = 0; r < rings; r++) {
 		for (unsigned int s = 0; s < sectors; s++) {
 
@@ -56,7 +58,11 @@ void Sphere::Create()
 			glm::vec2 texCoord = glm::vec2(s*S, r*R);
 			glm::vec3 vxs = glm::vec3(x, y, z);
 
-			vertices.push_back(VertexFormat(vxs, blue, texCoord));
+			//*n++ = x;
+			//*n++ = y;
+			//*n++ = z;
+
+			vertices.push_back(VertexFormat(vxs, blue, texCoord, vxs));
 		}
 	}
 
