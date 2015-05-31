@@ -110,8 +110,8 @@ void Circle::Draw()
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(scaledMx));
 
 	glm::vec3 lightPos = glm::vec3(Ball::position.x, Ball::position.y + 3, Ball::position.z);
-	glUniformMatrix3fv(lightPosition, 1, GL_FALSE, glm::value_ptr(lightPos));
-	glUniformMatrix3fv(lightColor, 1, GL_FALSE, glm::value_ptr(Camera::myLightColor));
+	glUniform3fv(lightPosition, 1, glm::value_ptr(lightPos));
+	glUniform3fv(lightColor, 1, glm::value_ptr(Camera::myLightColor));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());

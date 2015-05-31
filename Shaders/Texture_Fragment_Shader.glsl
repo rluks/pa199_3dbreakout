@@ -26,7 +26,7 @@ void main(void)
 
     //calculate the cosine of the angle of incidence
     float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));
-	brightness = 0.8;//clamp(brightness, 0, 1);
+	brightness = clamp(brightness, 0, 1);
 
     //calculate final color of the pixel, based on:
     // 1. The angle of incidence: brightness
@@ -34,9 +34,7 @@ void main(void)
     // 3. The texture and texture coord: texture(tex, fragTexCoord)
     vec4 surfaceColor = texture(tex, vec2(1 - fragTexCoord.x, fragTexCoord.y));
 
-	vec3 lightColorHere = vec3(1, 1, 1);
-    out_color = vec4(lightColor * surfaceColor.rgb, surfaceColor.a);
-	//out_color = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);
+	out_color = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);
 	//out_color = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);
 
 	//out_color = color;
