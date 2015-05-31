@@ -27,9 +27,10 @@ void Ray::Create()
 
 	glm::vec3 origin = glm::vec3(0, 0, 0);
 	glm::vec3 somewhere = glm::vec3(1, 0, 1);
+	glm::vec3 upNormal = glm::vec3(0, 1, 0);
 
-	vertices.push_back(VertexFormat(origin, red, glm::vec2(0, 0)));
-	vertices.push_back(VertexFormat(somewhere, red, glm::vec2(0, 0)));
+	vertices.push_back(VertexFormat(origin, red, glm::vec2(0, 0), upNormal));
+	vertices.push_back(VertexFormat(somewhere, red, glm::vec2(0, 0), upNormal));
 
 	verticesSize = vertices.size();
 
@@ -64,9 +65,10 @@ void Ray::Update()
 
 	glm::vec4 red = glm::vec4(1, 0, 0, 1);
 	glm::vec2 texCoord = glm::vec2(0, 0);
+	glm::vec3 upNormal = glm::vec3(0, 1, 0);
 
-	vertices[0] = VertexFormat(spherePosition, red, texCoord);
-	vertices[1] = VertexFormat(spherePosition+Ball::velocity, red, texCoord);
+	vertices[0] = VertexFormat(spherePosition, red, texCoord, upNormal);
+	vertices[1] = VertexFormat(spherePosition + Ball::velocity, red, texCoord, upNormal);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);//update data in buffer!!!
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * verticesSize, &vertices[0], GL_DYNAMIC_DRAW);

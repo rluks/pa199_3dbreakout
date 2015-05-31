@@ -27,8 +27,6 @@
     <ClCompile Include="Managers\TimeManager.cpp" />
     <ClCompile Include="Rendering\Models\Ray.cpp" />
     <ClCompile Include="Physics\Block.cpp" />
-    <ClCompile Include="Rendering\Models\BrickCollider.cpp" />
-    <ClCompile Include="Rendering\Models\Line.cpp" />
     <ClCompile Include="Physics\Bats.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -69,8 +67,6 @@
     <ClInclude Include="Managers\TimeManager.h" />
     <ClInclude Include="Rendering\Models\Ray.h" />
     <ClInclude Include="Physics\Block.h" />
-    <ClInclude Include="Rendering\Models\BrickCollider.h" />
-    <ClInclude Include="Rendering\Models\Line.h" />
     <ClInclude Include="Physics\Bats.h" />
   </ItemGroup>
   <ItemGroup>

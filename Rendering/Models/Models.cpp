@@ -19,6 +19,15 @@ Model::~Model()
 	Destroy();
 }
 
+glm::vec3 Model::getNorm(const glm::vec3 &A, const glm::vec3 &B, const glm::vec3 &C)
+{
+	glm::vec3 normal = glm::cross(B - A, C - A);
+
+	normal = glm::normalize(normal);
+
+	return normal;
+}
+
 void Model::Draw()
 {
 	//this will be again overridden

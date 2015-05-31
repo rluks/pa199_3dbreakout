@@ -34,6 +34,8 @@ namespace Rendering
 			static tdogl::Bitmap brickTexture;
 			static tdogl::Bitmap grassTexture;
 
+			static glm::vec3 getNorm(const glm::vec3 &, const glm::vec3 &, const glm::vec3 &);
+
 		protected:
 			GLuint vao;
 			GLuint program;

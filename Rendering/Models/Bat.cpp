@@ -102,50 +102,56 @@ void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &verti
 		glm::vec2 texCoordIn = glm::vec2(xIn / 4 + 0.5, zIn / 4 + 0.5);
 		glm::vec2 texCoordIn2 = glm::vec2(xIn2 / 4 + 0.5, zIn2 / 4 + 0.5);
 
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn));
+		glm::vec3 upNormal = glm::vec3(0, 1, 0);
 
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, texCoordIn2));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn, upNormal));
+
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, texCoordIn2, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, texCoordIn, upNormal));
 
 		//outer wall
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+		glm::vec3 outerWallNormal = Model::getNorm(glm::vec3(x, y, z), glm::vec3(x, 0, z), glm::vec3(x2, 0, z2));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(0, 1), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(0, 0), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(0, 1), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1), outerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0), outerWallNormal));
 
 		//inner wall
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(1, 0)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(1, 1)));
-		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(1, 0)));
+		glm::vec3 innerWallNormal = Model::getNorm(glm::vec3(xIn2, y, zIn2), glm::vec3(xIn2, 0, zIn2), glm::vec3(xIn, 0, zIn));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(1, 0), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(1, 1), innerWallNormal));
+		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(1, 0), innerWallNormal));
 
 		if (angle == startAngle)//vertical wall
 		{
-			vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
+			glm::vec3 verticalWallNormal = Model::getNorm(glm::vec3(xIn, 0, zIn), glm::vec3(x, 0, z), glm::vec3(xIn, y, zIn));
+			vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0), verticalWallNormal));
+			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0), verticalWallNormal));
+			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1), verticalWallNormal));
 
-			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0)));
+			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1), verticalWallNormal));
+			vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, glm::vec2(1, 1), verticalWallNormal));
+			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0), verticalWallNormal));
 
 		}
 		else if (counter == lastIteration)
 		{
-			vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
-			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
+			glm::vec3 verticalWallNormal2 = Model::getNorm(glm::vec3(xIn2, 0, zIn2), glm::vec3(x2, 0, z2), glm::vec3(xIn2, y, zIn2));
+			vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0), verticalWallNormal2));
+			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0), verticalWallNormal2));
+			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1), verticalWallNormal2));
 
-			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1)));
-			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0)));
+			vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1), verticalWallNormal2));
+			vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, glm::vec2(1, 1), verticalWallNormal2));
+			vertices.push_back(VertexFormat(glm::vec3(x2, 0, z2), blue, glm::vec2(1, 0), verticalWallNormal2));
 		}
 	}
 }

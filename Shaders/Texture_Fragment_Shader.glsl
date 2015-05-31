@@ -2,6 +2,7 @@
 
 in vec4 color;
 in vec2 fragTexCoord; //this is the texture coord
+in vec3 fragNormal;
 
 uniform sampler2D tex; //this is the texture
 

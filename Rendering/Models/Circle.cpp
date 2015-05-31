@@ -53,9 +53,11 @@ void Circle::Create()
 		glm::vec2 texCoord = glm::vec2(x/2 + 0.5, z/2 + 0.5);
 		glm::vec2 texCoord2 = glm::vec2(x2 / 2 + 0.5, z2 / 2 + 0.5);
 
-		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord));
-		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2));
-		vertices.push_back(VertexFormat(origin, blue, originTex));
+		glm::vec3 upNormal = glm::vec3(0, 1, 0);
+
+		vertices.push_back(VertexFormat(glm::vec3(x, y, z), blue, texCoord, upNormal));
+		vertices.push_back(VertexFormat(glm::vec3(x2, y, z2), blue, texCoord2, upNormal));
+		vertices.push_back(VertexFormat(origin, blue, originTex, upNormal));
 	}
 
 	verticesSize = vertices.size();
