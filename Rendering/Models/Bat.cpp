@@ -45,6 +45,9 @@ void Bat::Create()
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_TRUE, sizeof(VertexFormat), (void*)(offsetof(VertexFormat, VertexFormat::texture)));
 
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_TRUE, sizeof(VertexFormat), (void*)(offsetof(VertexFormat, VertexFormat::normal)));
+
 	glBindVertexArray(0);
 
 	this->vao = vao;
@@ -123,6 +126,7 @@ void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &verti
 
 		//inner wall
 		glm::vec3 innerWallNormal = Model::getNorm(glm::vec3(xIn2, y, zIn2), glm::vec3(xIn2, 0, zIn2), glm::vec3(xIn, 0, zIn));
+		innerWallNormal *= -1.0f;
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, y, zIn2), blue, glm::vec2(0, 1), innerWallNormal));
 		vertices.push_back(VertexFormat(glm::vec3(xIn2, 0, zIn2), blue, glm::vec2(0, 0), innerWallNormal));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(1, 0), innerWallNormal));
@@ -133,6 +137,7 @@ void Bat::generateBatVertices(float startAngle, std::vector<VertexFormat> &verti
 		if (angle == startAngle)//vertical wall
 		{
 			glm::vec3 verticalWallNormal = Model::getNorm(glm::vec3(xIn, 0, zIn), glm::vec3(x, 0, z), glm::vec3(xIn, y, zIn));
+			verticalWallNormal *= -1.0f;
 			vertices.push_back(VertexFormat(glm::vec3(xIn, 0, zIn), blue, glm::vec2(0, 0), verticalWallNormal));
 			vertices.push_back(VertexFormat(glm::vec3(x, 0, z), blue, glm::vec2(1, 0), verticalWallNormal));
 			vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), blue, glm::vec2(0, 1), verticalWallNormal));
@@ -172,6 +177,10 @@ void Bat::Draw()
 	glUniformMatrix4fv(camera, 1, GL_FALSE, glm::value_ptr(cameraMatrixCopy));
 	glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(Camera::projectionMatrix));
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(rotated));
+
+	glm::vec3 lightPos = glm::vec3(Ball::position.x, Ball::position.y + 3, Ball::position.z);
+	glUniform3fv(lightPosition, 1, glm::value_ptr(lightPos));
+	glUniform3fv(lightColor, 1, glm::value_ptr(Camera::myLightColor));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gTexture->object());
