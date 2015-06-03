@@ -23,7 +23,7 @@ void main(void)
 	vec3 cameraPosition = lightPosition;
 
 	vec3 normal = normalize(transpose(inverse(mat3(model))) * fragNormal);
-    vec3 surfacePos = vec3(model * vec4(fragVert, 1));
+    vec3 surfacePos = vec3(model * vec4(vec3(1-fragVert.x-1, fragVert.yz), 1));
     vec4 surfaceColor = texture(tex, fragTexCoord);
     vec3 surfaceToLight = normalize(lightPosition - surfacePos);
     vec3 surfaceToCamera = normalize(cameraPosition - surfacePos);
