@@ -11,32 +11,47 @@ uniform mat4 model;
 uniform vec3 lightColor;
 uniform vec3 lightPosition;
 
+
 layout(location = 0) out vec4 out_color;
  
 void main(void)
 {
-	mat3 normalMatrix = transpose(inverse(mat3(model)));
-    vec3 normal = normalize(normalMatrix * fragNormal);
+	float materialShininess = 80.0;
+	vec3 materialSpecularColor = vec3(1.0f, 1.0f, 1.0f);
+	float lightAttenuation = 0.2;
+	float lightAmbientCoefficient = 0.005;
+	vec3 cameraPosition = lightPosition;
+
+	vec3 normal = normalize(transpose(inverse(mat3(model))) * fragNormal);
+    vec3 surfacePos = vec3(model * vec4(fragVert, 1));
+    vec4 surfaceColor = texture(tex, fragTexCoord);
+    vec3 surfaceToLight = normalize(lightPosition - surfacePos);
+    vec3 surfaceToCamera = normalize(cameraPosition - surfacePos);
     
-    //calculate the location of this fragment (pixel) in world coordinates
-    vec3 fragPosition = vec3(model * vec4(fragVert, 1));
+    //ambient
+    vec3 ambient = lightAmbientCoefficient * surfaceColor.rgb * lightColor;
+
+    //diffuse
+    float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
+    vec3 diffuse = diffuseCoefficient * surfaceColor.rgb * lightColor;
     
-    //calculate the vector from this pixels surface to the light source
-    vec3 surfaceToLight = vec3(1 - lightPosition.x, lightPosition.y - 2, lightPosition.z) - fragPosition;
+    //specular
+    float specularCoefficient = 0.0;
+    if(diffuseCoefficient > 0.0)
+        specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), materialShininess);
+    vec3 specular = specularCoefficient * materialSpecularColor * lightColor;
+    
+    //attenuation
+    float distanceToLight = length(lightPosition - surfacePos);
+    float attenuation = 1.0 / (1.0 + lightAttenuation * pow(distanceToLight, 2));
 
-    //calculate the cosine of the angle of incidence
-    float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));
-	brightness = clamp(brightness, 0, 1);
+    //linear color (color before gamma correction)
+    vec3 linearColor = ambient + attenuation*(diffuse + specular);
+    
+    //final color (after gamma correction)
+    vec3 gamma = vec3(1.0/2.2);
+    out_color = vec4(pow(linearColor, gamma), surfaceColor.a);
 
-    //calculate final color of the pixel, based on:
-    // 1. The angle of incidence: brightness
-    // 2. The color/intensities of the light: light.intensities
-    // 3. The texture and texture coord: texture(tex, fragTexCoord)
-    vec4 surfaceColor = texture(tex, vec2(1 - fragTexCoord.x, fragTexCoord.y));
-
-	out_color = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);
-	//out_color = vec4(brightness * lightColor * surfaceColor.rgb, surfaceColor.a);
-
-	//out_color = color;
-	//out_color = texture(tex, vec2(1 - fragTexCoord.x, fragTexCoord.y));
+		
+		//out_color = texture(tex, vec2(1 - fragTexCoord.x, fragTexCoord.y));
 }
