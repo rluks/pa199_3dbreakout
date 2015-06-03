@@ -101,7 +101,7 @@ void Brick::Create()
 		float zIn2 = smallerRadius * sin(angle + angleDelta);
 
 		glm::vec3 verticalWallNormal = Model::getNorm(glm::vec3(xIn, Ypsilon, zIn), glm::vec3(x, Ypsilon, z), glm::vec3(xIn, y, zIn));
-
+		verticalWallNormal *= -1.0f;
 		vertices.push_back(VertexFormat(glm::vec3(xIn, Ypsilon, zIn), Color, glm::vec2(0, 0), verticalWallNormal));
 		vertices.push_back(VertexFormat(glm::vec3(x, Ypsilon, z), Color, glm::vec2(1, 0), verticalWallNormal));
 		vertices.push_back(VertexFormat(glm::vec3(xIn, y, zIn), Color, glm::vec2(0, 1), verticalWallNormal));
