@@ -73,9 +73,7 @@ Scene_Manager::Scene_Manager()
 		Block blocktemp2 = Block(aa, bb);
 		blocktemp2.normal *= -1.0f;	//normal facing inside circle
 
-		//int blockCounter = Block::blockCounter;
 		blockCounter += 2;//this is ugly, but time is short xD
-		//std::cout << blockCounter << std::endl;
 
 		if (blockCounter <= 8)
 			color = yellow;
@@ -112,8 +110,6 @@ Scene_Manager::Scene_Manager()
 			blocktempSide.color = color;
 			blocktempSide.normal *= -1.0f;
 			blocks.push_back(blocktempSide);
-			//models_manager->AddLine(aaa, bbb, color);
-			//models_manager->AddLine(glm::vec3(blocktempSide.normal.x + blocktempSide.middle.x, y, blocktempSide.normal.y + blocktempSide.middle.z), blocktempSide.middle, color);
 		}
 
 		blocktemp.color = color;
@@ -121,38 +117,13 @@ Scene_Manager::Scene_Manager()
 
 		blocks.push_back(blocktemp);
 		blocks.push_back(blocktemp2);
-
-		//models_manager->AddLine(a, b, color);
-		//models_manager->AddLine(aa, bb, color);
-
-		//float x3 = blocktemp.middle.x + blocktemp.normal.x;
-		//float y3 = blocktemp.middle.z + blocktemp.normal.y;
-
-		//models_manager->AddLine(glm::vec3(x3, y, y3), blocktemp.middle, color);
-		//models_manager->AddLine(glm::vec3(blocktemp2.normal.x + blocktemp2.middle.x, y, blocktemp2.normal.y + blocktemp2.middle.z), blocktemp2.middle, color);
-
 	}
 
 	bats = Bats(0);
-	for (std::vector<Block>::iterator it = bats.blocks.begin(); it != bats.blocks.end(); ++it)
-	{
-		Block block = *it;
-		//models_manager->AddLine(block.A, block.B, block.color);
-		//models_manager->AddLine(glm::vec3(block.normal.x + block.middle.x, y, block.normal.y + block.middle.z), block.middle, color);
-		//std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << std::endl;
-	}
-
 
 	Ball::selectVelocity = true;
 	Ball::enableMovement = false;
 
-	//std::cout << "s blocks size" << blocks.size() << std::endl;
-
-	/*for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
-	{
-		Block block = *it;
-		std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << std::endl;
-	}*/
 }
 
 Scene_Manager::~Scene_Manager()
@@ -163,28 +134,10 @@ Scene_Manager::~Scene_Manager()
 
 void Scene_Manager::notifyBeginFrame()
 {
-	/*std::cout << "------------------before blocks size--------------------------" << blocks.size() << std::endl;
-	for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
-	{
-		Block block = *it;
-		std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << " ax" << block.A.x << " ay" << block.A.y << " az" << block.A.z << std::endl;
-	}*/
-
 	//dealing with bats blocks
 	blocks.resize(numberOfBlocksAlive);
 	bats.Update();
 	blocks.insert(blocks.end(), bats.blocksRotated.begin(), bats.blocksRotated.end());//append new blocks
-
-	//std::cout << "after blocks size" << blocks.size() << std::endl;
-	//std::cout << "--------------------------------------------" << std::endl;
-	for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
-	{
-		Block block = *it;
-		if (Models_Manager::GetColorName(block.color) == "UNKNOWN"){
-			//std::cout << " no." << block.number << " ax" << block.A.x << " az" << block.A.z << std::endl;
-		}
-		//std::cout << Models_Manager::GetColorName(block.color) << " no." << block.number << " ax" << block.A.x << " ay" << block.A.y << " az" << block.A.z << std::endl;
-	}
 
 	if (Ball::enableMovement){
 		glm::vec2 ballPosition2D = glm::vec2(Ball::position.x, Ball::position.z);
@@ -198,10 +151,6 @@ void Scene_Manager::notifyBeginFrame()
 		for (std::vector<Block>::iterator it = blocks.begin(); it != blocks.end(); ++it)
 		{
 			Block block = *it;
-
-			if (Models_Manager::GetColorName(block.color) == "UNKNOWN"){
-				//std::cout << "testing block no." << block.number << " ax" << block.A.x << " az" << block.A.z << std::endl;
-			}
 
 			//triangle A,B,midd+normal - is ball in this triangle?
 			//ball
@@ -227,8 +176,6 @@ void Scene_Manager::notifyBeginFrame()
 			float c = 1.0f - a - b;
 
 			if (0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1){
-
-				//std::cout << "Inside triangle of Block no." << block.number << " - " << Models_Manager::GetColorName(block.color) << std::endl;
 
 				float x0 = ballPosition2D.x;
 				float y0 = ballPosition2D.y;
