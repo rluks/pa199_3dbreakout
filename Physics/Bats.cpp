@@ -1,6 +1,7 @@
 #include "Bats.h"
 
 float Bats::batAngle = 0.0f;
+float Bats::batAngleIncrement = 0.0f;
 
 Bats::Bats(){}
 
@@ -85,6 +86,8 @@ void Bats::GenerateBats(float startAngle)
 
 void Bats::Update()//rotate blocks of bats
 {
+	batAngle += batAngleIncrement;
+
 	blocksRotated.clear();
 
 	//std::cout << "block 0: " << blocks[0].A.x << std::endl;

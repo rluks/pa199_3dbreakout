@@ -42,6 +42,19 @@ void SpecialInput(int key, int x, int y)
 	}
 }
 
+void keySpecialUp(int key, int x, int y) {
+
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		InputManager::stopTurning();
+		break;
+	case GLUT_KEY_RIGHT:
+		InputManager::stopTurning();
+		break;
+	}
+}
+
 void mouseWheel(int button, int dir, int x, int y)
 {
 	if (dir > 0)
@@ -100,6 +113,7 @@ int main(int argc, char **argv)
 	glutSpecialFunc(SpecialInput);
 	glutMouseWheelFunc(mouseWheel);
 	glutKeyboardFunc(keyboardInput);
+	glutSpecialUpFunc(keySpecialUp);
 
 	srand(static_cast <unsigned> (time(0)));
 

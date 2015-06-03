@@ -44,12 +44,17 @@ void InputManager::switchCamera()
 
 void InputManager::left()
 {
-	Bats::batAngle += 3.0f;
+	Bats::batAngleIncrement = 1.0f;
 }
 
 void InputManager::right()
 {
-	Bats::batAngle -= 3.0f;
+	Bats::batAngleIncrement = -1.0f;
+}
+
+void InputManager::stopTurning()
+{
+	Bats::batAngleIncrement = 0.0f;
 }
 
 void InputManager::zoomIn()

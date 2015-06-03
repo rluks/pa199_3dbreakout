@@ -22,5 +22,6 @@ class Bats
 		void Update();
 
 		static float batAngle;
+		static float batAngleIncrement;
 };
 

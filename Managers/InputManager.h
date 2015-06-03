@@ -20,6 +20,8 @@ class InputManager
 
 		static void left();
 		static void right();
+		static void stopTurning();
+
 		static void switchCamera();
 		static void zoomIn();
 		static void zoomOut();
