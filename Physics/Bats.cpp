@@ -4,6 +4,7 @@ float Bats::batAngle = 0.0f;
 float Bats::batAngleIncrement = 0.0f;
 
 Bats::Bats(){}
+Bats::~Bats(){}
 
 Bats::Bats(int useless)
 {
@@ -84,31 +85,17 @@ void Bats::GenerateBats(float startAngle)
 
 }
 
-void Bats::Update()//rotate blocks of bats
+void Bats::Update()
 {
 	batAngle += batAngleIncrement;
 
 	blocksRotated.clear();
-
-	//std::cout << "block 0: " << blocks[0].A.x << std::endl;
 	for (std::vector<int>::size_type i = 0; i != blocks.size(); i++) {
 		Block block = blocks[i];
 		block.A = glm::rotate(block.A, glm::radians(batAngle), glm::vec3(0.0f, 1.0f, 0.0f));
 		block.B = glm::rotate(block.B, glm::radians(batAngle), glm::vec3(0.0f, 1.0f, 0.0f));
 
 		block.CalculateMidNorm();
-
-		/*block.middle = glm::rotate(block.middle, glm::radians(batAngle), glm::vec3(0.0f, 1.0f, 0.0f));
-		block.normal = glm::rotate(block.normal, glm::radians(batAngle));*/
-
 		blocksRotated.push_back(block);
 	}
-
-	//std::cout << "block" << blocks[0].A.x << std::endl;
-
-}
-
-
-Bats::~Bats()
-{
 }
