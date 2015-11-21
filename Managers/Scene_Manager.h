@@ -25,6 +25,7 @@ namespace Managers
 			int previous_height);
 
 		void EraseBlocksWithColor(const glm::vec4 &);
+		float calculateBallBlockDistance(const Block&);
 		int Score;
 
 	private:

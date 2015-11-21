@@ -20,6 +20,11 @@ Ball::~Ball()
 {
 }
 
+void Ball::CorrectionUpdate(double elapsedTime)
+{
+	position.x += elapsedTime * velocity.x;
+	position.z += elapsedTime * velocity.z;
+}
 
 
 void Ball::Update()
@@ -48,7 +53,12 @@ void Ball::Update()
 	}
 	
 	if (enableMovement){
-
+		std::setw(2);
+		std::setprecision(5);
+		//std::cout.precision(5);
+		//std::cout << "el" << std::to_string(elapsedTime) << std::endl;
+		std::cout << std::fixed << std::setw(11) << std::setprecision(6)
+			<< std::setfill('0') << elapsedTime << std::endl;
 		position.x += elapsedTime * velocity.x;
 		position.z += elapsedTime * velocity.z;
 	}

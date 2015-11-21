@@ -177,6 +177,7 @@ void Scene_Manager::notifyBeginFrame()
 
 			if (0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1){
 
+				/*
 				float x0 = ballPosition2D.x;
 				float y0 = ballPosition2D.y;
 
@@ -189,7 +190,8 @@ void Scene_Manager::notifyBeginFrame()
 				float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
 				float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
 				float distance = abs(nahore / dole);
-				distance -= Ball::radius;
+				distance -= Ball::radius;*/
+				float distance = calculateBallBlockDistance(block);
 
 				distancesStr += std::to_string(distance) + " ";
 
@@ -200,11 +202,11 @@ void Scene_Manager::notifyBeginFrame()
 			}
 		}
 
-		float minDistance = 0.000005f;
+		float minDistance = 0.01f;
+		//if (minimalDistance <= 0.0f || minimalDistance < minDistance){
+		if (minimalDistance <= 0.0f && minimalDistance < minDistance){
 
-		if (minimalDistance <= 0.0f || minimalDistance < minDistance){
-
-			//std::cout << "HIT, distances: " << distancesStr << " ,min distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
+			std::cout << "HIT, distances: " << distancesStr << " ,min distance: " << minimalDistance << " ballposition2d " << ballPosition2D.x << ", " << ballPosition2D.y << std::endl;
 
 			glm::vec3 vel = Ball::velocity;
 			glm::vec3 normal = glm::vec3(closestBlock.normal.x, 0, closestBlock.normal.y);
@@ -212,7 +214,12 @@ void Scene_Manager::notifyBeginFrame()
 
 			Ball::Update();
 
-			//std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << " ax" << closestBlock.A.x << " az" << closestBlock.A.z << std::endl;
+			while (minimalDistance < minDistance){
+				Ball::CorrectionUpdate(0.017f);
+				minimalDistance = calculateBallBlockDistance(closestBlock);
+			}
+
+			std::cout << "Hit block no." << closestBlock.number << " which is " << Models_Manager::GetColorName(closestBlock.color) << " ax" << closestBlock.A.x << " az" << closestBlock.A.z << std::endl;
 			EraseBlocksWithColor(closestBlock.color);
 
 			Score += 100;
@@ -246,6 +253,26 @@ void Scene_Manager::notifyBeginFrame()
 		glm::vec3 vel = Ball::velocity;
 		Ball::velocity = vel - 2 * glm::dot(vel, normal) * normal;
 	}
+}
+
+float Scene_Manager::calculateBallBlockDistance(const Block &block)
+{
+	float x0 = Ball::position.x;
+	float y0 = Ball::position.z;
+
+	float x1 = block.A.x;
+	float y1 = block.A.z;
+
+	float x2 = block.B.x;
+	float y2 = block.B.z;
+
+	float nahore = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1);
+	float dole = sqrt((y2 - y1)*(y2 - y1) + (x2 - x1)*(x2 - x1));
+	float distance = abs(nahore / dole);
+
+	distance -= Ball::radius;
+
+	return distance;
 }
 
 void Scene_Manager::EraseBlocksWithColor(const glm::vec4 &color)
