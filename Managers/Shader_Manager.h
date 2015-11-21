@@ -5,9 +5,11 @@
 #include <map>
 #include <vector>
 
+#include "..\OpenGLIncludes.h"
+
 //..\ subfolder!
-#include "..\..\packages\nupengl.core.0.0.0.1\build\native\include\GL\glew.h" 
-#include "..\..\packages\nupengl.core.0.0.0.1\build\native\include\GL\freeglut.h" 
+//#include "..\..\packages\nupengl.core.0.1.0.1\build\native\include\GL\glew.h" 
+//#include "..\..\packages\nupengl.core.0.1.0.1\build\native\include\GL\freeglut.h" 
 
 namespace Managers
 {
